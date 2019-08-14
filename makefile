@@ -2,6 +2,7 @@ default: build
 
 .PHONY: build
 build:
+	-[[ -f config.json ]] || cp assets/config.json.orig config.json
 	-[[ -d build ]] || mkdir build
 	cd build; cmake ..;  make -j8
 
