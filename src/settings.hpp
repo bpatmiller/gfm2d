@@ -3,9 +3,9 @@
     parameters for initializing the simulation.
 */
 
-#include "json.hpp"
 #include <fstream>
 #include <iostream>
+#include <nlohmann/json.hpp>
 
 // for convenience
 using json = nlohmann::json;
