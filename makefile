@@ -8,7 +8,8 @@ build:
 
 .PHONY: format
 format:
-	clang-format -i src/*.cpp src/*.hpp test/*.cpp test/*.hpp
+	clang-format -i src/*.cpp src/*.hpp
+	#test/*.cpp test/*.hpp
 
 .PHONY: clean
 clean:
