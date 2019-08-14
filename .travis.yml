@@ -1,5 +1,9 @@
-sudo: false
+sudo: required
+before install:
+  sudo apt install libeigen3-dev nlohmann-json-dev
+
 language: cpp
+
 compiler:
   - gcc
   - clang
@@ -12,5 +16,6 @@ addons:
       - g++
       - clang
       - nlohmann-json-dev
+
 script:
-  - make
+  - make build run
