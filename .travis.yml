@@ -1,10 +1,12 @@
 sudo: required
+language: cpp
+dist: bionic
+
 before_install:
   - sudo apt-get install -y libeigen3-dev nlohmann-json-dev
   - pip install --user pyyaml cpp-coveralls
 
-language: cpp
-dist: bionic
+
 
 compiler:
   - gcc
@@ -14,7 +16,6 @@ addons:
   apt:
     packages:
       - lcov
-      - gcov
       - gcovr
     update: true
 
