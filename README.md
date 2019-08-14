@@ -3,19 +3,21 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
 
 ### BIG TODOS:
-[x] get travis build working
-[x] get catch2 working
-[] get coverage working
-[] set up array2
-[] do some simple graphics
-[] make skeleton data structures
-[] 
+- [x] get travis build working
+- [x] get catch2 working
+- [] set up array2
+- [] do some simple graphics
+- [] make skeleton data structures
+- [] do level set work
+- [] do some tests
 
 ...
 
-[] set up auto code review
+- [] get coverage working
+- [] set up auto code review
 
 ### about the project
+
 
 
 ### config.json
