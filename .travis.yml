@@ -14,4 +14,5 @@ addons:
     update: true
 
 script:
+  - cmake --version
   - make build run
