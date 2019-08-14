@@ -1,21 +1,16 @@
 sudo: required
 before install:
-  sudo apt install libeigen3-dev nlohmann-json-dev
+  sudo apt-get install -y libeigen3-dev nlohmann-json-dev
 
 language: cpp
+dist: bionic
 
 compiler:
   - gcc
   - clang
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-bionic
-    packages:
-      - g++
-      - clang
-      - nlohmann-json-dev
+    update: true
 
 script:
   - make build run
