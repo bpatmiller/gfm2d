@@ -1,6 +1,7 @@
 sudo: required
 before install:
-  sudo apt-get install -y libeigen3-dev
+  - echo yeet
+  - sudo apt-get install -y libeigen3-dev
 
 language: cpp
 dist: bionic
@@ -15,5 +16,4 @@ addons:
 
 script:
   - cmake --version
-  - ls /usr/share
   - make build run
