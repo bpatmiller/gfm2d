@@ -1,4 +1,5 @@
 #include "settings.hpp"
+#include <Eigen/SparseCore>
 #include <iostream>
 
 int main() {
