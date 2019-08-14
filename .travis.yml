@@ -1,6 +1,5 @@
 sudo: required
-before install:
-  - echo yeet
+before_install:
   - sudo apt-get install -y libeigen3-dev
 
 language: cpp
