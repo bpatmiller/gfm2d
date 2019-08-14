@@ -2,10 +2,11 @@
     \brief Loads data from config.json and returns
     parameters for initializing the simulation.
 */
+#pragma once
 
+#include "json.hpp"
 #include <fstream>
 #include <iostream>
-#include "json.hpp"
 // for convenience
 using json = nlohmann::json;
 

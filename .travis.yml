@@ -1,6 +1,7 @@
 sudo: required
 before_install:
   - sudo apt-get install -y libeigen3-dev nlohmann-json-dev
+  - pip install --user pyyaml cpp-coveralls
 
 language: cpp
 dist: bionic
@@ -11,8 +12,15 @@ compiler:
 
 addons:
   apt:
+    packages:
+      - lcov
+      - gcov
+      - gcovr
     update: true
 
 script:
   - cmake --version
   - make build run
+
+after_success:
+  coveralls -i gfm2d
