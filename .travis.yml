@@ -15,4 +15,5 @@ addons:
 
 script:
   - cmake --version
+  - ls /usr/share
   - make build run

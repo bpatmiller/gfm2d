@@ -23,10 +23,11 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 # PkgConfig
 find_package(PkgConfig REQUIRED)
 
-include_directories(${CMAKE_SOURCE_DIR}/inc)
+include_directories("${CMAKE_SOURCE_DIR}"/inc)
 
 # Eigen
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
-find_package(Eigen3 REQUIRED)
-include_directories(${EIGEN3_INCLUDE_DIR})
+# list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+# find_package(Eigen3 REQUIRED)
+# include_directories("${EIGEN3_INCLUDE_DIR}")
+include_directories("${CMAKE_SOURCE_DIR}/inc/eigen3/Eigen/src")
 message(STATUS "Eigen included at ${EIGEN3_INCLUDE_DIR}")
