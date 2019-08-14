@@ -29,3 +29,6 @@ after_success:
   - lcov --list coverage.info
   # Uploading report to CodeCov
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+notifications:
+  slack: brendanstestinglair:1QK2ldlwoHSnj5l5Z4SkxOJf
