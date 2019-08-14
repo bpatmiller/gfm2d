@@ -24,9 +24,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 find_package(PkgConfig REQUIRED)
 
 # json
-find_package(nlohmann_json REQUIRED)
-target_link_libraries(gfm nlohmann_json::nlohmann_json)
-message(STATUS "nlohmann-json included")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
 # Eigen
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
