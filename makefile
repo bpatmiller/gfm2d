@@ -7,14 +7,16 @@ build:
 
 .PHONY: format
 format:
-	clang-format -i src/*.cpp src/*.h
+	clang-format -i src/*.cpp src/*.hpp
 
 .PHONY: clean
 clean:
 	rm -rf build/
+	cp -f assets/config.json.orig config.json
 
 .PHONY: run
 run:
 	build/bin/gfm 
-#--config config.json
 
+.PHONY: all
+all: clean format build run

@@ -1,0 +1,16 @@
+sudo: false
+language: cpp
+compiler:
+  - gcc
+  - clang
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-bionic
+    packages:
+      - g++
+      - clang
+      - nlohmann-json-dev
+script:
+  - make
