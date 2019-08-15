@@ -17,3 +17,7 @@ some facts:
         the oeÆient matrix of the assoiated linear system is the standard symmetri matrix for the variable oeÆient Poisson equation in the absene of
         interfaes allowing for straightforward appliation of standard \blak box"
         solvers."
+
+QUESTION:
+    does it require only 1 grid for velocity, pressure, etc?
+    pretty sure (?)

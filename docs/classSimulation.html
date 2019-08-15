@@ -79,6 +79,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a978e30ee06f1238fcef542bfb3ba0a0a"><td class="memItemLeft" align="right" valign="top"><a id="a978e30ee06f1238fcef542bfb3ba0a0a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Simulation</b> (int sx_, int sy_, float h_)</td></tr>
 <tr class="separator:a978e30ee06f1238fcef542bfb3ba0a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10d9646039f5bffba768c3abd0b558c7"><td class="memItemLeft" align="right" valign="top"><a id="a10d9646039f5bffba768c3abd0b558c7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()</td></tr>
+<tr class="separator:a10d9646039f5bffba768c3abd0b558c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1c5c6d790092c2d9829421bad83d741"><td class="memItemLeft" align="right" valign="top"><a id="aa1c5c6d790092c2d9829421bad83d741"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (int sx_, int sy_, float h_)</td></tr>
 <tr class="separator:aa1c5c6d790092c2d9829421bad83d741"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -93,14 +96,23 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>print_information</b>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a9a490119dc943a80ac7c3a2a3f56a638"><td class="memItemLeft" align="right" valign="top"><a id="a9a490119dc943a80ac7c3a2a3f56a638"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sx</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sx</b> = 0</td></tr>
 <tr class="separator:a9a490119dc943a80ac7c3a2a3f56a638"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af36a90f50c976712a091d33c4e3f5214"><td class="memItemLeft" align="right" valign="top"><a id="af36a90f50c976712a091d33c4e3f5214"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sy</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>sy</b> = 0</td></tr>
 <tr class="separator:af36a90f50c976712a091d33c4e3f5214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9321bee67ee0cf2701fe9ae3b416ad95"><td class="memItemLeft" align="right" valign="top"><a id="a9321bee67ee0cf2701fe9ae3b416ad95"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>h</b></td></tr>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>h</b> = 0</td></tr>
 <tr class="separator:a9321bee67ee0cf2701fe9ae3b416ad95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44e7413e8c5c38d6b0ff1edbab088f7c"><td class="memItemLeft" align="right" valign="top"><a id="a44e7413e8c5c38d6b0ff1edbab088f7c"></a>
+<a class="el" href="structArray2.html">Array2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>u</b></td></tr>
+<tr class="separator:a44e7413e8c5c38d6b0ff1edbab088f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a389cec2340c346c1c7a67220ba09b847"><td class="memItemLeft" align="right" valign="top"><a id="a389cec2340c346c1c7a67220ba09b847"></a>
+<a class="el" href="structArray2.html">Array2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>v</b></td></tr>
+<tr class="separator:a389cec2340c346c1c7a67220ba09b847"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cb2cff635190e58fca2336e8c06c7a2"><td class="memItemLeft" align="right" valign="top"><a id="a0cb2cff635190e58fca2336e8c06c7a2"></a>
+<a class="el" href="structArray2.html">Array2f</a>&#160;</td><td class="memItemRight" valign="bottom"><b>p</b></td></tr>
+<tr class="separator:a0cb2cff635190e58fca2336e8c06c7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab90ce229b4480792cf59177d1d171cd9"><td class="memItemLeft" align="right" valign="top"><a id="ab90ce229b4480792cf59177d1d171cd9"></a>
 std::vector&lt; <a class="el" href="classFluid.html">Fluid</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>fluids</b></td></tr>
 <tr class="separator:ab90ce229b4480792cf59177d1d171cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,7 +124,8 @@ std::vector&lt; <a class="el" href="classFluid.html">Fluid</a> &gt;&#160;</td><t
 <tr class="separator:a8234c086edf5bd9835ea9094873d664d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The main simulation class that defines our computational domain. It is described spatially by a cell size (h) and a number of cells in both dimensions (sx, sy). </p>
+<div class="textblock"><p>The main simulation class that defines our computational domain. It is described spatially by a cell size (h) and a number of cells in both dimensions (sx, sy).</p>
+<p>stores velocity and pressure, a list of fluids contained in it, a solid phi describing boundary locations a map from voxels to fluid type </p>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<a class="el" href="simulation_8hpp_source.html">simulation.hpp</a></li>
 </ul>

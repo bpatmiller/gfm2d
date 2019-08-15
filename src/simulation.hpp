@@ -26,12 +26,7 @@ public:
 class Fluid {
 public:
   float density;
-  Array2f u;   // horizontal velocity, sampled at cell sides
-  Array2f v;   // vertical velocity, sampled at cell tops/bottoms
-  Array2f p;   // pressure, sampled at center
-  Array2f rho; // density, sampled at center but often used for boundaries (PLS)
-  Array2f div; // divergence, sampled at center
-  Array2f phi; // phi, sampled at center
+  Array2f phi;     // phi, sampled at center
   Array2f pls_phi; // an artificial resampling of phi for use in the particle
                    // level set
   Array2i particle_count; // counts how many particles are in that area, sampled
@@ -40,17 +35,11 @@ public:
   std::vector<Particle> particles;
 
   Fluid(float density_, int sx_, int sy_, float h) : density(density_) {
-    // face-located quantities
-    u.init(sx_ + 1, sy_, 0.0, -0.5, h);
-    u.init(sx_, sy_ + 1, -0.5, 0.0, h);
     // center-located quantities
-    p.init(sx_, sy_, -0.5, -0.5, h);
-    rho.init(sx_, sy_, -0.5, -0.5, h);
-    div.init(sx_, sy_, -0.5, -0.5, h);
     phi.init(sx_, sy_, -0.5, -0.5, h);
     // vertex-located quantities
-    pls_phi.init(sx_ + 1, sy_ + 1, 0.0, 0.0, h);
-    p.init(sx_ + 1, sy_ + 1, 0.0, 0.0, h);
+    pls_phi.init(sx_ - 1, sy_ - 1, -1.0, -1.0, h);
+    particle_count.init(sx_ - 1, sy_ - 1, -1.0, -1.0, h);
   }
   /*    */
   void print_information() {
@@ -63,12 +52,20 @@ public:
  * is described spatially by a cell size (h) and a number of cells in both
  * dimensions (sx, sy).
  *
+ * stores velocity and pressure,
+ * a list of fluids contained in it,
+ * a solid phi describing boundary locations
+ * a map from voxels to fluid type
  */
 class Simulation {
 public:
-  int sx;  // number of voxels on the x-axis
-  int sy;  // number of voxels on the y-axis
-  float h; // voxel size
+  int sx = 0;  // number of voxels on the x-axis
+  int sy = 0;  // number of voxels on the y-axis
+  float h = 0; // voxel size
+
+  Array2f u; // horizontal velocity, sampled at cell sides
+  Array2f v; // vertical velocity, sampled at cell tops/bottoms
+  Array2f p; // pressure, sampled at center
 
   std::vector<Fluid> fluids;
   Array2f solid_phi; // phi corresponding to solid boundaries, not important as
@@ -79,10 +76,20 @@ public:
   Simulation() {}
   Simulation(int sx_, int sy_, float h_) : sx(sx_), sy(sy_), h(h_) {}
 
+  void init() {
+    assert(sx != 0 && sy != 0 && h != 0);
+    // face-located quantities
+    u.init(sx + 1, sy, 0.0, -0.5, h);
+    v.init(sx, sy + 1, -0.5, 0.0, h);
+    // center-located quantities
+    p.init(sx, sy, -0.5, -0.5, h);
+  }
+
   void init(int sx_, int sy_, float h_) {
     sx = sx_;
     sy = sy_;
     h = h_;
+    init();
   }
 
   /** Creates a fluid of a given density, but does not equip it with a phi*/

@@ -13,12 +13,30 @@ using namespace glm;
  * universe is (0,0)
  */
 template <class T> struct Array2 {
+public:
   int sx = 0;
   int sy = 0;
   float offset_x = 0;
   float offset_y = 0;
   float h = 0;
   std::vector<T> data;
+
+  /** \Class Array2::iterator
+   *  iterates through our data vecot
+   *  call ij() on the iterate to get the index
+   */
+  class iterator : public std::vector<T>::iterator {
+  public:
+    Array2<T> const *owner;
+    iterator(Array2<T> const *owner, typename std::vector<T>::iterator iter)
+        : std::vector<T>::iterator(iter), owner(owner) {}
+    using std::vector<T>::iterator::operator++;
+    vec2 ij() { return owner->ij_from_index(*this - owner->data.begin()); }
+  };
+  iterator begin() { return iterator(this, data.begin()); }
+  iterator end() { return iterator(this, data.end()); }
+
+  int size() const { return sx * sy; }
 
   /** An empty contructor not intended to be used */
   Array2() {}
@@ -72,6 +90,24 @@ template <class T> struct Array2 {
   vec2 coordinates_at(vec2 world_coordinates) {
     return vec2((world_coordinates.x / h) + offset_x,
                 (world_coordinates.y / h) + offset_y);
+  }
+
+  /** Takes in grid coordinates (eg an index) and returns the worldspace
+   * position */
+  vec2 worldspace_of(vec2 grid_coordinates) {
+    assert(grid_coordinates.x >= 0 && grid_coordinates.x <= sx - 1);
+    assert(grid_coordinates.y >= 0 && grid_coordinates.y <= sy - 1);
+    return vec2((grid_coordinates.x - offset_x) * h,
+                (grid_coordinates.y - offset_y) * h);
+  }
+
+  /** converts from a scalar index (indexing the data vector) to a vec2
+   * with x and y coordinates */
+  vec2 ij_from_index(int index) const {
+    assert(index >= 0 && index < sx * sy);
+    vec2 ij = vec2(index % sx, index / sx);
+    assert(ij.x + (sx * ij.y) == index); // convert back
+    return ij;
   }
 };
 

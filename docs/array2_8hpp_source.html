@@ -125,13 +125,22 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> vec2((world_coordinates.x / h) + offset_x,</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                (world_coordinates.y / h) + offset_y);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structArray2.html">Array2&lt;double&gt;</a> <a class="code" href="structArray2.html">Array2d</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structArray2.html">Array2&lt;float&gt;</a> <a class="code" href="structArray2.html">Array2f</a>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structArray2.html">Array2&lt;int&gt;</a> <a class="code" href="structArray2.html">Array2i</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="structArray2.html#a28fc641f81046366ee2058b80e6b06c5">   79</a></span>&#160;  vec2 <a class="code" href="structArray2.html#a28fc641f81046366ee2058b80e6b06c5">worldspace_of</a>(vec2 grid_coordinates) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    assert(grid_coordinates.x &gt;= 0 &amp;&amp; grid_coordinates.x &lt;= sx - 1);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    assert(grid_coordinates.y &gt;= 0 &amp;&amp; grid_coordinates.y &lt;= sy - 1);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> vec2((grid_coordinates.x - offset_x) * h,</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                (grid_coordinates.y - offset_y) * h);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;  }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structArray2.html">Array2&lt;double&gt;</a> <a class="code" href="structArray2.html">Array2d</a>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structArray2.html">Array2&lt;float&gt;</a> <a class="code" href="structArray2.html">Array2f</a>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">typedef</span> <a class="code" href="structArray2.html">Array2&lt;int&gt;</a> <a class="code" href="structArray2.html">Array2i</a>;</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructArray2_html_a8a89f0623dc0e116e4dc14b0b77b769e"><div class="ttname"><a href="structArray2.html#a8a89f0623dc0e116e4dc14b0b77b769e">Array2::operator()</a></div><div class="ttdeci">T &amp; operator()(int i, int j)</div><div class="ttdoc">Takes in x and y indice of the grid and returns the value stored at that index.</div><div class="ttdef"><b>Definition:</b> array2.hpp:59</div></div>
+<div class="ttc" id="astructArray2_html_a28fc641f81046366ee2058b80e6b06c5"><div class="ttname"><a href="structArray2.html#a28fc641f81046366ee2058b80e6b06c5">Array2::worldspace_of</a></div><div class="ttdeci">vec2 worldspace_of(vec2 grid_coordinates)</div><div class="ttdoc">Takes in grid coordinates (eg an index) and returns the worldspace position.</div><div class="ttdef"><b>Definition:</b> array2.hpp:79</div></div>
 <div class="ttc" id="astructArray2_html_ad264d90ac5d4de34e9bbc214810e169a"><div class="ttname"><a href="structArray2.html#ad264d90ac5d4de34e9bbc214810e169a">Array2::set</a></div><div class="ttdeci">void set(T val)</div><div class="ttdoc">Fills the data vector with the input value.</div><div class="ttdef"><b>Definition:</b> array2.hpp:52</div></div>
 <div class="ttc" id="astructArray2_html_afd1e9be811a27a30290d244fe8fd0e47"><div class="ttname"><a href="structArray2.html#afd1e9be811a27a30290d244fe8fd0e47">Array2::coordinates_at</a></div><div class="ttdeci">vec2 coordinates_at(vec2 world_coordinates)</div><div class="ttdoc">Takes in some position in world coordinates and returns the grid coordinates of that position.</div><div class="ttdef"><b>Definition:</b> array2.hpp:72</div></div>
 <div class="ttc" id="astructArray2_html_ad6a742ce7bd22f8f56b3959a26f28c11"><div class="ttname"><a href="structArray2.html#ad6a742ce7bd22f8f56b3959a26f28c11">Array2::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">FIXME creating new vectors might be causing memory leaks on resets Creates a vector to store the grid...</div><div class="ttdef"><b>Definition:</b> array2.hpp:44</div></div>
