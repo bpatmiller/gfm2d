@@ -16,6 +16,7 @@ clean:
 	rm -rf build/
 	cp -f assets/config.json.orig config.json
 	rm -f ./*.gcov
+	rm capture.info
 
 .PHONY: run
 run:

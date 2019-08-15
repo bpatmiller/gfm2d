@@ -3,3 +3,4 @@ build/
 config.json
 .DS_Store
 coverage.info
+*.gcda
