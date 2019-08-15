@@ -3,12 +3,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
 
 ### BIG TODOS:
-* [ ] get travis build working
-* [x] get catch2 working
-* [x] set up array2
-* [ ] level set initialization
 * [ ] do some simple graphics
-* [x] make skeleton data structures
 * [ ] do level set work
 * [ ] do some tests
 
@@ -16,7 +11,11 @@
 
 * [x] get coverage working
 * [x] set up auto code review
-
+* [x] get travis build working
+* [x] get catch2 working
+* [x] set up array2
+* [x] make skeleton data structures
+* [x] level set initialization
 ### about the project
 
 
