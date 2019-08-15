@@ -1,5 +1,6 @@
 #pragma once
 #include "array2.hpp"
+#include <stdio.h>
 #include <vector>
 
 /** \class Particle
@@ -51,6 +52,10 @@ public:
     pls_phi.init(sx_ + 1, sy_ + 1, 0.0, 0.0, h);
     p.init(sx_ + 1, sy_ + 1, 0.0, 0.0, h);
   }
+  /*    */
+  void print_information() {
+    printf("~~ Fluid information ~~\n density: %f\n", density);
+  }
 };
 
 /** \class Simulation
@@ -82,4 +87,14 @@ public:
 
   /** Creates a fluid of a given density, but does not equip it with a phi*/
   void add_fluid(float density) { fluids.push_back(Fluid(density, sx, sy, h)); }
+
+  /*      */
+  void print_information() {
+    printf("~~ Simulation information ~~\n sx: %i, sy: %i, h: %f\n no. "
+           "fluids: %i\n",
+           sx, sy, h, static_cast<int>(fluids.size()));
+    for (auto f : fluids) {
+      f.print_information();
+    }
+  }
 };

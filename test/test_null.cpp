@@ -21,4 +21,5 @@ TEST_CASE("testing basic array2 operations") {
 TEST_CASE("test creating a basic simulation") {
   Simulation sim;
   initialize_simulation(sim);
+  sim.print_information();
 }
