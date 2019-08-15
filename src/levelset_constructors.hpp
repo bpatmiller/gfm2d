@@ -2,6 +2,7 @@
 #include "json.hpp"
 #include "simulation.hpp"
 #include <string>
+
 using json = nlohmann::json;
 
 /** \class FluidConfig
@@ -32,5 +33,7 @@ void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
                         FluidConfig fconf) {
   f.phi.clear();
 
-  // for (auto)
+  // for (auto i : irange(1, 10)) {
+  //   std::cout << "10 loop\n";
+  // }
 }

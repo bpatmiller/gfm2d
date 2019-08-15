@@ -4,3 +4,5 @@ languages:
 exclude:
   - /lib/.*
   - /lib/json/.*
+  - /docs/.*
+  - /assets/.*
