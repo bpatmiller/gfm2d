@@ -1,9 +1,3 @@
-/** \file A 2d array template with a consistent
- * spatial indexing scheme for use in a collocated
- * grid. For translation between worldspace and gridspace,
- * we use a linear offset. The leastmost worldspace coordinate considered in our
- * universe is (0,0)
- */
 #pragma once
 
 #include <glm/glm.hpp>
@@ -11,6 +5,13 @@
 
 using namespace glm;
 
+/** \class Array2
+ * A 2d array template with a consistent
+ * spatial indexing scheme for use in a collocated
+ * grid. For translation between worldspace and gridspace,
+ * we use a linear offset. The leastmost worldspace coordinate considered in our
+ * universe is (0,0)
+ */
 template <class T> struct Array2 {
   int sx = 0;
   int sy = 0;

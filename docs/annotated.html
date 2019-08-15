@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GFM2D: README</title>
+<title>GFM2D: Class List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,6 +47,7 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
+</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,46 +62,20 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
-<div class="PageDoc"><div class="header">
+<div class="header">
   <div class="headertitle">
-<div class="title">README </div>  </div>
+<div class="title">Class List</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a href="https://travis-ci.com/bpatmiller/gfm2d"><img src="https://travis-ci.com/bpatmiller/gfm2d.svg?branch=master" alt="Build Status" class="inline"/>
-</a> <a href="https://codecov.io/gh/bpatmiller/gfm2d"><object type="image/svg+xml" data="https://codecov.io/gh/bpatmiller/gfm2d/branch/master/graph/badge.svg" alt="codecov"></object>
-/>
-</a> <a href="https://bettercodehub.com/"><img src="https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master" alt="BCH compliance" class="inline"/>
-</a></p>
-<h3>BIG TODOS:</h3>
-<ul>
-<li>[x] get travis build working</li>
-<li>[x] get catch2 working</li>
-<li>[x] set up array2</li>
-<li>[] level set initialization</li>
-<li>[] do some simple graphics</li>
-<li>[x] make skeleton data structures</li>
-<li>[] do level set work</li>
-<li>[] do some tests</li>
-</ul>
-<p>...</p>
-<ul>
-<li>[x] get coverage working</li>
-<li>[~] set up auto code review</li>
-</ul>
-<h3>about the project</h3>
-<h3>config.json</h3>
-<p>to add fluids, we use the "fluid" entry type in the json. A fluid entry consists of a name, a density, and a phi definition. As of now, the only supported phi computation is of a circle (exterior and interior).</p>
-<h3>CI/CD stuff</h3>
-<ul>
-<li>Travis CI</li>
-<li>CodeCov</li>
-<li>bettercodehub</li>
-<li>doxygen</li>
-</ul>
-<h3>dependencies</h3>
-<p><a href="https://github.com/nlohmann/json">https://github.com/nlohmann/json</a> </p>
-</div></div><!-- PageDoc -->
+<div class="textblock">Here are the classes, structs, unions and interfaces with brief descriptions:</div><div class="directory">
+<table class="directory">
+<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structArray2.html" target="_self">Array2</a></td><td class="desc">A 2d array template with a consistent spatial indexing scheme for use in a collocated grid </td></tr>
+<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classFluid.html" target="_self">Fluid</a></td><td class="desc">Each fluid has its own velocity, pressure, and level set which are then composed by way of "ghost values" </td></tr>
+<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="structFluidConfig.html" target="_self">FluidConfig</a></td><td class="desc">A container for a fluid's initial phi conditions </td></tr>
+<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classParticle.html" target="_self">Particle</a></td><td class="desc">A simple particle class for use in the particle level set method </td></tr>
+<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><span class="icona"><span class="icon">C</span></span><a class="el" href="classSimulation.html" target="_self">Simulation</a></td><td class="desc">The main simulation class that defines our computational domain </td></tr>
+</table>
+</div><!-- directory -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

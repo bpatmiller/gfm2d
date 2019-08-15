@@ -29,7 +29,7 @@ test: clean build
 
 .PHONY: docs
 docs:
-	doxygen .doxyfile
+	rm -rf docs/ && doxygen .doxyfile
 
 .PHONY: all
 all: clean format build run

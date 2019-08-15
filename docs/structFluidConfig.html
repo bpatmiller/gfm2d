@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GFM2D: Particle Class Reference</title>
+<title>GFM2D: FluidConfig Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,35 +66,52 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="classParticle-members.html">List of all members</a>  </div>
+<a href="structFluidConfig-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Particle Class Reference</div>  </div>
+<div class="title">FluidConfig Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A container for a fluid's initial phi conditions.  
+ <a href="structFluidConfig.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="levelset__constructors_8hpp_source.html">levelset_constructors.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a98784ea765eae8715cfac8608e165f9d"><td class="memItemLeft" align="right" valign="top"><a id="a98784ea765eae8715cfac8608e165f9d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Particle</b> (vec3 position_, float starting_phi_, float radius_)</td></tr>
-<tr class="separator:a98784ea765eae8715cfac8608e165f9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eab622d9cd3c88a0d24e59df32afa25"><td class="memItemLeft" align="right" valign="top"><a id="a4eab622d9cd3c88a0d24e59df32afa25"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>FluidConfig</b> (json j)</td></tr>
+<tr class="separator:a4eab622d9cd3c88a0d24e59df32afa25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a4e2f0aec4261adfc8080af6b6a5233c9"><td class="memItemLeft" align="right" valign="top"><a id="a4e2f0aec4261adfc8080af6b6a5233c9"></a>
-vec2&#160;</td><td class="memItemRight" valign="bottom"><b>position</b></td></tr>
-<tr class="separator:a4e2f0aec4261adfc8080af6b6a5233c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29f0e77628f3ad2c3a77eb577ca99a0f"><td class="memItemLeft" align="right" valign="top"><a id="a29f0e77628f3ad2c3a77eb577ca99a0f"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>starting_phi</b></td></tr>
-<tr class="separator:a29f0e77628f3ad2c3a77eb577ca99a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a9c8ec502deee9e17355867563e55dc"><td class="memItemLeft" align="right" valign="top"><a id="a3a9c8ec502deee9e17355867563e55dc"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>radius</b></td></tr>
-<tr class="separator:a3a9c8ec502deee9e17355867563e55dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5815d2adaae1746f2860218b59ceb51"><td class="memItemLeft" align="right" valign="top"><a id="ae5815d2adaae1746f2860218b59ceb51"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>valid</b></td></tr>
-<tr class="separator:ae5815d2adaae1746f2860218b59ceb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac92020b08460088d925efa657d654015"><td class="memItemLeft" align="right" valign="top"><a id="ac92020b08460088d925efa657d654015"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="separator:ac92020b08460088d925efa657d654015"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abadddb12e509ac4797816aea874ccea0"><td class="memItemLeft" align="right" valign="top"><a id="abadddb12e509ac4797816aea874ccea0"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>p1</b></td></tr>
+<tr class="separator:abadddb12e509ac4797816aea874ccea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a510c379faceea65bb30e89133859bf"><td class="memItemLeft" align="right" valign="top"><a id="a3a510c379faceea65bb30e89133859bf"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>p2</b></td></tr>
+<tr class="separator:a3a510c379faceea65bb30e89133859bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af353af257d0594b4d87c640e3792bfb5"><td class="memItemLeft" align="right" valign="top"><a id="af353af257d0594b4d87c640e3792bfb5"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>p3</b></td></tr>
+<tr class="separator:af353af257d0594b4d87c640e3792bfb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a2d713e07cd37e2cf6f3b3063e08fcc"><td class="memItemLeft" align="right" valign="top"><a id="a0a2d713e07cd37e2cf6f3b3063e08fcc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>negate</b></td></tr>
+<tr class="separator:a0a2d713e07cd37e2cf6f3b3063e08fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>src/<a class="el" href="simulation_8hpp_source.html">simulation.hpp</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A container for a fluid's initial phi conditions. </p>
+<ul>
+<li>a string which lets the user choose the shape</li>
+<li>three scalar values which describe its transformations</li>
+<li><p class="startli">a boolean which negates the phi values</p>
+<p class="startli">supported shapes are: circle </p>
+</li>
+</ul>
+</div><hr/>The documentation for this class was generated from the following file:<ul>
+<li>src/<a class="el" href="levelset__constructors_8hpp_source.html">levelset_constructors.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

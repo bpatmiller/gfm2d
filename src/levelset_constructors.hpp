@@ -4,7 +4,8 @@
 #include <string>
 using json = nlohmann::json;
 
-/** \class A container for a fluid's initial phi conditions.
+/** \class FluidConfig
+ * A container for a fluid's initial phi conditions.
  * - a string which lets the user choose the shape
  * - three scalar values which describe its transformations
  * - a boolean which negates the phi values

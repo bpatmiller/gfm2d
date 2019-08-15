@@ -2,7 +2,8 @@
 #include "array2.hpp"
 #include <vector>
 
-/** \class A simple particle class for use in the particle level set method
+/** \class Particle
+ * A simple particle class for use in the particle level set method
  */
 class Particle {
 public:
@@ -17,7 +18,8 @@ public:
   }
 };
 
-/** \class each fluid has its own velocity, pressure, and level set which are
+/** \class Fluid
+ * each fluid has its own velocity, pressure, and level set which are
  * then composed by way of "ghost values"
  */
 class Fluid {
@@ -51,7 +53,8 @@ public:
   }
 };
 
-/** \class The main simulation class that defines our computational domain. It
+/** \class Simulation
+ * The main simulation class that defines our computational domain. It
  * is described spatially by a cell size (h) and a number of cells in both
  * dimensions (sx, sy).
  *

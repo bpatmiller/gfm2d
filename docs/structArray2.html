@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GFM2D: Array2&lt; T &gt; Struct Template Reference</title>
+<title>GFM2D: Array2&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,9 +68,14 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structArray2-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Array2&lt; T &gt; Struct Template Reference</div>  </div>
+<div class="title">Array2&lt; T &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A 2d array template with a consistent spatial indexing scheme for use in a collocated grid.  
+ <a href="structArray2.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="array2_8hpp_source.html">array2.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -128,7 +133,13 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>h</b> = 0</td></tr>
 std::vector&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>data</b></td></tr>
 <tr class="separator:a2c8d5015d8edb6fc44ecb4d9700f0c4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;class T&gt;<br />
+class Array2&lt; T &gt;</h3>
+
+<p>A 2d array template with a consistent spatial indexing scheme for use in a collocated grid. </p>
+<p>For translation between worldspace and gridspace, we use a linear offset. The leastmost worldspace coordinate considered in our universe is (0,0) </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afd1e9be811a27a30290d244fe8fd0e47"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afd1e9be811a27a30290d244fe8fd0e47">&#9670;&nbsp;</a></span>coordinates_at()</h2>
 
@@ -230,7 +241,7 @@ template&lt;class T&gt; </div>
 
 </div>
 </div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/<a class="el" href="array2_8hpp_source.html">array2.hpp</a></li>
 </ul>
 </div><!-- contents -->
