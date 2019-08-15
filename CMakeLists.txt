@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 set(PROJECT_NAME gfm)
 project(${PROJECT_NAME})
 
+set(CMAKE_VERBOSE_MAKEFILE on)
+
 # cpp version / settings
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,19 +14,22 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # coverage flags
+set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG} --coverage")
+set(CMAKE_EXE_LINKER_FLAGS_COVERAGE
+    "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
+set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE
+    "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} --coverage")
+
+# choose which flags to use
 if(DEFINED ENV{COVERAGE_OPTION})
-  set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG} --coverage")
-  set(CMAKE_EXE_LINKER_FLAGS_COVERAGE
-      "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
-  set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE
-      "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} --coverage")
+  set(CMAKE_BUILD_TYPE COVERAGE)
   message(STATUS "OPT building with coverage options !!")
 else()
+  set(CMAKE_BUILD_TYPE DEBUG)
   message(STATUS "OPT building without coverage options ~~")
 endif()
 
 # set build type and output location
-set(CMAKE_BUILD_TYPE COVERAGE)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # source / lib directories
