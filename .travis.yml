@@ -11,21 +11,13 @@ compiler:
 
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-7
     packages:
       - gcovr
       - lcov
-      - g++-6
-      - clang
     update: true
 
 script:
-  - clang --version
   - cmake --version
-  - gcov --version
-  - lcov --version
   - make clean build
   - ./build/bin/unit-tests
 
