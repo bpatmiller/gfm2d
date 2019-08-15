@@ -5,16 +5,17 @@
 ### BIG TODOS:
 - [x] get travis build working
 - [x] get catch2 working
-- [] set up array2
+- [x] set up array2
+- [] level set initialization
 - [] do some simple graphics
-- [] make skeleton data structures
+- [x] make skeleton data structures
 - [] do level set work
 - [] do some tests
 
 ...
 
-- [] get coverage working
-- [] set up auto code review
+- [x] get coverage working
+- [~] set up auto code review
 
 ### about the project
 
@@ -26,6 +27,11 @@ to add fluids, we use the "fluid" entry type in the json. A fluid entry consists
 a density, and a phi definition. As of now, the only supported phi computation is of a circle
 (exterior and interior).
 
+### CI/CD stuff
+- Travis CI
+- CodeCov
+- bettercodehub
+- doxygen
 
 ### dependencies
 https://github.com/nlohmann/json

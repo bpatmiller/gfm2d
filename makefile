@@ -27,5 +27,9 @@ run:
 test: clean build
 	build/bin/unit-tests
 
+.PHONY: docs
+docs:
+	doxygen .doxyfile
+
 .PHONY: all
 all: clean format build run

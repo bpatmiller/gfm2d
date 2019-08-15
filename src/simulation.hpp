@@ -2,7 +2,7 @@
 #include "array2.hpp"
 #include <vector>
 
-/* A simple particle class for use in the particle level set method
+/** \class A simple particle class for use in the particle level set method
  */
 class Particle {
 public:
@@ -17,8 +17,8 @@ public:
   }
 };
 
-/* each fluid has its own velocity, pressure, and level set which are then
- * composed by way of "ghost values"
+/** \class each fluid has its own velocity, pressure, and level set which are
+ * then composed by way of "ghost values"
  */
 class Fluid {
 public:
@@ -51,8 +51,8 @@ public:
   }
 };
 
-/* The main simulation class that defines our computational domain. It is
- * described spatially by a cell size (h) and a number of cells in both
+/** \class The main simulation class that defines our computational domain. It
+ * is described spatially by a cell size (h) and a number of cells in both
  * dimensions (sx, sy).
  *
  */
@@ -77,6 +77,6 @@ public:
     h = h_;
   }
 
-  /* Creates a fluid of a given density, but does not equip it with a phi*/
+  /** Creates a fluid of a given density, but does not equip it with a phi*/
   void add_fluid(float density) { fluids.push_back(Fluid(density, sx, sy, h)); }
 };

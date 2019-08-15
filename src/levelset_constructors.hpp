@@ -1,15 +1,15 @@
 #pragma once
-#include "simulation.hpp"
 #include "json.hpp"
+#include "simulation.hpp"
 #include <string>
 using json = nlohmann::json;
 
-/* A container for a fluid's initial phi conditions.
-* - a string which lets the user choose the shape
-* - three scalar values which describe its transformations
-* - a boolean which negates the phi values
-*
-*  supported shapes are: circle */
+/** \class A container for a fluid's initial phi conditions.
+ * - a string which lets the user choose the shape
+ * - three scalar values which describe its transformations
+ * - a boolean which negates the phi values
+ *
+ *  supported shapes are: circle */
 struct FluidConfig {
   std::string name;
   float p1;
@@ -26,7 +26,10 @@ struct FluidConfig {
   };
 };
 
-/* */
-void construct_levelset(Fluid& f, int sx, int sy,float h, std::string name, FluidConfig fconf) {
-    f.phi.clear();
+/** TODO */
+void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
+                        FluidConfig fconf) {
+  f.phi.clear();
+
+  // for (auto)
 }

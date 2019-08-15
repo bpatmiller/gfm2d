@@ -1,0 +1,91 @@
+\hypertarget{structArray2}{}\section{Array2$<$ T $>$ Struct Template Reference}
+\label{structArray2}\index{Array2$<$ T $>$@{Array2$<$ T $>$}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structArray2_a42645581bcf87a47ecf3263388809112}\label{structArray2_a42645581bcf87a47ecf3263388809112}} 
+\mbox{\hyperlink{structArray2_a42645581bcf87a47ecf3263388809112}{Array2}} ()
+\begin{DoxyCompactList}\small\item\em An empty contructor not intended to be used. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structArray2_ab4f4080a8318cfa7c953ae1ffb560daa}\label{structArray2_ab4f4080a8318cfa7c953ae1ffb560daa}} 
+\mbox{\hyperlink{structArray2_ab4f4080a8318cfa7c953ae1ffb560daa}{Array2}} (int sx\+\_\+, int sy\+\_\+, float offset\+\_\+x\+\_\+, float offset\+\_\+y\+\_\+, float h\+\_\+)
+\begin{DoxyCompactList}\small\item\em Equip the grid with dimensions as well as an \char`\"{}offset\char`\"{} to foolproof converting from worldspace to gridspace and back. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structArray2_a7a7631efac6def77a33405808add9842}\label{structArray2_a7a7631efac6def77a33405808add9842}} 
+void {\bfseries init} (int sx\+\_\+, int sy\+\_\+, float offset\+\_\+x\+\_\+, float offset\+\_\+y\+\_\+, float h\+\_\+)
+\item 
+\mbox{\Hypertarget{structArray2_ad6a742ce7bd22f8f56b3959a26f28c11}\label{structArray2_ad6a742ce7bd22f8f56b3959a26f28c11}} 
+void \mbox{\hyperlink{structArray2_ad6a742ce7bd22f8f56b3959a26f28c11}{init}} ()
+\begin{DoxyCompactList}\small\item\em F\+I\+X\+ME creating new vectors might be causing memory leaks on resets Creates a vector to store the grid\textquotesingle{}s elements and clears every value to 0. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structArray2_ad264d90ac5d4de34e9bbc214810e169a}\label{structArray2_ad264d90ac5d4de34e9bbc214810e169a}} 
+void \mbox{\hyperlink{structArray2_ad264d90ac5d4de34e9bbc214810e169a}{set}} (T val)
+\begin{DoxyCompactList}\small\item\em Fills the data vector with the input value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structArray2_a8b7caea81764b7ae00e28fb9aa0e23f4}\label{structArray2_a8b7caea81764b7ae00e28fb9aa0e23f4}} 
+void \mbox{\hyperlink{structArray2_a8b7caea81764b7ae00e28fb9aa0e23f4}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Fills the data vector with 0 casted to the template type. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{structArray2_a8a89f0623dc0e116e4dc14b0b77b769e}{operator()}} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Takes in x and y indice of the grid and returns the value stored at that index. \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{structArray2_a3e1321aba8d5072af7fcffe56198b99d}{operator()}} (glm\+::ivec2 ij)
+\begin{DoxyCompactList}\small\item\em Takes in a vec2 index of the grid and returns the value stored at that index. \end{DoxyCompactList}\item 
+vec2 \mbox{\hyperlink{structArray2_afd1e9be811a27a30290d244fe8fd0e47}{coordinates\+\_\+at}} (vec2 world\+\_\+coordinates)
+\begin{DoxyCompactList}\small\item\em Takes in some position in world coordinates and returns the {\itshape grid} coordinates of that position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structArray2_aa940e91649f35c252ede59dad5f75d52}\label{structArray2_aa940e91649f35c252ede59dad5f75d52}} 
+int {\bfseries sx} = 0
+\item 
+\mbox{\Hypertarget{structArray2_a6060f402f1cf425325df8a4ea23ac2b4}\label{structArray2_a6060f402f1cf425325df8a4ea23ac2b4}} 
+int {\bfseries sy} = 0
+\item 
+\mbox{\Hypertarget{structArray2_a1c0f896b76b9817ab4162aef59644be6}\label{structArray2_a1c0f896b76b9817ab4162aef59644be6}} 
+float {\bfseries offset\+\_\+x} = 0
+\item 
+\mbox{\Hypertarget{structArray2_aeb90cd45930f8fd1d995dd751b53e8ba}\label{structArray2_aeb90cd45930f8fd1d995dd751b53e8ba}} 
+float {\bfseries offset\+\_\+y} = 0
+\item 
+\mbox{\Hypertarget{structArray2_adddfcecc3bd577f17240287e63ba0cc4}\label{structArray2_adddfcecc3bd577f17240287e63ba0cc4}} 
+float {\bfseries h} = 0
+\item 
+\mbox{\Hypertarget{structArray2_a2c8d5015d8edb6fc44ecb4d9700f0c4d}\label{structArray2_a2c8d5015d8edb6fc44ecb4d9700f0c4d}} 
+std\+::vector$<$ T $>$ {\bfseries data}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structArray2_afd1e9be811a27a30290d244fe8fd0e47}\label{structArray2_afd1e9be811a27a30290d244fe8fd0e47}} 
+\index{Array2$<$ T $>$@{Array2$<$ T $>$}!coordinates\_at@{coordinates\_at}}
+\index{coordinates\_at@{coordinates\_at}!Array2$<$ T $>$@{Array2$<$ T $>$}}
+\subsubsection{\texorpdfstring{coordinates\_at()}{coordinates\_at()}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+vec2 \mbox{\hyperlink{structArray2}{Array2}}$<$ T $>$\+::coordinates\+\_\+at (\begin{DoxyParamCaption}\item[{vec2}]{world\+\_\+coordinates }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Takes in some position in world coordinates and returns the {\itshape grid} coordinates of that position. 
+
+An example translation is that a center-\/sampled (eg pressure) value would have offsets -\/0.\+5,-\/0.\+5 \mbox{\Hypertarget{structArray2_a8a89f0623dc0e116e4dc14b0b77b769e}\label{structArray2_a8a89f0623dc0e116e4dc14b0b77b769e}} 
+\index{Array2$<$ T $>$@{Array2$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!Array2$<$ T $>$@{Array2$<$ T $>$}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+T\& \mbox{\hyperlink{structArray2}{Array2}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Takes in x and y indice of the grid and returns the value stored at that index. 
+
+\mbox{\Hypertarget{structArray2_a3e1321aba8d5072af7fcffe56198b99d}\label{structArray2_a3e1321aba8d5072af7fcffe56198b99d}} 
+\index{Array2$<$ T $>$@{Array2$<$ T $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!Array2$<$ T $>$@{Array2$<$ T $>$}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+T\& \mbox{\hyperlink{structArray2}{Array2}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{glm\+::ivec2}]{ij }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Takes in a vec2 index of the grid and returns the value stored at that index. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/array2.\+hpp\end{DoxyCompactItemize}

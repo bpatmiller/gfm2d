@@ -1,18 +1,20 @@
-/*  Loads data from config.json and returns
+/**  \file Loads data from config.json and returns
     parameters for initializing the simulation.
 */
 #pragma once
 
 #include "json.hpp"
-#include "simulation.hpp"
 #include "levelset_constructors.hpp"
+#include "simulation.hpp"
 #include <fstream>
 #include <iostream>
 #include <string>
 // for convenience
 using json = nlohmann::json;
 
-/* Initializes a simulation based on the json parameters */
+/** Initializes a simulation based on the json parameters,
+ * then adds fluids and sets their starting phis.
+ */
 void initialize_simulation(Simulation &sim) {
   std::ifstream i("config.json");
   json j;
