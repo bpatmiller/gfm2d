@@ -29,6 +29,15 @@ template <class T> struct Array2 {
     init();
   }
 
+  void init(int sx_, int sy_, float offset_x_, float offset_y_, float h_) {
+    sx = sx_;
+    sy = sy_;
+    offset_x = offset_x_;
+    offset_y = offset_y_;
+    h = h_;
+    init();
+  }
+
   /* FIXME creating new vectors might be causing memory leaks on resets
    * Creates a vector to store the grid's elements and clears every value to 0*/
   void init() {
