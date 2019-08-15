@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "array2.hpp"
 #include "catch.hpp"
+#include "export_data.hpp"
 #include "settings.hpp"
 #include "simulation.hpp"
 
@@ -21,4 +22,5 @@ TEST_CASE("test creating a basic simulation") {
   Simulation sim;
   initialize_simulation(sim);
   sim.print_information();
+  export_fluid_ids(sim);
 }

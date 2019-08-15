@@ -44,16 +44,9 @@ void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
 
   for (auto it = f.phi.begin(); it != f.phi.end(); it++) {
     glm::vec2 ij = it.ij();
-    printf("ij:%f, %f\n", ij.x, ij.y);
-  }
-
-  for (int x = 0; x < sx; x++) {
-    for (int y = 0; y < sy; y++) {
-      // TODO add conditionals for non-spheres
-      float phi_value = compute_phi_sphere(
-          (static_cast<float>(x) + 0.5f) / static_cast<float>(sx),
-          (static_cast<float>(y) + 0.5f) / static_cast<float>(sy), fconf);
-      f.phi(x, y) = fconf.negate ? -phi_value : phi_value;
-    }
+    float phi_value = compute_phi_sphere(
+        (static_cast<float>(ij.x) + 0.5f) / static_cast<float>(sx),
+        (static_cast<float>(ij.y) + 0.5f) / static_cast<float>(sy), fconf);
+    f.phi(ij) = fconf.negate ? -phi_value : phi_value;
   }
 }

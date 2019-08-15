@@ -104,4 +104,10 @@ public:
       f.print_information();
     }
   }
+
+  /* SIMULATION METHODS */
+
+  /** Populates the fluid_id array with the fluid that exists at each index in
+   * space*/
+  void get_fluid_ids();
 };
