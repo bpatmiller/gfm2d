@@ -1,6 +1,8 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 #include "array2.hpp"
+#include "settings.hpp"
+#include "simulation.hpp"
 
 TEST_CASE("this is a null test") {
   REQUIRE(1 == 1);
@@ -14,4 +16,9 @@ TEST_CASE("testing basic array2 operations") {
 
   // coordinates_at(position) takes a position and returns the grid's relative coordinates
   REQUIRE( arri.coordinates_at(world_coordinates) == vec2(0.5,0.5) );
+}
+
+TEST_CASE("test creating a basic simulation") {
+  Simulation sim;
+  initialize_simulation(sim);
 }

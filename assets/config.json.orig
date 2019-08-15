@@ -1,29 +1,28 @@
 {
-    "horizontal_cells":"50",
-    "vertical_cells":"50",
-    "cell_size":"0.1",
-    "number_of_fluids":"2",
+    "horizontal_cells":50,
+    "vertical_cells":50,
+    "cell_size":0.1,
     "fluids":[
         {
             "name":"water",
-            "density":"1.0",
+            "density":1.0,
             "phi":{
                 "shape":"circle",
-                "property1":"0.5",
-                "property2":"0.5",
-                "property3":"0.25",
-                "negate":"1"
+                "property1":0.5,
+                "property2":0.5,
+                "property3":0.25,
+                "negate":false
             }
         },
         {
             "name":"air",
-            "density":"0.1",
+            "density":0.1,
             "phi":{
                 "shape":"circle",
-                "property1":"0.5",
-                "property2":"0.5",
-                "property3":"0.25",
-                "negate":0
+                "property1":0.5,
+                "property2":0.5,
+                "property3":0.2,
+                "negate":true
             }
         }
     ]

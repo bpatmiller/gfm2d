@@ -1,11 +1,8 @@
 #include "settings.hpp"
-#include <Eigen/SparseCore>
-#include <iostream>
 
 int main() {
-  std::cout << "hello\n";
-
-  print_settings();
+  Simulation sim;
+  initialize_simulation(sim);
 
   return 0;
 }
