@@ -7,17 +7,23 @@ before_install:
   - pip install --user pyyaml cpp-coveralls
 
 compiler:
-  - clang
+  - gcc
 
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-7
     packages:
       - gcovr
       - lcov
+      - g++-6
+      - clang
     update: true
 
 script:
   - cmake --version
+  - g++ --version
   - make clean build
   - ./build/bin/unit-tests
 
@@ -29,6 +35,3 @@ after_success:
   - lcov --list coverage.info
   # Uploading report to CodeCov
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
-
-notifications:
-  slack: brendanstestinglair:1QK2ldlwoHSnj5l5Z4SkxOJf
