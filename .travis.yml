@@ -4,7 +4,7 @@ dist: bionic
 
 before_install:
   - sudo apt-get install -y libeigen3-dev nlohmann-json-dev
-  - pip install --user pyyaml cpp-coveralls
+  - pip install --user pyyaml cpp-coveralls cmake-format
 
 compiler:
   - gcc

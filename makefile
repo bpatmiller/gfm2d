@@ -9,8 +9,11 @@ build:
 
 .PHONY: format
 format:
-	clang-format -i src/*.cpp src/*.hpp
-	#test/*.cpp test/*.hpp
+	find ./src ./test -iname *.hpp -o -iname *.cpp \
+	| xargs clang-format -i
+	cmake-format -i --command-case canonical --keyword-case upper \
+	--enable-sort True --autosort True --enable-markup True \
+	./CMakeLists.txt ./test/CMakeLists.txt
 
 .PHONY: clean
 clean:
