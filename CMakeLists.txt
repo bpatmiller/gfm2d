@@ -7,7 +7,7 @@ project(${PROJECT_NAME})
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wno-unused-parameter")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
@@ -25,10 +25,6 @@ set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 aux_source_directory(${SRC_DIR} SOURCES)
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# test subdir
-add_subdirectory(test)
-
-
 ################################
 #   include libraries
 ################################
@@ -37,10 +33,10 @@ add_subdirectory(test)
 find_package(PkgConfig REQUIRED)
 
 # json
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/json)
+include_directories(BEFORE SYSTEM ${CMAKE_SOURCE_DIR}/lib/json)
 message(STATUS "~Including json in lib/json")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/catch)
+include_directories(${CMAKE_SOURCE_DIR}/lib/catch)
 message(STATUS "~Including catch2 in lib/catch")
 
 # GLM
@@ -54,3 +50,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 find_package(Eigen3 REQUIRED NO_MODULE)
 include_directories("${EIGEN3_INCLUDE_DIR}")
 message(STATUS "~Including eigen3 at ${EIGEN3_INCLUDE_DIR}")
+
+# test subdir
+add_subdirectory(test)
