@@ -1,0 +1,10 @@
+c++11 -> c++14?
+
+Array2 design
+
+accessing with either vec2 or i,j
+
+point in space -> grid coordinates for different types
+^ drafted out on paper
+
+or potentially universal grid that index

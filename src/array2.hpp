@@ -7,7 +7,6 @@
 
 #include <glm/glm.hpp>
 #include <vector>
-#include <glm/glm.hpp>
 
 using namespace glm;
 

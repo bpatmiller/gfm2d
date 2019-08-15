@@ -36,9 +36,12 @@ add_subdirectory(test)
 # PkgConfig
 find_package(PkgConfig REQUIRED)
 
-# json and catch2
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/inc)
-message(STATUS "~Including json/catch2 in inc/")
+# json
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/json)
+message(STATUS "~Including json in lib/json")
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib/catch)
+message(STATUS "~Including catch2 in lib/catch")
 
 # GLM
 SET(expected_glm_dir ${CMAKE_SOURCE_DIR}/lib/glm)
