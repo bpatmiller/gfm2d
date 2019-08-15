@@ -7,10 +7,15 @@
 
 #include <glm/glm.hpp>
 #include <vector>
+#include <glm/glm.hpp>
+
+using namespace glm;
 
 template <class T> struct Array2 {
   int sx = 0;
   int sy = 0;
+  float offset_x = -0.5;
+  float offset_y = -0.5;
   int size = 0;
   std::vector<T> data;
 
