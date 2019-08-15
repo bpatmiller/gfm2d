@@ -18,7 +18,9 @@ if(DEFINED ENV{COVERAGE_OPTION})
       "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
   set(CMAKE_SHARED_LINKER_FLAGS_COVERAGE
       "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} --coverage")
-  message(STATUS "~~ building with coverage options ~~")
+  message(STATUS "OPT building with coverage options !!")
+else()
+  message(STATUS "OPT building without coverage options ~~")
 endif()
 
 # set build type and output location
@@ -39,15 +41,15 @@ find_package(PkgConfig REQUIRED)
 
 # json
 include_directories(BEFORE SYSTEM ${CMAKE_SOURCE_DIR}/lib/json)
-message(STATUS "~Including json in lib/json")
+message(STATUS "INCLUDE json at lib/json")
 
 include_directories(${CMAKE_SOURCE_DIR}/lib/catch)
-message(STATUS "~Including catch2 in lib/catch")
+message(STATUS "INCLUDE catch2 at lib/catch")
 
 # GLM
 set(expected_glm_dir ${CMAKE_SOURCE_DIR}/lib/glm)
 include_directories(BEFORE SYSTEM ${expected_glm_dir})
-message(STATUS "~Including bundled glm at ${expected_glm_dir}")
+message(STATUS "INCLUDE glm at lib/glm")
 add_definitions(-DGLM_ENABLE_EXPERIMENTAL -DGLM_FORCE_SIZE_FUNC=1
                 -DGLM_FORCE_RADIANS=1)
 
@@ -55,7 +57,7 @@ add_definitions(-DGLM_ENABLE_EXPERIMENTAL -DGLM_FORCE_SIZE_FUNC=1
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 find_package(Eigen3 REQUIRED NO_MODULE)
 include_directories("${EIGEN3_INCLUDE_DIR}")
-message(STATUS "~Including eigen3 at ${EIGEN3_INCLUDE_DIR}")
+message(STATUS "INCLUDE eigen3 at ${EIGEN3_INCLUDE_DIR}")
 
 # test subdir
 add_subdirectory(test)
