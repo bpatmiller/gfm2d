@@ -22,8 +22,8 @@ clean:
 run:
 	build/bin/gfm 
 
-.PHONY: unit
-unit:
+.PHONY: test
+test: clean build
 	build/bin/unit-tests
 
 .PHONY: all
