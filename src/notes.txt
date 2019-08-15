@@ -1,10 +1,19 @@
-c++11 -> c++14?
-
-Array2 design
-
-accessing with either vec2 or i,j
-
 point in space -> grid coordinates for different types
 ^ drafted out on paper
 
 or potentially universal grid that index
+
+~~~ A Boundary Condition Capturing Method for Poisson's Equation on Irregular Domains
+some facts:
+    - the whole computation domain is solved in one step:
+        "For eah grid point i, one can write a linear equation of the form...
+        and assemble the system of linear equations into matrix form. Each
+        Bk+1/2 is evaluated based on the side of the interfae that xk and xk+1 lie on. If xk
+        and xk+1 lie on opposite sides of the interfae, then Bk+1/2 is defined along
+        the lines of equation 48 and equation 33."
+
+    - the coefficient matrix is unchanged
+        "Furthermore,
+        the oeÆient matrix of the assoiated linear system is the standard symmetri matrix for the variable oeÆient Poisson equation in the absene of
+        interfaes allowing for straightforward appliation of standard \blak box"
+        solvers."
