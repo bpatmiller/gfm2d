@@ -17,6 +17,8 @@ format:
 
 .PHONY: clean
 clean:
+	rm -f plot/data/*
+	rm -f plot/output/*
 	rm -rf build/
 	cp -f assets/config.json.orig config.json
 	rm -f ./*.gcov
@@ -27,12 +29,16 @@ run:
 	build/bin/gfm 
 
 .PHONY: test
-test: clean build
+test: build
 	build/bin/unit-tests
 
 .PHONY: docs
 docs:
 	rm -rf docs/ && doxygen .doxyfile
+
+.PHONY: draw
+draw:
+	gnuplot plot/draw_phi.gnu
 
 .PHONY: all
 all: clean format build run

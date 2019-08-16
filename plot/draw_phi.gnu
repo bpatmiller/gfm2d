@@ -1,5 +1,9 @@
 #! /usr/bin/gnuplot
 
-#set style line 1 lc rgb '#0060ad' pt 5   # square
-plot "example_phi.txt" using 1:2:4 with points lt palette
+set loadpath "plot/palettes/"
+
+set style fill
+plot for [i=0:2] "plot/data/phi.txt" using 1:($3==i?$2:1/0):4 with points ls i+4 lc palette
+
+
 pause -1 "Hit any key to continue"

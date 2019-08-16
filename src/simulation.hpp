@@ -83,6 +83,8 @@ public:
     v.init(sx, sy + 1, -0.5, 0.0, h);
     // center-located quantities
     p.init(sx, sy, -0.5, -0.5, h);
+    solid_phi.init(sx, sy, -0.5, -0.5, h);
+    fluid_id.init(sx, sy, -0.5, -0.5, h);
   }
 
   void init(int sx_, int sy_, float h_) {
