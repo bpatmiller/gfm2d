@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -109,6 +110,8 @@ public:
     assert(ij.x + (sx * ij.y) == index); // convert back
     return ij;
   }
+
+  T max() { return *std::max_element(data.begin(), data.end()); }
 };
 
 typedef Array2<double> Array2d;

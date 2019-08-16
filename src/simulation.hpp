@@ -63,9 +63,9 @@ public:
   int sy = 0;  // number of voxels on the y-axis
   float h = 0; // voxel size
 
-  float t = 0;     // amount of time elapsed
-  float max_t = 0; // full simulation runtime
-  float timestep = 0;   // timestep per frame
+  float time_elapsed = 0; // amount of time elapsed
+  float max_t = 0;        // full simulation runtime
+  float timestep = 0;     // timestep per frame
 
   Array2f u; // horizontal velocity, sampled at cell sides
   Array2f v; // vertical velocity, sampled at cell tops/bottoms
@@ -117,6 +117,9 @@ public:
   void advance(float dt);
 
   /* SIMULATION METHODS */
+
+  /** Returns a timestep that ensures the simulation is stable */
+  float cfl();
 
   /** Populates the fluid_id array with the fluid that exists at each index in
    * space*/
