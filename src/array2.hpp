@@ -82,8 +82,8 @@ public:
   }
 
   /** Takes in a vec2 index of the grid and returns the value stored at that
-   * index. */
-  T &operator()(glm::ivec2 ij) { return (*this)(ij.x, ij.y); }
+   * index. Note: this .can. beused with any position in grid coordinates */
+  T &operator()(glm::vec2 const ij) { return (*this)(ij.x, ij.y); }
 
   /** Takes in some position in world coordinates and returns the *grid*
    * coordinates of that position. An example translation is that a
@@ -111,7 +111,41 @@ public:
     return ij;
   }
 
+  // TODO rearrange this code
   T max() { return *std::max_element(data.begin(), data.end()); }
+
+  inline T lerp(T val1, T val2, float f) {
+    return (1.0f - f) * val1 + f * val2;
+  }
+
+  inline T lerp_2(T val00, T val10, T val01, T val11, vec2 f) {
+    return lerp(lerp(val00, val10, f.x), lerp(val01, val11, f.x), f.y);
+  }
+
+  inline int index_from_ij(vec2 ij) { return ij.x + (sx * ij.y); }
+
+  /** The same as (vec2) but it does not interpolate
+   * deprecated but i like having it */
+  T snapped_access(vec2 ij) { return data[ij.x + (sx * ij.y)]; }
+
+  vec2 subcell_coordinates(vec2 ij) {
+    ivec2 rounded(ij);
+    return ij - vec2(rounded);
+  }
+
+  /* bilerp takes in a location (in grid coordinates) and returns the
+   * interpolated value at the coordinate*/
+  T const bilerp(vec2 ij) {
+    T val00 = snapped_access(ij);
+    T val10 = snapped_access(ij + vec2(1, 0));
+    T val01 = snapped_access(ij + vec2(0, 1));
+    T val11 = snapped_access(ij + vec2(1, 1));
+    return lerp_2(val00, val10, val01, val11, subcell_coordinates(ij));
+  }
+
+  T value_at(vec2 world_position) {
+    return bilerp(coordinates_at(world_position));
+  }
 };
 
 typedef Array2<double> Array2d;

@@ -1,4 +1,6 @@
 #include "simulation.hpp"
+#include "levelset_methods.hpp"
+#include "particle_levelset_method.hpp"
 
 /** TODO Returns a timestep that ensures the simulation is stable */
 float Simulation::cfl() {
@@ -32,7 +34,12 @@ void Simulation::run() {
 
 /* The central method in the Simulation class. This performs all of our
  * computations for a given timestep that it assumed to be safe. */
-void Simulation::advance(float dt) {}
+void Simulation::advance(float dt) {
+  for (auto &f : fluids) {
+    advect_phi(u, v, f.phi, dt);
+    advect_particles(f, vel, solid_phi, dt);
+  }
+}
 
 void Simulation::get_fluid_ids() {
   Array2f min_phi(sx, sy, -0.5, -0.5, h);

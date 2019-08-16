@@ -29,7 +29,7 @@ run:
 	build/bin/gfm 
 
 .PHONY: test
-test: build
+test:
 	build/bin/unit-tests
 
 .PHONY: docs
@@ -41,4 +41,4 @@ draw:
 	gnuplot plot/draw_phi.gnu
 
 .PHONY: all
-all: clean format build run
+all: clean format build test

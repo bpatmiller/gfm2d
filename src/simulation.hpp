@@ -3,6 +3,16 @@
 #include <stdio.h>
 #include <vector>
 
+struct VelocityField {
+  Array2f *up;
+  Array2f *vp;
+  VelocityField() {}
+  VelocityField(Array2f *u_, Array2f *v_) : up(u_), vp(v_) {}
+  vec2 operator()(glm::vec2 world_position) {
+    return vec2(up->value_at(world_position), vp->value_at(world_position));
+  }
+};
+
 /** \class Particle
  * A simple particle class for use in the particle level set method
  */
@@ -70,6 +80,7 @@ public:
   Array2f u; // horizontal velocity, sampled at cell sides
   Array2f v; // vertical velocity, sampled at cell tops/bottoms
   Array2f p; // pressure, sampled at center
+  VelocityField vel;
 
   std::vector<Fluid> fluids;
   Array2f solid_phi; // phi corresponding to solid boundaries, not important as
@@ -117,8 +128,6 @@ public:
   void advance(float dt);
 
   /* SIMULATION METHODS */
-
-  /** Returns a timestep that ensures the simulation is stable */
   float cfl();
 
   /** Populates the fluid_id array with the fluid that exists at each index in
