@@ -1,4 +1,6 @@
 {
+    "runtime":2.0,
+    "timestep":0.5,
     "horizontal_cells":50,
     "vertical_cells":50,
     "cell_size":0.1,
