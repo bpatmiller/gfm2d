@@ -1,5 +1,16 @@
 #include "simulation.hpp"
 
+void Simulation::run() {
+    while (t < max_t) {
+        if (t + timestep > max_t) timestep = max_t - t;
+        advance(timestep);
+        t+=timestep;
+    }
+}
+
+void Simulation::advance(float dt) {
+}
+
 void Simulation::get_fluid_ids() {
   Array2f min_phi(sx, sy, -0.5, -0.5, h);
   min_phi.set(99999.9);

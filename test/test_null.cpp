@@ -23,4 +23,6 @@ TEST_CASE("test creating a basic simulation") {
   initialize_simulation(sim);
   sim.print_information();
   export_fluid_ids(sim);
+
+  sim.run();
 }

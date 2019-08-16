@@ -63,6 +63,10 @@ public:
   int sy = 0;  // number of voxels on the y-axis
   float h = 0; // voxel size
 
+  float t = 0;     // amount of time elapsed
+  float max_t = 0; // full simulation runtime
+  float timestep = 0;   // timestep per frame
+
   Array2f u; // horizontal velocity, sampled at cell sides
   Array2f v; // vertical velocity, sampled at cell tops/bottoms
   Array2f p; // pressure, sampled at center
@@ -87,10 +91,12 @@ public:
     fluid_id.init(sx, sy, -0.5, -0.5, h);
   }
 
-  void init(int sx_, int sy_, float h_) {
+  void init(int sx_, int sy_, float h_, float max_t_, float dt_) {
     sx = sx_;
     sy = sy_;
     h = h_;
+    max_t = max_t_;
+    timestep = dt_;
     init();
   }
 
@@ -106,6 +112,9 @@ public:
       f.print_information();
     }
   }
+
+  void run();
+  void advance(float dt);
 
   /* SIMULATION METHODS */
 

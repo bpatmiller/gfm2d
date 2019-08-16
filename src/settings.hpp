@@ -23,9 +23,11 @@ void initialize_simulation(Simulation &sim) {
   int sx = j["horizontal_cells"].get<int>();
   int sy = j["vertical_cells"].get<int>();
   float h = j["cell_size"].get<float>();
+  float rt = j["runtime"].get<float>();
+  float dt = j["timestep"].get<float>();
 
   // define the computational domain
-  sim.init(sx, sy, h);
+  sim.init(sx, sy, h, rt, dt);
 
   // add each fluid
   for (auto tmp : j["fluids"].get<json>()) {
