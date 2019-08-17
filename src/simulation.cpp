@@ -1,4 +1,5 @@
 #include "simulation.hpp"
+#include "export_data.hpp"
 #include "levelset_methods.hpp"
 #include "particle_levelset_method.hpp"
 
@@ -16,7 +17,11 @@ float Simulation::cfl() {
  * t            - tracks the amount of time traversed in a given frame
  * substep      - a length of time given by cfl() */
 void Simulation::run() {
+  clear_exported_data();
   while (time_elapsed < max_t) {
+    std::cout << "exporting\n";
+    export_simulation_data(fluids, time_elapsed, frame_number);
+    frame_number += 1;
     if (time_elapsed + timestep > max_t)
       timestep = max_t - time_elapsed;
     // break the timestep up
@@ -39,6 +44,7 @@ void Simulation::advance(float dt) {
     advect_phi(u, v, f.phi, dt);
     advect_particles(f, vel, solid_phi, dt);
   }
+  project_phi(fluids);
 }
 
 void Simulation::get_fluid_ids() {

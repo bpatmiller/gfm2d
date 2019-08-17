@@ -73,6 +73,12 @@ public:
   /** Fills the data vector with 0 casted to the template type */
   void clear() { set(static_cast<T>(0)); }
 
+  /** returns direct access to the data vector */
+  T &operator()(int i) {
+    assert(i >= 0 && i <= sx * sy);
+    return data[i];
+  }
+
   /** Takes in x and y indice of the grid and returns the value stored at that
    * index. */
   T &operator()(int i, int j) {

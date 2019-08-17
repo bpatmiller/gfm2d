@@ -1,3 +1,18 @@
+--- data design
+FILE STRUCTURE
+    data is stored in the plot/data/ directory
+    one instance of a simulation produces the following datafiles:
+        - phi.dat, which includes phi values and fluid types
+        - velocity.dat, which includes an interpolated velocity at voxel centers
+        - particles.dat, which includes marker particles used in the particle level set method
+DATA STRUCTURE
+    - phi.dat
+    #x  y   id  phi
+    0.05    0.05    0   -0.23
+    ...     ... ... ...
+
+
+
 point in space -> grid coordinates for different types
 ^ drafted out on paper
 

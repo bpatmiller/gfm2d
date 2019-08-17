@@ -6,7 +6,8 @@
 * [ ] do some simple graphics
 * [ ] do level set work
 * [ ] do some tests
-
+* [ ] fix cmake like a real human
+* [ ] phi projection method
 ...
 
 * [x] get coverage working
@@ -16,6 +17,7 @@
 * [x] set up array2
 * [x] make skeleton data structures
 * [x] level set initialization
+* [x] fix weird cyclic dependency
 ### about the project
 
 

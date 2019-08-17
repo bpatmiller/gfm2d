@@ -1,4 +1,5 @@
 #pragma once
+#include "fluid.hpp"
 #include "json.hpp"
 #include "simulation.hpp"
 #include <string>

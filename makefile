@@ -18,7 +18,7 @@ format:
 .PHONY: clean
 clean:
 	rm -f plot/data/*
-	rm -f plot/output/*
+	rm -f plot/images/*
 	rm -rf build/
 	cp -f assets/config.json.orig config.json
 	rm -f ./*.gcov
@@ -38,7 +38,7 @@ docs:
 
 .PHONY: draw
 draw:
-	gnuplot plot/draw_phi.gnu
+	python plot/plot.py
 
 .PHONY: all
 all: clean format build test
