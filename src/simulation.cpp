@@ -17,9 +17,9 @@ float Simulation::cfl() {
  * t            - tracks the amount of time traversed in a given frame
  * substep      - a length of time given by cfl() */
 void Simulation::run() {
+  // delete old datafiles
   clear_exported_data();
   while (time_elapsed < max_t) {
-    std::cout << "exporting\n";
     export_simulation_data(fluids, time_elapsed, frame_number);
     frame_number += 1;
     if (time_elapsed + timestep > max_t)
