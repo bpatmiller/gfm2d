@@ -1,5 +1,6 @@
 #pragma once
 #include "array2.hpp"
+#include <stdio.h>
 
 /** \class Particle
  * A simple particle class for use in the particle level set method
