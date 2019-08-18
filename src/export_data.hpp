@@ -43,6 +43,6 @@ void export_simulation_data(std::vector<Fluid> &sim, float time,
 void clear_exported_data() {
   std::ofstream phi_file;
   phi_file.open("plot/data/phi.txt");
-  phi_file << "# CLEAR\n";
+  phi_file << "# BEGIN PHI DATASET\n";
   phi_file.close();
 }

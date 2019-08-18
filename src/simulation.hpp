@@ -87,6 +87,7 @@ public:
 
   /* SIMULATION METHODS */
   float cfl();
+  void add_gravity(float dt);
 
   /** Populates the fluid_id array with the fluid that exists at each index in
    * space*/

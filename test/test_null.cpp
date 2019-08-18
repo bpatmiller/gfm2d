@@ -23,6 +23,14 @@ TEST_CASE("testing array2 operations") {
   REQUIRE(phi(5, 5) == new_phi(5, 5));
   phi(6, 7) = 10;
   REQUIRE(new_phi(6, 7) == 0);
+
+  // test that our iterator allows modification
+  phi.clear();
+  for (auto it = phi.begin(); it != phi.end(); it++) {
+    *it = 50;
+  }
+  REQUIRE(phi.min() == 50);
+  REQUIRE(phi.max() == 50);
 }
 
 TEST_CASE("test creating a basic simulation") {

@@ -119,6 +119,15 @@ public:
 
   // TODO rearrange this code
   T max() { return *std::max_element(data.begin(), data.end()); }
+  T min() { return *std::min_element(data.begin(), data.end()); }
+  T infnorm() {
+    T best_val = 0;
+    for (auto &d : data) {
+      if (std::abs(d) > best_val)
+        best_val = std::abs(d);
+    }
+    return best_val;
+  }
 
   inline T lerp(T val1, T val2, float f) {
     return (1.0f - f) * val1 + f * val2;

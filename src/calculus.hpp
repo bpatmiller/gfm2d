@@ -49,6 +49,3 @@ vec2 interpolate_gradient(Array2f &field, vec2 world_position) {
 
   return bilerp(g00, g10, g01, g11, xy);
 }
-
-/** returns the central differenced divergence of a point on a grid */
-float divergence(Array2f &field, vec2 ij) { return 0; }

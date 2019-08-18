@@ -5,7 +5,7 @@
 
 /** TODO Returns a timestep that ensures the simulation is stable */
 float Simulation::cfl() {
-  float reciprocal = (u.max() + v.max()) / h;
+  float reciprocal = (u.infnorm() + v.infnorm()) / h;
   return 1.0 / reciprocal;
 }
 
@@ -17,8 +17,9 @@ float Simulation::cfl() {
  * t            - tracks the amount of time traversed in a given frame
  * substep      - a length of time given by cfl() */
 void Simulation::run() {
-  // delete old datafiles
+  // delete old datafiles, fix after initializing
   clear_exported_data();
+  project_phi(fluids);
   while (time_elapsed < max_t) {
     export_simulation_data(fluids, time_elapsed, frame_number);
     frame_number += 1;
@@ -27,7 +28,7 @@ void Simulation::run() {
     // break the timestep up
     float t = 0;
     while (t < timestep) {
-      float substep = cfl();
+      float substep = std::min(cfl(), timestep / 10.0f);
       if (t + substep > timestep)
         substep = timestep - t;
       advance(substep);
@@ -40,11 +41,23 @@ void Simulation::run() {
 /* The central method in the Simulation class. This performs all of our
  * computations for a given timestep that it assumed to be safe. */
 void Simulation::advance(float dt) {
+  assert(dt > 0);
   for (auto &f : fluids) {
     advect_phi(u, v, f.phi, dt);
     advect_particles(f, vel, solid_phi, dt);
+    // correct
+    reinitialize_phi(fluids);
+    //correct
+    // adjust radii
+    // reseed
   }
   project_phi(fluids);
+
+  // advect_velocity(dt);
+  add_gravity(dt);
+
+  // enforce boudnaries
+  // project pressure
 }
 
 void Simulation::get_fluid_ids() {
@@ -60,5 +73,11 @@ void Simulation::get_fluid_ids() {
         fluid_id(ij) = n;
       }
     }
+  }
+}
+
+void Simulation::add_gravity(float dt) {
+  for (auto &face : v.data) {
+    face -= 9.8 * dt;
   }
 }
