@@ -1,4 +1,4 @@
-* linguist-vendored
+lib/* linguist-vendored
 docs/* linguist-documentation
 *.cpp linguist-vendored=false
 *.c linguist-vendored=false

@@ -3,6 +3,9 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
 
 ### BIG TODOS:
+* [ ] density sampling
+* [ ] poisson coefficient matrix
+* [ ] poisson rhs
 * [ ] make levelset initialization better
 * [ ] do some tests
 * [ ] fix cmake like a real human

@@ -1,6 +1,7 @@
 #pragma once
 #include "fluid.hpp"
 #include "velocityfield.hpp"
+#include <eigen3/Eigen/SparseCore>
 #include <stdio.h>
 #include <vector>
 
@@ -81,11 +82,12 @@ public:
   void add_gravity(float dt);
   void advect_velocity(float dt);
   void enforce_boundaries();
+  /* Methods specifically used for solving for pressure */
   void solve_pressure(float dt);
   void apply_pressure_gradient(float dt);
+  float sample_density(vec2 ij, vec2 kl);
+  Eigen::SparseMatrix<double> assemble_poisson_coefficient_matrix(Array2i fluid_cell_count, int nf);
+  Eigen::VectorXd assemble_poisson_rhs(Array2i fluid_cell_count, int nf);
   Array2i count_fluid_cells();
-
-  /** Populates the fluid_id array with the fluid that exists at each index in
-   * space TODO consider removing this*/
   void get_fluid_ids();
 };

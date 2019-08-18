@@ -3,6 +3,7 @@
 #include "levelset_methods.hpp"
 #include "particle_levelset_method.hpp"
 #include <eigen3/Eigen/SparseCore>
+#include <eigen3/Eigen/IterativeLinearSolvers>
 
 /** TODO Returns a timestep that ensures the simulation is stable */
 float Simulation::cfl() {
@@ -132,23 +133,67 @@ Array2i Simulation::count_fluid_cells() {
   return fluid_cell_count;
 }
 
-/** TODO Consider refactoring later
- * Sets up a linear system Ax=b to solve the discrete poission equation with
+/** Returns the density between two voxels, either as naively expected in the
+ * case where the voxels contain the same fluid, or as defined in eqn. 55 in Liu
+ * et al*/
+float Simulation::sample_density(vec2 ij, vec2 kl) { return 0; }
+
+/** Assembles a varying coefficient matrix for the possion equation. The lhs is
+ * discretized as in eqn. 77 in liu et all */
+Eigen::SparseMatrix<double> Simulation::assemble_poisson_coefficient_matrix(Array2i fluid_cell_count, int nf) {
+  std::vector<Eigen::Triplet<double>> coefficients;
+
+  // assemble our coefficient matrix
+  for (int it = 0; it < p.size(); it++) {
+    if (solid_phi(it) <= 0)
+      continue;
+    // auto &f = fluids[fluid_id(it)]; // map from grid location to fluid type
+    // vec2 ij = f.phi.ij_from_index(it);
+    // int index =
+    //     fluid_cell_count(it); // map from grid location to fluid cell index
+
+    // float Fl = 0;
+    // float Fr = 0;
+    // float Fb = 0;
+    // float Ft = 0;
+    // // skeleton code for solution math
+    // vec2 N = normalize(gradient(f.phi, ij));
+  }
+
+  Eigen::SparseMatrix<double> A(nf, nf);
+  return A;
+}
+
+Eigen::VectorXd Simulation::assemble_poisson_rhs(Array2i fluid_cell_count, int nf) {
+  Eigen::VectorXd rhs(nf);
+  return rhs;
+}
+
+/** Sets up a linear system Ax=b to solve the discrete poission equation with
  * varying coefficients and a discontinuous solution as in "A Boundary Condition
- * Capturing Method for Poisson's Equation on Irregular Domains"
+ * Capturing Method for Poisson's Equation on Irregular Domains" Liu et al
  */
 void Simulation::solve_pressure(float dt) {
+  /* Count each fluid cell, and find which voxels contain which fluids */
+  get_fluid_ids();
   Array2i fluid_cell_count = count_fluid_cells();
-  int nf = fluid_cell_count.max() + 1;
-  Eigen::SparseMatrix<double> A(nf, nf);
-  Eigen::VectorXd rhs(nf);
-  Eigen::VectorXd x(nf);
+  int nf = fluid_cell_count.max() + 1; // number of fluid cells
 
-  // assemble our solution row by row
-  for (int it =0; it < p.size(); it++) {
-    if (solid_phi(it) <= 0) continue;
-    // int index = fluid_cell_count(it); // map from grid location to fluid grid only location
+  /* Create our coefficint matrix and rhs to discretize the poission equation */
+  Eigen::SparseMatrix<double> A = assemble_poisson_coefficient_matrix(fluid_cell_count, nf);
+  Eigen::VectorXd rhs = assemble_poisson_rhs(fluid_cell_count, nf);
 
+  /* Solve the linear system with the PCG method */
+  Eigen::ConjugateGradient<Eigen::SparseMatrix<double>> solver;
+  Eigen::VectorXd pressures(nf);
+  solver.compute(A);
+  pressures = solver.solve(rhs);
+
+  /* Copy the new pressure values over */
+  p.clear();
+  for (int i = 0; i < p.size(); i++) {
+    if (fluid_cell_count(i) < 0) continue;
+    p(i) = pressures(fluid_cell_count(i));
   }
 }
 

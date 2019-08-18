@@ -50,6 +50,7 @@ void export_fluid_ids(std::vector<Fluid> &fluids, float time,
 
 void export_simulation_data(VelocityField vel, std::vector<Fluid> &sim,
                             float time, int frame_number) {
+  std::printf("exporting frame %i at time %f\n", frame_number, time);
   export_fluid_ids(sim, time, frame_number);
   export_velocity(vel, sim[0].phi, time, frame_number);
 }
