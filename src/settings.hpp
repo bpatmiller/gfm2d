@@ -47,4 +47,5 @@ void initialize_simulation(Simulation &sim) {
     construct_levelset(sim.fluids.back(), sx, sy, h, fluid_name, fconf);
   }
   initialize_boundaries(sim);
+  fix_levelset_walls(sim.fluids, vec2(h, h), vec2((sx - 1) * h, (sy - 1) * h));
 }

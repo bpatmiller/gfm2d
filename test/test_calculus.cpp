@@ -7,6 +7,15 @@
 #include "velocityfield.hpp"
 using namespace glm;
 
+float test_distance_to_bounds(vec2 position, vec2 lower_bounds,
+                              vec2 upper_bounds) {
+  float dx =
+      min(abs(lower_bounds.x - position.x), abs(position.x - upper_bounds.x));
+  float dy =
+      min(abs(lower_bounds.y - position.y), abs(position.y - upper_bounds.y));
+  return sqrt(dx * dx + dy * dy);
+}
+
 /** "Classic" 4th order Runge-Kutta integration */
 vec2 test_rk4(vec2 position, VelocityField &vel, float dt) {
   float l1 = vel(position).x * dt;
@@ -46,4 +55,15 @@ TEST_CASE("testing calculus operations") {
   REQUIRE(fe.x == rk.x);
   REQUIRE(fe.y == rk.y);
   REQUIRE(1 == 1);
+}
+
+TEST_CASE("testing boundary phi") {
+  vec2 lower_bounds(0.f, 0.f);
+  vec2 upper_bounds(1.f, 1.f);
+  vec2 p1(0.f, 0.5f);
+  vec2 p2(0.5f, 0.5f);
+
+  REQUIRE(test_distance_to_bounds(p1, lower_bounds, upper_bounds) == 0.5f);
+  REQUIRE(test_distance_to_bounds(p2, lower_bounds, upper_bounds) ==
+          sqrt(0.5f * 0.5f + 0.5f * 0.5f));
 }

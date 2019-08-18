@@ -3,6 +3,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
 
 ### BIG TODOS:
+* [ ] make levelset initialization better
 * [ ] do some tests
 * [ ] fix cmake like a real human
 * [ ] pressure projection!!!

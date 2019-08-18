@@ -34,8 +34,7 @@ struct FluidConfig {
  * p3 is the radius
  */
 float compute_phi_sphere(float x1, float x2, FluidConfig &fconf) {
-  return glm::distance(glm::vec2(x1, x2), glm::vec2(fconf.p1, fconf.p2)) -
-         fconf.p3;
+  return distance(vec2(x1, x2), vec2(fconf.p1, fconf.p2)) - fconf.p3;
 }
 
 /** TODO - add documentation and more level set starting configurations */
@@ -44,10 +43,32 @@ void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
   f.phi.clear();
 
   for (auto it = f.phi.begin(); it != f.phi.end(); it++) {
-    glm::vec2 ij = it.ij();
+    vec2 ij = it.ij();
     float phi_value = compute_phi_sphere(
         (static_cast<float>(ij.x) + 0.5f) / static_cast<float>(sx),
         (static_cast<float>(ij.y) + 0.5f) / static_cast<float>(sy), fconf);
     f.phi(ij) = fconf.negate ? -phi_value : phi_value;
+  }
+}
+
+/** returns the distance from a point to a bounding box */
+float distance_to_bounds(vec2 position, vec2 lower_bounds, vec2 upper_bounds) {
+  float dx =
+      min(abs(lower_bounds.x - position.x), abs(position.x - upper_bounds.x));
+  float dy =
+      min(abs(lower_bounds.y - position.y), abs(position.y - upper_bounds.y));
+  return sqrt(dx * dx + dy * dy);
+}
+
+/** Sets the phi value at any point to be no more than the negative distance to
+ * the nearest wall */
+void fix_levelset_walls(std::vector<Fluid> &fluids, vec2 lower_bounds,
+                        vec2 upper_bounds) {
+  for (auto &f : fluids) {
+    for (auto it = f.phi.begin(); it != f.phi.end(); it++) {
+      float box_distance =
+          distance_to_bounds(it.wp(), lower_bounds, upper_bounds);
+      *it = max(-box_distance, *it);
+    }
   }
 }

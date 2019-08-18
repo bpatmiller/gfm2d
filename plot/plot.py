@@ -45,13 +45,21 @@ for i, ax in enumerate(axs.reshape(-1)):
     yi = np.linspace(0.0, 5.0, 100)
     # grid the data.
     zi = griddata(x, y, z, xi, yi, interp='linear')
+    boundaryi = griddata(x, y, fluid_id, xi, yi, interp='linear')
     # contour the gridded data, plotting dots at the nonuniform data points.
-    ax.contour(xi, yi, zi, 15, linewidths=0.5, colors='k')
-    ax.contourf(xi, yi, zi, 15,
-                vmax=abs(zi).max(), vmin=-abs(zi).max())
+    # ax.contourf(xi, yi, zi, 15,
+    #             vmax=abs(zi).max(), vmin=-abs(zi).max(), )
+    # ax.imshow(, interpolation='nearest', vmin=0.5, vmax=0.99)
+    ax.imshow(zi, origin='lower', cmap='RdPu_r', interpolation='none',
+              extent=[np.min(x), np.max(x), np.min(y), np.max(y)])
+    contour = ax.contour(
+        xi,
+        yi,
+        boundaryi,
+        levels=2,
+        linewidths=0.5,
+        cmap="RdBu_r")
 
-    ax.set_xlim(0, 5)
-    ax.set_ylim(0, 5)
     ax.set_title("t=" + str(i))
     ax.set_aspect("equal")
     ax.axis('off')
