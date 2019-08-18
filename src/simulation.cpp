@@ -20,6 +20,7 @@ float Simulation::cfl() {
 void Simulation::run() {
   // delete old datafiles, fix after initializing
   clear_exported_data();
+  reinitialize_phi(fluids);
   project_phi(fluids, solid_phi);
   while (time_elapsed < max_t) {
     export_simulation_data(vel, fluids, time_elapsed, frame_number);

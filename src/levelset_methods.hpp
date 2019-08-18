@@ -99,7 +99,7 @@ void reinitialize_phi(std::vector<Fluid> fluids) {
 
     float err = 0;
     float tol = 1e-1;
-    int max_iters = 50;
+    int max_iters = 250;
     float dt = 0.5f * f.phi.h;
 
     for (int iter = 0; iter <= max_iters; iter++) {
