@@ -46,11 +46,7 @@ for i, ax in enumerate(axs.reshape(-1)):
     # grid the data.
     zi = griddata(x, y, z, xi, yi, interp='linear')
     boundaryi = griddata(x, y, fluid_id, xi, yi, interp='linear')
-    # contour the gridded data, plotting dots at the nonuniform data points.
-    # ax.contourf(xi, yi, zi, 15,
-    #             vmax=abs(zi).max(), vmin=-abs(zi).max(), )
-    # ax.imshow(, interpolation='nearest', vmin=0.5, vmax=0.99)
-    ax.imshow(zi, origin='lower', cmap='RdPu_r', interpolation='none',
+    ax.imshow(zi, origin='lower', cmap=cm.RdBu, interpolation='nearest',
               extent=[np.min(x), np.max(x), np.min(y), np.max(y)])
     contour = ax.contour(
         xi,

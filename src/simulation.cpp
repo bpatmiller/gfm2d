@@ -60,7 +60,7 @@ void Simulation::advance(float dt) {
 
   enforce_boundaries();
   solve_pressure(dt);
-  // apply_pressure_gradient();
+  // apply_pressure_gradient(dt);
 }
 
 void Simulation::get_fluid_ids() {
@@ -117,16 +117,39 @@ void Simulation::enforce_boundaries() {
   }
 }
 
+/* Returns an int array which gives each fluid cell a corresponding nonnegative
+ * integer index. Nonfluid cells are marked with a -1 */
+Array2i Simulation::count_fluid_cells() {
+  Array2i fluid_cell_count(sx, sy, -0.5, -0.5, h);
+  fluid_cell_count.set(-1);
+  int counter = 0;
+  for (int i = 0; i < fluid_cell_count.size(); i++) {
+    if (solid_phi(i) <= 0)
+      continue;
+    fluid_cell_count(i) = counter++;
+  }
+  assert(counter > 0);
+  return fluid_cell_count;
+}
+
 /** TODO Consider refactoring later
  * Sets up a linear system Ax=b to solve the discrete poission equation with
  * varying coefficients and a discontinuous solution as in "A Boundary Condition
  * Capturing Method for Poisson's Equation on Irregular Domains"
  */
 void Simulation::solve_pressure(float dt) {
-  int nf = 1; // number of fluids
+  Array2i fluid_cell_count = count_fluid_cells();
+  int nf = fluid_cell_count.max() + 1;
   Eigen::SparseMatrix<double> A(nf, nf);
   Eigen::VectorXd rhs(nf);
   Eigen::VectorXd x(nf);
+
+  // assemble our solution row by row
+  for (int it =0; it < p.size(); it++) {
+    if (solid_phi(it) <= 0) continue;
+    // int index = fluid_cell_count(it); // map from grid location to fluid grid only location
+
+  }
 }
 
 /** Applies the discrete pressure gradient using a similar method as how the

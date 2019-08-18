@@ -14,6 +14,7 @@
 using json = nlohmann::json;
 
 void initialize_boundaries(Simulation &sim) {
+  sim.solid_phi.set(0.5f * sim.solid_phi.h);
   for (int i = 0; i < sim.sx; i++) {
     sim.solid_phi(i, 0) = -0.5;
     sim.solid_phi(i, sim.sy - 1) = -0.5;

@@ -64,7 +64,6 @@ public:
   /** Creates a fluid of a given density, but does not equip it with a phi*/
   void add_fluid(float density) { fluids.push_back(Fluid(density, sx, sy, h)); }
 
-  /*      */
   void print_information() {
     printf("~~ Simulation information ~~\n sx: %i, sy: %i, h: %f\n no. "
            "fluids: %i\n",
@@ -84,8 +83,9 @@ public:
   void enforce_boundaries();
   void solve_pressure(float dt);
   void apply_pressure_gradient(float dt);
+  Array2i count_fluid_cells();
 
   /** Populates the fluid_id array with the fluid that exists at each index in
-   * space*/
+   * space TODO consider removing this*/
   void get_fluid_ids();
 };
