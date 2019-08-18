@@ -5,11 +5,18 @@
 
 using namespace glm;
 
-/** guarantees we will have no overlaps or gaps */
-void project_phi(std::vector<Fluid> &fluids) {
+/** guarantees we will have no overlaps or gaps. Also checks that our fluids are
+ * never defined within solid boundaries. */
+void project_phi(std::vector<Fluid> &fluids, Array2f &solid_phi) {
   assert(!fluids.empty());
   int number_grid_points = fluids[0].phi.size();
   for (int i = 0; i < number_grid_points; i++) {
+    if (solid_phi(i) < 0) {
+      for (auto &f : fluids) {
+        f.phi(i) = max(f.phi(i), -solid_phi(i));
+      }
+      continue;
+    }
     float min1 = number_grid_points;
     float min2 = number_grid_points;
     for (auto &f : fluids) {
@@ -91,13 +98,13 @@ void reinitialize_phi(std::vector<Fluid> fluids) {
     Array2f gradnorm = gradient_norm(f.phi, sigmoid);
 
     float err = 0;
-    float tol = 1e-2f;
+    float tol = 1e-1;
     int max_iters = 500;
     float dt = 0.5f * f.phi.h;
 
     for (int iter = 0; iter <= max_iters; iter++) {
-      assert(iter != max_iters);
-      // apply the updatemak
+      // assert(iter != max_iters);
+      // apply the update
       for (int i = 0; i < f.phi.size(); i++) {
         f.phi(i) -= sigmoid(i) * (gradnorm(i) - 1.0f) * dt;
       }
