@@ -131,14 +131,17 @@ T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="s
 <tr class="memitem:afd1e9be811a27a30290d244fe8fd0e47"><td class="memItemLeft" align="right" valign="top">vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structArray2.html#afd1e9be811a27a30290d244fe8fd0e47">coordinates_at</a> (vec2 world_coordinates)</td></tr>
 <tr class="memdesc:afd1e9be811a27a30290d244fe8fd0e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in some position in world coordinates and returns the <em>grid</em> coordinates of that position.  <a href="#afd1e9be811a27a30290d244fe8fd0e47">More...</a><br /></td></tr>
 <tr class="separator:afd1e9be811a27a30290d244fe8fd0e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28fc641f81046366ee2058b80e6b06c5"><td class="memItemLeft" align="right" valign="top"><a id="a28fc641f81046366ee2058b80e6b06c5"></a>
-vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structArray2.html#a28fc641f81046366ee2058b80e6b06c5">worldspace_of</a> (vec2 grid_coordinates)</td></tr>
-<tr class="memdesc:a28fc641f81046366ee2058b80e6b06c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in grid coordinates (eg an index) and returns the worldspace position. <br /></td></tr>
-<tr class="separator:a28fc641f81046366ee2058b80e6b06c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afded5f53e6245dc3dbbc4e371eca7bc7"><td class="memItemLeft" align="right" valign="top"><a id="afded5f53e6245dc3dbbc4e371eca7bc7"></a>
+vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structArray2.html#afded5f53e6245dc3dbbc4e371eca7bc7">worldspace_of</a> (vec2 grid_coordinates) const</td></tr>
+<tr class="memdesc:afded5f53e6245dc3dbbc4e371eca7bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in grid coordinates (eg an index) and returns the worldspace position. <br /></td></tr>
+<tr class="separator:afded5f53e6245dc3dbbc4e371eca7bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b28a251ffb9195059a7ec0f2f5dc799"><td class="memItemLeft" align="right" valign="top"><a id="a2b28a251ffb9195059a7ec0f2f5dc799"></a>
 vec2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structArray2.html#a2b28a251ffb9195059a7ec0f2f5dc799">ij_from_index</a> (int index) const</td></tr>
 <tr class="memdesc:a2b28a251ffb9195059a7ec0f2f5dc799"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts from a scalar index (indexing the data vector) to a vec2 with x and y coordinates <br /></td></tr>
 <tr class="separator:a2b28a251ffb9195059a7ec0f2f5dc799"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb4c25de1397c43172ee30af41b3b896"><td class="memItemLeft" align="right" valign="top"><a id="afb4c25de1397c43172ee30af41b3b896"></a>
+vec2&#160;</td><td class="memItemRight" valign="bottom"><b>wp_from_index</b> (int index) const</td></tr>
+<tr class="separator:afb4c25de1397c43172ee30af41b3b896"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99cdc8f8a686013658349952c6b5456e"><td class="memItemLeft" align="right" valign="top"><a id="a99cdc8f8a686013658349952c6b5456e"></a>
 T&#160;</td><td class="memItemRight" valign="bottom"><b>max</b> ()</td></tr>
 <tr class="separator:a99cdc8f8a686013658349952c6b5456e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,9 +160,8 @@ T&#160;</td><td class="memItemRight" valign="bottom"><b>lerp_2</b> (T val00, T v
 <tr class="memitem:ad6f808c9d7d88ac20d6e4826624a9797"><td class="memItemLeft" align="right" valign="top"><a id="ad6f808c9d7d88ac20d6e4826624a9797"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>index_from_ij</b> (vec2 ij)</td></tr>
 <tr class="separator:ad6f808c9d7d88ac20d6e4826624a9797"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a325c7d62e750ae57f8aed0500b4fbfa1"><td class="memItemLeft" align="right" valign="top"><a id="a325c7d62e750ae57f8aed0500b4fbfa1"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structArray2.html#a325c7d62e750ae57f8aed0500b4fbfa1">snapped_access</a> (vec2 ij)</td></tr>
-<tr class="memdesc:a325c7d62e750ae57f8aed0500b4fbfa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The same as (vec2) but it does not interpolate deprecated but i like having it. <br /></td></tr>
+<tr class="memitem:a325c7d62e750ae57f8aed0500b4fbfa1"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structArray2.html#a325c7d62e750ae57f8aed0500b4fbfa1">snapped_access</a> (vec2 ij)</td></tr>
+<tr class="memdesc:a325c7d62e750ae57f8aed0500b4fbfa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The same as (vec2) but it does not interpolate deprecated but i like having it.  <a href="#a325c7d62e750ae57f8aed0500b4fbfa1">More...</a><br /></td></tr>
 <tr class="separator:a325c7d62e750ae57f8aed0500b4fbfa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f1a32a583ba70b4efc72b16f68a69a2"><td class="memItemLeft" align="right" valign="top"><a id="a7f1a32a583ba70b4efc72b16f68a69a2"></a>
 vec2&#160;</td><td class="memItemRight" valign="bottom"><b>subcell_coordinates</b> (vec2 ij)</td></tr>
@@ -298,6 +300,37 @@ template&lt;class T&gt; </div>
 
 <p>Takes in a vec2 index of the grid and returns the value stored at that index. </p>
 <p>Note: this .can. beused with any position in grid coordinates </p>
+
+</div>
+</div>
+<a id="a325c7d62e750ae57f8aed0500b4fbfa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a325c7d62e750ae57f8aed0500b4fbfa1">&#9670;&nbsp;</a></span>snapped_access()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="structArray2.html">Array2</a>&lt; T &gt;::snapped_access </td>
+          <td>(</td>
+          <td class="paramtype">vec2&#160;</td>
+          <td class="paramname"><em>ij</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The same as (vec2) but it does not interpolate deprecated but i like having it. </p>
+<p>Note: this forces the coordinates inbound </p>
 
 </div>
 </div>

@@ -108,6 +108,21 @@ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 <tr class="memitem:ada0a89df9d8a7eb39613184e71746de7"><td class="memItemLeft" align="right" valign="top"><a id="ada0a89df9d8a7eb39613184e71746de7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>add_gravity</b> (float dt)</td></tr>
 <tr class="separator:ada0a89df9d8a7eb39613184e71746de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174e3a39d9c5649da36393b98c67e446"><td class="memItemLeft" align="right" valign="top"><a id="a174e3a39d9c5649da36393b98c67e446"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>advect_velocity</b> (float dt)</td></tr>
+<tr class="separator:a174e3a39d9c5649da36393b98c67e446"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616b2ffd9f07cf8e2ee377fa313e5607"><td class="memItemLeft" align="right" valign="top"><a id="a616b2ffd9f07cf8e2ee377fa313e5607"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a616b2ffd9f07cf8e2ee377fa313e5607">enforce_boundaries</a> ()</td></tr>
+<tr class="memdesc:a616b2ffd9f07cf8e2ee377fa313e5607"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the velocity on solid boundaries to 0 so that fluids do not flow in or out of solids. <br /></td></tr>
+<tr class="separator:a616b2ffd9f07cf8e2ee377fa313e5607"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12f7b360ce5d22c5e8a8d111acd1c884"><td class="memItemLeft" align="right" valign="top"><a id="a12f7b360ce5d22c5e8a8d111acd1c884"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a12f7b360ce5d22c5e8a8d111acd1c884">solve_pressure</a> (float dt)</td></tr>
+<tr class="memdesc:a12f7b360ce5d22c5e8a8d111acd1c884"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO Consider refactoring later Sets up a linear system Ax=b to solve the discrete poission equation with varying coefficients and a discontinuous solution as in "A Boundary Condition
+Capturing Method for Poisson's Equation on Irregular Domains". <br /></td></tr>
+<tr class="separator:a12f7b360ce5d22c5e8a8d111acd1c884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2393e1da56190503c9e8320b8a94368c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a2393e1da56190503c9e8320b8a94368c">apply_pressure_gradient</a> (float dt)</td></tr>
+<tr class="memdesc:a2393e1da56190503c9e8320b8a94368c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the discrete pressure gradient using a similar method as how the coefficient matrix in solve_pressure is constructed.  <a href="#a2393e1da56190503c9e8320b8a94368c">More...</a><br /></td></tr>
+<tr class="separator:a2393e1da56190503c9e8320b8a94368c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9213a11855b98b66ec578e4745f9562"><td class="memItemLeft" align="right" valign="top"><a id="ac9213a11855b98b66ec578e4745f9562"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#ac9213a11855b98b66ec578e4745f9562">get_fluid_ids</a> ()</td></tr>
 <tr class="memdesc:ac9213a11855b98b66ec578e4745f9562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populates the fluid_id array with the fluid that exists at each index in space. <br /></td></tr>
@@ -163,6 +178,26 @@ std::vector&lt; <a class="el" href="classFluid.html">Fluid</a> &gt;&#160;</td><t
 <p>It is described spatially by a cell size (h) and a number of cells in both dimensions (sx, sy).</p>
 <p>stores velocity and pressure, a list of fluids contained in it, a solid phi describing boundary locations a map from voxels to fluid type </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2393e1da56190503c9e8320b8a94368c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2393e1da56190503c9e8320b8a94368c">&#9670;&nbsp;</a></span>apply_pressure_gradient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulation::apply_pressure_gradient </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies the discrete pressure gradient using a similar method as how the coefficient matrix in solve_pressure is constructed. </p>
+
+</div>
+</div>
 <a id="ae5c367f87c0b5dc9740bc6d00e44e72c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5c367f87c0b5dc9740bc6d00e44e72c">&#9670;&nbsp;</a></span>run()</h2>
 

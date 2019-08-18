@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_5ffluid_5fids',['get_fluid_ids',['../classSimulation.html#ac9213a11855b98b66ec578e4745f9562',1,'Simulation']]]
+  ['enforce_5fboundaries',['enforce_boundaries',['../classSimulation.html#a616b2ffd9f07cf8e2ee377fa313e5607',1,'Simulation']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GFM2D: Class Members - Functions</title>
+<title>GFM2D: src/velocityfield.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -47,7 +47,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -62,58 +61,19 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">velocityfield.hpp</div>  </div>
+</div><!--header-->
 <div class="contents">
-&#160;<ul>
-<li>add_fluid()
-: <a class="el" href="classSimulation.html#a1aa01e35508d7a15739eb16e15ab5e00">Simulation</a>
-</li>
-<li>apply_pressure_gradient()
-: <a class="el" href="classSimulation.html#a2393e1da56190503c9e8320b8a94368c">Simulation</a>
-</li>
-<li>Array2()
-: <a class="el" href="structArray2.html#a42645581bcf87a47ecf3263388809112">Array2&lt; T &gt;</a>
-</li>
-<li>cfl()
-: <a class="el" href="classSimulation.html#a9449ce98d9819e822ca544a1324c9d04">Simulation</a>
-</li>
-<li>clear()
-: <a class="el" href="structArray2.html#a8b7caea81764b7ae00e28fb9aa0e23f4">Array2&lt; T &gt;</a>
-</li>
-<li>coordinates_at()
-: <a class="el" href="structArray2.html#afd1e9be811a27a30290d244fe8fd0e47">Array2&lt; T &gt;</a>
-</li>
-<li>enforce_boundaries()
-: <a class="el" href="classSimulation.html#a616b2ffd9f07cf8e2ee377fa313e5607">Simulation</a>
-</li>
-<li>get_fluid_ids()
-: <a class="el" href="classSimulation.html#ac9213a11855b98b66ec578e4745f9562">Simulation</a>
-</li>
-<li>ij_from_index()
-: <a class="el" href="structArray2.html#a2b28a251ffb9195059a7ec0f2f5dc799">Array2&lt; T &gt;</a>
-</li>
-<li>init()
-: <a class="el" href="structArray2.html#ad6a742ce7bd22f8f56b3959a26f28c11">Array2&lt; T &gt;</a>
-</li>
-<li>operator()()
-: <a class="el" href="structArray2.html#ac73bd1d6e74fade6085e8fccdfda8d7f">Array2&lt; T &gt;</a>
-</li>
-<li>run()
-: <a class="el" href="classSimulation.html#ae5c367f87c0b5dc9740bc6d00e44e72c">Simulation</a>
-</li>
-<li>set()
-: <a class="el" href="structArray2.html#ad264d90ac5d4de34e9bbc214810e169a">Array2&lt; T &gt;</a>
-</li>
-<li>snapped_access()
-: <a class="el" href="structArray2.html#a325c7d62e750ae57f8aed0500b4fbfa1">Array2&lt; T &gt;</a>
-</li>
-<li>solve_pressure()
-: <a class="el" href="classSimulation.html#a12f7b360ce5d22c5e8a8d111acd1c884">Simulation</a>
-</li>
-<li>worldspace_of()
-: <a class="el" href="structArray2.html#afded5f53e6245dc3dbbc4e371eca7bc7">Array2&lt; T &gt;</a>
-</li>
-</ul>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;array2.hpp&quot;</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div><div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="structVelocityField.html">    5</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structVelocityField.html">VelocityField</a> {</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  <a class="code" href="structArray2.html">Array2f</a> *up;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  <a class="code" href="structArray2.html">Array2f</a> *vp;</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;  <a class="code" href="structVelocityField.html">VelocityField</a>() {}</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <a class="code" href="structVelocityField.html">VelocityField</a>(<a class="code" href="structArray2.html">Array2f</a> *u_, <a class="code" href="structArray2.html">Array2f</a> *v_) : up(u_), vp(v_) {}</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;  vec2 operator()(glm::vec2 world_position) {</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">return</span> vec2(up-&gt;value_at(world_position), vp-&gt;value_at(world_position));</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  }</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;};</div><div class="ttc" id="structVelocityField_html"><div class="ttname"><a href="structVelocityField.html">VelocityField</a></div><div class="ttdef"><b>Definition:</b> velocityfield.hpp:5</div></div>
+<div class="ttc" id="structArray2_html"><div class="ttname"><a href="structArray2.html">Array2&lt; float &gt;</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
