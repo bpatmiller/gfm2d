@@ -5,5 +5,6 @@ int main() {
   initialize_simulation(sim);
   sim.print_information();
 
+  sim.run();
   return 0;
 }

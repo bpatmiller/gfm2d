@@ -58,6 +58,8 @@ public:
     p.init(sx, sy, -0.5, -0.5, h);
     solid_phi.init(sx, sy, -0.5, -0.5, h);
     fluid_id.init(sx, sy, -0.5, -0.5, h);
+    vel.up = &u;
+    vel.vp = &v;
   }
 
   void init(int sx_, int sy_, float h_, float max_t_, float dt_) {

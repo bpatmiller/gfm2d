@@ -96,8 +96,21 @@ public:
    * coordinates of that position. An example translation is that a
    * center-sampled (eg pressure) value would have offsets -0.5,-0.5   */
   vec2 coordinates_at(vec2 world_coordinates) {
-    return vec2((world_coordinates.x / h) + offset_x,
-                (world_coordinates.y / h) + offset_y);
+    assert(!std::isnan(world_coordinates.x) &&
+           !std::isnan(world_coordinates.y));
+    assert(h != 0);
+    float i = (world_coordinates.x / h) + offset_x;
+    float j = (world_coordinates.y / h) + offset_y;
+    if (i < 0)
+      i = 0;
+    if (j < 0)
+      j = 0;
+    if (i > sx - 1)
+      i = sx - 1;
+    if (j > sy - 1)
+      j = sy - 1;
+    assert(!std::isnan(i) && !std::isnan(j));
+    return vec2(i, j);
   }
 
   /** Takes in grid coordinates (eg an index) and returns the worldspace
@@ -119,9 +132,7 @@ public:
   }
 
   vec2 wp_from_index(int index) const {
-    vec2 ij = vec2(index % sx, index / sx);
-    assert(ij.x + (sx * ij.y) == index); // convert back
-    return worldspace_of(ij);
+    return worldspace_of(ij_from_index(index));
   }
 
   // TODO rearrange this code
@@ -147,8 +158,25 @@ public:
   inline int index_from_ij(vec2 ij) { return ij.x + (sx * ij.y); }
 
   /** The same as (vec2) but it does not interpolate
-   * deprecated but i like having it */
-  T snapped_access(vec2 ij) { return data[ij.x + (sx * ij.y)]; }
+   * deprecated but i like having it. Note: this forces the coordinates inbound
+   */
+  T snapped_access(vec2 ij) {
+    ivec2 rounded(ij);
+    int i = rounded.x;
+    int j = rounded.y;
+    if (i < 0)
+      i = 0;
+    if (j < 0)
+      j = 0;
+    if (i > sx - 1)
+      i = sx - 1;
+    if (j > sy - 1)
+      j = sy - 1;
+    int index = i + (sx * j);
+    assert(index >= 0);
+    assert(index < sx * sy);
+    return data[index];
+  }
 
   vec2 subcell_coordinates(vec2 ij) {
     ivec2 rounded(ij);
@@ -158,6 +186,8 @@ public:
   /* bilerp takes in a location (in grid coordinates) and returns the
    * interpolated value at the coordinate*/
   T const bilerp(vec2 ij) {
+    assert(!std::isnan(ij.x) &&
+           !std::isnan(ij.y)); // added in the debugging process
     T val00 = snapped_access(ij);
     T val10 = snapped_access(ij + vec2(1, 0));
     T val01 = snapped_access(ij + vec2(0, 1));

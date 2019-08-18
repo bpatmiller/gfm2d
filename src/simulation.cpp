@@ -53,7 +53,7 @@ void Simulation::advance(float dt) {
   }
   project_phi(fluids);
 
-  // advect_velocity(dt);
+  advect_velocity(dt);
   add_gravity(dt);
 
   // enforce boudnaries
@@ -88,12 +88,12 @@ void Simulation::advect_velocity(float dt) {
 
   for (auto it = u.begin(); it != u.end(); it++) {
     vec2 new_position = rk4(it.wp(), vel, -dt);
-    new_u(it.ij()) = u.value_at(new_position);
+    *it = u.value_at(new_position);
   }
 
   for (auto it = v.begin(); it != v.end(); it++) {
     vec2 new_position = rk4(it.wp(), vel, -dt);
-    new_v(it.ij()) = v.value_at(new_position);
+    *it = v.value_at(new_position);
   }
 
   u = new_u;

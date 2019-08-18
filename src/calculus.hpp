@@ -17,11 +17,12 @@ vec2 upwind_gradient(Array2f &phi, vec2 velocity, vec2 ij) {
 
 /** "Classic" 4th order Runge-Kutta integration */
 vec2 rk4(vec2 position, VelocityField &vel, float dt) {
-  vec2 k1 = vel(position);
-  vec2 k2 = vel(position + (dt * 0.5f) * k1);
-  vec2 k3 = vel(position + (dt * 0.5f) * k2);
-  vec2 k4 = vel(position + k3);
-  return position + (1.0f / 6.0f) * (k1 + 2.0f * k2 + 2.0f * k3 + k4);
+  // vec2 k1 = vel(position);
+  // vec2 k2 = vel(position + (dt * 0.5f) * k1);
+  // vec2 k3 = vel(position + (dt * 0.5f) * k2);
+  // vec2 k4 = vel(position + k3);
+  // return position + (1.0f / 6.0f) * (k1 + 2.0f * k2 + 2.0f * k3 + k4);
+  return position;
 }
 
 /** returns the central difference gradient of a point on a grid */
