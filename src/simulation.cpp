@@ -47,7 +47,7 @@ void Simulation::advance(float dt) {
     advect_particles(f, vel, solid_phi, dt);
     // correct
     reinitialize_phi(fluids);
-    //correct
+    // correct
     // adjust radii
     // reseed
   }

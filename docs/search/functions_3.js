@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['operator_28_29_26',['operator()',['../structArray2.html#a8a89f0623dc0e116e4dc14b0b77b769e',1,'Array2::operator()(int i, int j)'],['../structArray2.html#a3e1321aba8d5072af7fcffe56198b99d',1,'Array2::operator()(glm::ivec2 ij)']]]
+  ['ij_5ffrom_5findex',['ij_from_index',['../structArray2.html#a2b28a251ffb9195059a7ec0f2f5dc799',1,'Array2']]],
+  ['init',['init',['../structArray2.html#ad6a742ce7bd22f8f56b3959a26f28c11',1,'Array2']]]
 ];

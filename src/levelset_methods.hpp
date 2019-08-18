@@ -31,13 +31,48 @@ void project_phi(std::vector<Fluid> &fluids) {
   }
 }
 
+/** Computes the gradient norm at each point using Godunov's scheme as described
+ * in the osher and fedikew book */
 Array2f gradient_norm(Array2f phi, Array2f sigmoid) {
   Array2f gradnorm(phi);
   gradnorm.set(1.0f);
 
-  // for (auto it = phi.begin(); it != phi.end(); it++) {
-  //   vec2 ij = it.ij();
-  // }
+  for (auto it = phi.begin(); it != phi.end(); it++) {
+    vec2 ij = it.ij();
+    if (ij.x < 1 || ij.x >= phi.sx - 1 || ij.y < 1 || ij.y >= phi.sy - 1)
+      continue;
+    float a = sigmoid(ij);
+    float h = phi.h;
+
+    float dx = 0;
+    float dy = 0;
+
+    float dxn = (phi(ij) - phi(ij - vec2(1, 0))) / h;
+    float dxp = (phi(ij + vec2(1, 0)) - phi(ij)) / h;
+    if (a >= 0) {
+      dxn = (dxn > 0) ? dxn * dxn : 0;
+      dxp = (dxp < 0) ? dxp * dxp : 0;
+      dx = std::max(dxn, dxp);
+    } else {
+      dxn = (dxn < 0) ? dxn * dxn : 0;
+      dxp = (dxp > 0) ? dxp * dxp : 0;
+      dx = std::max(dxn, dxp);
+    }
+
+    float dyn = (phi(ij) - phi(ij - vec2(0, 1))) / h;
+    float dyp = (phi(ij + vec2(0, 1)) - phi(ij)) / h;
+    if (a >= 0) {
+      dyn = (dyn > 0) ? dyn * dyn : 0;
+      dyp = (dyp < 0) ? dyp * dyp : 0;
+      dy = std::max(dyn, dyp);
+    } else {
+      dyn = (dyn < 0) ? dyn * dyn : 0;
+      dyp = (dyp > 0) ? dyp * dyp : 0;
+      dy = std::max(dyn, dyp);
+    }
+
+    gradnorm(ij) = sqrt(dx + dy);
+  }
   return gradnorm;
 }
 
@@ -56,13 +91,13 @@ void reinitialize_phi(std::vector<Fluid> fluids) {
     Array2f gradnorm = gradient_norm(f.phi, sigmoid);
 
     float err = 0;
-    float tol = 1e-1f;
-    int max_iters = 50;
-    float dt = 0.1f * f.phi.h;
+    float tol = 1e-2f;
+    int max_iters = 500;
+    float dt = 0.5f * f.phi.h;
 
-    for (int iter = 0; iter < max_iters; iter++) {
+    for (int iter = 0; iter <= max_iters; iter++) {
       assert(iter != max_iters);
-      // apply the update
+      // apply the updatemak
       for (int i = 0; i < f.phi.size(); i++) {
         f.phi(i) -= sigmoid(i) * (gradnorm(i) - 1.0f) * dt;
       }
