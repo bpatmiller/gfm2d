@@ -1,7 +1,24 @@
 #include "fluid.hpp"
+#include "simulation.hpp"
 #include <fstream>
 #include <iostream>
 #include <vector>
+
+void export_velocity(VelocityField &vel, Array2f phi, float time,
+                     int frame_number) {
+  std::fstream vel_file("plot/data/vel.txt", vel_file.out | vel_file.app);
+
+  vel_file << "#BLOCK HEADER time:" << time << "\n";
+  vel_file << "#x\ty\tu\tv\n";
+  vel_file << "\n";
+
+  for (auto it = phi.begin(); it != phi.end(); it++) {
+    vec2 wp = it.wp();
+    vec2 velocity = vel(wp);
+    vel_file << wp.x << "\t" << wp.y << "\t" << velocity.x << "\t" << velocity.y
+             << "\n";
+  }
+}
 
 /** we make use of the fact that by our projection method, only one fluid at any
  * point has a negative phi value. so if we only include negative phi values, we
@@ -10,9 +27,6 @@
  * */
 void export_fluid_ids(std::vector<Fluid> &fluids, float time,
                       int frame_number) {
-  // std::ofstream fluid_id_file;
-
-  // fluid_id_file.open("plot/data/phi.txt");
   std::fstream fluid_id_file("plot/data/phi.txt",
                              fluid_id_file.out | fluid_id_file.app);
 
@@ -33,14 +47,20 @@ void export_fluid_ids(std::vector<Fluid> &fluids, float time,
   fluid_id_file.close();
 }
 
-void export_simulation_data(std::vector<Fluid> &sim, float time,
-                            int frame_number) {
+void export_simulation_data(VelocityField vel, std::vector<Fluid> &sim,
+                            float time, int frame_number) {
   export_fluid_ids(sim, time, frame_number);
+  export_velocity(vel, sim[0].phi, time, frame_number);
 }
 
 void clear_exported_data() {
   std::ofstream phi_file;
   phi_file.open("plot/data/phi.txt");
   phi_file << "# BEGIN PHI DATASET\n";
+  phi_file.close();
+
+  std::ofstream vel_file;
+  phi_file.open("plot/data/vel.txt");
+  phi_file << "# BEGIN VELOCITY DATASET\n";
   phi_file.close();
 }

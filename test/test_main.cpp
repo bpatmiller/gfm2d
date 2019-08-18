@@ -1,6 +1,6 @@
 #define CATCH_CONFIG_MAIN
-// #include "calculus.hpp"
 #include "catch.hpp"
+
 #include "settings.hpp"
 
 TEST_CASE("testing array2 operations") {
@@ -42,16 +42,6 @@ TEST_CASE("testing array2 operations") {
 
   Array2f assign_phi(new_phi);
   REQUIRE(assign_phi.h == new_phi.h);
-
-  // // TODO check that rk4 is the same as forward euler in 0 error conditions
-  // Array2f u(10, 10, -0.5f, 0.f, 0.1f);
-  // Array2f v(10, 10, 0.f, -0.5f, 0.1f);
-  // VelocityField vel(&u, &v);
-  // v.set(-9.8);
-  // vec2 position(0.5, 0.5);
-  // float dt = -0.01f;
-
-  // REQUIRE(forward_euler(position, vel, dt) == rk4(position, vel, dt));
 }
 
 TEST_CASE("test creating a basic simulation") {

@@ -9,8 +9,6 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-//
-#include "levelset_methods.hpp"
 
 // for convenience
 using json = nlohmann::json;

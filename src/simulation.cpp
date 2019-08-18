@@ -21,7 +21,7 @@ void Simulation::run() {
   clear_exported_data();
   project_phi(fluids, solid_phi);
   while (time_elapsed < max_t) {
-    export_simulation_data(fluids, time_elapsed, frame_number);
+    export_simulation_data(vel, fluids, time_elapsed, frame_number);
     frame_number += 1;
     if (time_elapsed + timestep > max_t)
       timestep = max_t - time_elapsed;
