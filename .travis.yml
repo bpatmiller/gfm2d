@@ -14,9 +14,6 @@ env:
 
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-7
     packages:
       - gcovr
       - lcov
@@ -27,6 +24,7 @@ addons:
 script:
   - make clean build
   - ./build/bin/unit-tests
+  - make draw
 
 after_success:
     # Creating report

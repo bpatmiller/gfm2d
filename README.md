@@ -3,8 +3,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
 
 ### BIG TODOS:
-* [ ] do some simple graphics
-* [ ] do level set work
+* [ ] levelset reinitialization
 * [ ] do some tests
 * [ ] fix cmake like a real human
 * [ ] phi projection method
@@ -18,6 +17,8 @@
 * [x] make skeleton data structures
 * [x] level set initialization
 * [x] fix weird cyclic dependency
+* [x] do some simple graphics
+* [x] do level set work
 ### about the project
 
 
