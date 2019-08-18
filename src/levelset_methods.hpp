@@ -11,12 +11,12 @@ void project_phi(std::vector<Fluid> &fluids, Array2f &solid_phi) {
   assert(!fluids.empty());
   int number_grid_points = fluids[0].phi.size();
   for (int i = 0; i < number_grid_points; i++) {
-    if (solid_phi(i) < 0) {
-      for (auto &f : fluids) {
-        f.phi(i) = max(f.phi(i), -solid_phi(i));
-      }
-      continue;
-    }
+    // if (solid_phi(i) < 0) {
+    //   for (auto &f : fluids) {
+    //     f.phi(i) = max(f.phi(i), -solid_phi(i));
+    //   }
+    //   continue;
+    // }
     float min1 = number_grid_points;
     float min2 = number_grid_points;
     for (auto &f : fluids) {

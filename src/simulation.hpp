@@ -86,7 +86,8 @@ public:
   void solve_pressure(float dt);
   void apply_pressure_gradient(float dt);
   float sample_density(vec2 ij, vec2 kl);
-  Eigen::SparseMatrix<double> assemble_poisson_coefficient_matrix(Array2i fluid_cell_count, int nf);
+  Eigen::SparseMatrix<double>
+  assemble_poisson_coefficient_matrix(Array2i fluid_cell_count, int nf);
   Eigen::VectorXd assemble_poisson_rhs(Array2i fluid_cell_count, int nf);
   Array2i count_fluid_cells();
   void get_fluid_ids();

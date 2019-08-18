@@ -2,8 +2,8 @@
 #include "export_data.hpp"
 #include "levelset_methods.hpp"
 #include "particle_levelset_method.hpp"
-#include <eigen3/Eigen/SparseCore>
 #include <eigen3/Eigen/IterativeLinearSolvers>
+#include <eigen3/Eigen/SparseCore>
 
 /** TODO Returns a timestep that ensures the simulation is stable */
 float Simulation::cfl() {
@@ -140,7 +140,9 @@ float Simulation::sample_density(vec2 ij, vec2 kl) { return 0; }
 
 /** Assembles a varying coefficient matrix for the possion equation. The lhs is
  * discretized as in eqn. 77 in liu et all */
-Eigen::SparseMatrix<double> Simulation::assemble_poisson_coefficient_matrix(Array2i fluid_cell_count, int nf) {
+Eigen::SparseMatrix<double>
+Simulation::assemble_poisson_coefficient_matrix(Array2i fluid_cell_count,
+                                                int nf) {
   std::vector<Eigen::Triplet<double>> coefficients;
 
   // assemble our coefficient matrix
@@ -164,7 +166,8 @@ Eigen::SparseMatrix<double> Simulation::assemble_poisson_coefficient_matrix(Arra
   return A;
 }
 
-Eigen::VectorXd Simulation::assemble_poisson_rhs(Array2i fluid_cell_count, int nf) {
+Eigen::VectorXd Simulation::assemble_poisson_rhs(Array2i fluid_cell_count,
+                                                 int nf) {
   Eigen::VectorXd rhs(nf);
   return rhs;
 }
@@ -180,7 +183,8 @@ void Simulation::solve_pressure(float dt) {
   int nf = fluid_cell_count.max() + 1; // number of fluid cells
 
   /* Create our coefficint matrix and rhs to discretize the poission equation */
-  Eigen::SparseMatrix<double> A = assemble_poisson_coefficient_matrix(fluid_cell_count, nf);
+  Eigen::SparseMatrix<double> A =
+      assemble_poisson_coefficient_matrix(fluid_cell_count, nf);
   Eigen::VectorXd rhs = assemble_poisson_rhs(fluid_cell_count, nf);
 
   /* Solve the linear system with the PCG method */
@@ -192,7 +196,8 @@ void Simulation::solve_pressure(float dt) {
   /* Copy the new pressure values over */
   p.clear();
   for (int i = 0; i < p.size(); i++) {
-    if (fluid_cell_count(i) < 0) continue;
+    if (fluid_cell_count(i) < 0)
+      continue;
     p(i) = pressures(fluid_cell_count(i));
   }
 }

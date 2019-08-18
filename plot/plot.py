@@ -44,9 +44,9 @@ for i, ax in enumerate(axs.reshape(-1)):
     xi = np.linspace(0.0, 5.0, 100)
     yi = np.linspace(0.0, 5.0, 100)
     # grid the data.
-    zi = griddata(x, y, z, xi, yi, interp='linear')
+    zi = griddata(x, y, np.log(-z), xi, yi, interp='linear')
     boundaryi = griddata(x, y, fluid_id, xi, yi, interp='linear')
-    ax.imshow(zi, origin='lower', cmap=cm.RdBu, interpolation='nearest',
+    ax.imshow(zi, origin='lower', cmap=cm.GnBu, interpolation='nearest',
               extent=[np.min(x), np.max(x), np.min(y), np.max(y)])
     contour = ax.contour(
         xi,
