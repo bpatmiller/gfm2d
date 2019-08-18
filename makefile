@@ -14,6 +14,7 @@ format:
 	cmake-format -i --command-case canonical --keyword-case upper \
 	--enable-sort True --autosort True --enable-markup True \
 	./CMakeLists.txt ./test/CMakeLists.txt
+	autopep8 --in-place --aggressive --aggressive plot/plot.py
 
 .PHONY: clean
 clean:

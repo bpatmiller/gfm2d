@@ -4,7 +4,7 @@ dist: bionic
 
 before_install:
   - sudo apt-get install -y libeigen3-dev
-  - pip install --user pyyaml cpp-coveralls cmake-format
+  - pip install --user pyyaml cpp-coveralls cmake-format autopep8
 
 compiler:
   - gcc
