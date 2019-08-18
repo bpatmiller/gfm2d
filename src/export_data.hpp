@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 
+/* exports velocities sampled at the voxel centers */
 void export_velocity(VelocityField &vel, Array2f phi, float time,
                      int frame_number) {
   std::fstream vel_file("plot/data/vel.txt", vel_file.out | vel_file.app);

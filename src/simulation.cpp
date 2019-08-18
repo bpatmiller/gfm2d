@@ -2,6 +2,7 @@
 #include "export_data.hpp"
 #include "levelset_methods.hpp"
 #include "particle_levelset_method.hpp"
+#include <eigen3/Eigen/SparseCore>
 
 /** TODO Returns a timestep that ensures the simulation is stable */
 float Simulation::cfl() {
@@ -101,6 +102,8 @@ void Simulation::advect_velocity(float dt) {
   v = new_v;
 }
 
+/** Sets the velocity on solid boundaries to 0 so that fluids do not flow in or
+ * out of solids */
 void Simulation::enforce_boundaries() {
   for (auto it = solid_phi.begin(); it != solid_phi.end(); it++) {
     if (*it < 0) {
@@ -113,5 +116,18 @@ void Simulation::enforce_boundaries() {
   }
 }
 
-/** TODO Consider refactoring later */
-void Simulation::solve_pressure(float dt) {}
+/** TODO Consider refactoring later
+ * Sets up a linear system Ax=b to solve the discrete poission equation with
+ * varying coefficients and a discontinuous solution as in "A Boundary Condition
+ * Capturing Method for Poisson's Equation on Irregular Domains"
+ */
+void Simulation::solve_pressure(float dt) {
+  int nf = 1; // number of fluids
+  Eigen::SparseMatrix<double> A(nf, nf);
+  Eigen::VectorXd rhs(nf);
+  Eigen::VectorXd x(nf);
+}
+
+/** Applies the discrete pressure gradient using a similar method as how the
+ * coefficient matrix in solve_pressure is constructed. */
+void Simulation::apply_pressure_gradient(float dt) {}

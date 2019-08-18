@@ -9,6 +9,7 @@ import matplotlib.cm as cm
 phi_location = "plot/data/phi.txt"
 velocity_location = "plot/data/vel.txt"
 
+
 def read_blocks(input_file, i, j):
     """ Split a data file by newlines/comments. this is used to split our datafile by time
     indexing begins at 0."""
@@ -79,7 +80,8 @@ for i, ax in enumerate(axs.reshape(-1)):
     ax.set_aspect("equal")
     ax.axis('off')
 
-    ax.quiver(x, y, u, v, color=colormap(norm(colors)), angles='xy', scale_units='xy', scale=10)
+    ax.quiver(x, y, u, v, color=colormap(norm(colors)),
+              angles='xy', scale_units='xy', scale=10)
 
 fig.tight_layout()
 plt.savefig('plot/images/vel.png', bbox_inches='tight')
