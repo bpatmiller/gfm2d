@@ -3,10 +3,9 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
 
 ### BIG TODOS:
-* [ ] levelset reinitialization
 * [ ] do some tests
 * [ ] fix cmake like a real human
-* [ ] phi projection method
+* [ ] pressure projection!!!
 ...
 
 * [x] get coverage working
@@ -19,6 +18,8 @@
 * [x] fix weird cyclic dependency
 * [x] do some simple graphics
 * [x] do level set work
+* [x] phi projection method
+* [x] levelset reinitialization
 ### about the project
 
 
@@ -58,5 +59,8 @@ a density, and a phi definition. As of now, the only supported phi computation i
 - bettercodehub
 - doxygen
 
-### dependencies
+### Dependencies
 https://github.com/nlohmann/json
+catch2
+Eigen3
+GLM
