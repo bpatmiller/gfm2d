@@ -1,18 +1,8 @@
 #pragma once
-#include "array2.hpp"
 #include "fluid.hpp"
+#include "velocityfield.hpp"
 #include <stdio.h>
 #include <vector>
-
-struct VelocityField {
-  Array2f *up;
-  Array2f *vp;
-  VelocityField() {}
-  VelocityField(Array2f *u_, Array2f *v_) : up(u_), vp(v_) {}
-  vec2 operator()(glm::vec2 world_position) {
-    return vec2(up->value_at(world_position), vp->value_at(world_position));
-  }
-};
 
 /** \class Simulation
  * The main simulation class that defines our computational domain. It

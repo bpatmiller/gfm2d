@@ -1,7 +1,5 @@
 #pragma once
-#include "array2.hpp"
-#include "iostream"
-#include <glm/glm.hpp>
+#include "velocityfield.hpp"
 using namespace glm;
 
 /** Note: this is intended for use with only integer indices */

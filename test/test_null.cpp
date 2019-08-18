@@ -1,5 +1,4 @@
 #define CATCH_CONFIG_MAIN
-#include "array2.hpp"
 #include "catch.hpp"
 #include "settings.hpp"
 #include "simulation.hpp"
@@ -52,8 +51,6 @@ TEST_CASE("testing array2 operations") {
   // vec2 position(0.5,0.5);
   // float dt = -0.01f;
   // REQUIRE(1 == rk4(position, ));
-
-
 }
 
 TEST_CASE("test creating a basic simulation") {
