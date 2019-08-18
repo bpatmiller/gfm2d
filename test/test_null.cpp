@@ -31,6 +31,15 @@ TEST_CASE("testing array2 operations") {
   }
   REQUIRE(phi.min() == 50);
   REQUIRE(phi.max() == 50);
+
+  new_phi.set(0);
+  phi.set(5);
+
+  phi = new_phi;
+  REQUIRE(phi.max() == 0);
+  new_phi.set(2);
+  REQUIRE(phi.max() == 0);
+  REQUIRE(new_phi.max() == 2);
 }
 
 TEST_CASE("test creating a basic simulation") {

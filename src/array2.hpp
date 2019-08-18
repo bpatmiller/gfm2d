@@ -33,6 +33,7 @@ public:
         : std::vector<T>::iterator(iter), owner(owner) {}
     using std::vector<T>::iterator::operator++;
     vec2 ij() { return owner->ij_from_index(*this - owner->data.begin()); }
+    vec2 wp() { return owner->wp_from_index(*this - owner->data.begin()); }
   };
   iterator begin() { return iterator(this, data.begin()); }
   iterator end() { return iterator(this, data.end()); }
@@ -101,7 +102,7 @@ public:
 
   /** Takes in grid coordinates (eg an index) and returns the worldspace
    * position */
-  vec2 worldspace_of(vec2 grid_coordinates) {
+  vec2 worldspace_of(vec2 grid_coordinates) const {
     assert(grid_coordinates.x >= 0 && grid_coordinates.x <= sx - 1);
     assert(grid_coordinates.y >= 0 && grid_coordinates.y <= sy - 1);
     return vec2((grid_coordinates.x - offset_x) * h,
@@ -115,6 +116,12 @@ public:
     vec2 ij = vec2(index % sx, index / sx);
     assert(ij.x + (sx * ij.y) == index); // convert back
     return ij;
+  }
+
+  vec2 wp_from_index(int index) const {
+    vec2 ij = vec2(index % sx, index / sx);
+    assert(ij.x + (sx * ij.y) == index); // convert back
+    return worldspace_of(ij);
   }
 
   // TODO rearrange this code

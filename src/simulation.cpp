@@ -81,3 +81,21 @@ void Simulation::add_gravity(float dt) {
     face -= 9.8 * dt;
   }
 }
+
+void Simulation::advect_velocity(float dt) {
+  Array2f new_u(u);
+  Array2f new_v(v);
+
+  for (auto it = u.begin(); it != u.end(); it++) {
+    vec2 new_position = rk4(it.wp(), vel, -dt);
+    new_u(it.ij()) = u.value_at(new_position);
+  }
+
+  for (auto it = v.begin(); it != v.end(); it++) {
+    vec2 new_position = rk4(it.wp(), vel, -dt);
+    new_v(it.ij()) = v.value_at(new_position);
+  }
+
+  u = new_u;
+  v = new_v;
+}
