@@ -82,6 +82,7 @@ public:
   void add_gravity(float dt);
   void advect_velocity(float dt);
   void enforce_boundaries();
+  void solve_pressure(float dt);
 
   /** Populates the fluid_id array with the fluid that exists at each index in
    * space*/

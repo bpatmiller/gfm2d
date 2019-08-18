@@ -57,7 +57,8 @@ void Simulation::advance(float dt) {
   add_gravity(dt);
 
   enforce_boundaries();
-  // project_pressure();
+  solve_pressure(dt);
+  // apply_pressure_gradient();
 }
 
 void Simulation::get_fluid_ids() {
@@ -111,3 +112,6 @@ void Simulation::enforce_boundaries() {
     }
   }
 }
+
+/** TODO Consider refactoring later */
+void Simulation::solve_pressure(float dt) {}

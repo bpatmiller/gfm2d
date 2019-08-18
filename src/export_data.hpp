@@ -1,9 +1,7 @@
 #include "fluid.hpp"
 #include <fstream>
-#include <vector>
-// TODO
 #include <iostream>
-#include <stdarg.h>
+#include <vector>
 
 /** we make use of the fact that by our projection method, only one fluid at any
  * point has a negative phi value. so if we only include negative phi values, we

@@ -1,7 +1,7 @@
+#pragma once
 /**  \file Loads data from config.json and returns
     parameters for initializing the simulation.
 */
-#pragma once
 
 #include "json.hpp"
 #include "levelset_constructors.hpp"
@@ -9,6 +9,9 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+//
+#include "levelset_methods.hpp"
+
 // for convenience
 using json = nlohmann::json;
 
