@@ -15,11 +15,19 @@ vec2 upwind_gradient(Array2f &phi, vec2 velocity, vec2 ij) {
 
 /** "Classic" 4th order Runge-Kutta integration */
 vec2 rk4(vec2 position, VelocityField &vel, float dt) {
-  vec2 k1 = vel(position);
-  vec2 k2 = vel(position + (dt * 0.5f) * k1);
-  vec2 k3 = vel(position + (dt * 0.5f) * k2);
-  vec2 k4 = vel(position + k3);
-  return position + (1.0f / 6.0f) * (k1 + 2.0f * k2 + 2.0f * k3 + k4);
+  float l1 = vel(position).x * dt;
+  float l2 = dt * vel(vec2(position.x + 0.5f * l1, position.y + 0.5f * dt)).x;
+  float l3 = dt * vel(vec2(position.x + 0.5f * l2, position.y + 0.5f * dt)).x;
+  float l4 = dt * vel(vec2(position.x + l3, position.y * dt)).x;
+  float x = position.x + (1.f / 6.f) * (l1 + 2.f * l2 + 2.f * l3 + l4);
+
+  float k1 = vel(position).y * dt;
+  float k2 = dt * vel(vec2(position.x + 0.5f * dt, position.y + 0.5f * k1)).y;
+  float k3 = dt * vel(vec2(position.x + 0.5f * dt, position.y + 0.5f * k2)).y;
+  float k4 = dt * vel(vec2(position.x * dt, position.y + k3)).y;
+  float y = position.y + (1.f / 6.f) * (k1 + 2.f * k2 + 2.f * k3 + k4);
+
+  return vec2(x, y);
 }
 
 /** Forward euler integration, only for testing purposes */
