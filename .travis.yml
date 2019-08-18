@@ -3,7 +3,7 @@ language: cpp
 dist: bionic
 
 before_install:
-  - sudo apt-get install -y libeigen3-dev nlohmann-json-dev
+  - sudo apt-get install -y libeigen3-dev nlohmann-json-dev python-tk
   - pip install --user pyyaml cpp-coveralls cmake-format matplotlib numpy
 
 compiler:
