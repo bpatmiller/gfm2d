@@ -12,6 +12,13 @@
 // for convenience
 using json = nlohmann::json;
 
+void initialize_boundaries(Simulation &sim) {
+  for (int i = 0; i < sim.sx; i++) {
+    sim.solid_phi(i, 0) = -0.5;
+    sim.solid_phi(i, sim.sy - 1) = -0.5;
+  }
+}
+
 /** Initializes a simulation based on the json parameters,
  * then adds fluids and sets their starting phis.
  */
@@ -38,4 +45,5 @@ void initialize_simulation(Simulation &sim) {
     FluidConfig fconf(tmp["phi"].get<json>());
     construct_levelset(sim.fluids.back(), sx, sy, h, fluid_name, fconf);
   }
+  initialize_boundaries(sim);
 }

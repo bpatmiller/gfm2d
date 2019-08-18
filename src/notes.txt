@@ -1,3 +1,5 @@
+todo initialize walls
+
 --- BUGS
 ij.x is NaN in snapped access???
 

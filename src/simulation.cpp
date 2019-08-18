@@ -56,7 +56,7 @@ void Simulation::advance(float dt) {
   advect_velocity(dt);
   add_gravity(dt);
 
-  // enforce boudnaries
+  enforce_boundaries();
   // project pressure
 }
 
@@ -98,4 +98,16 @@ void Simulation::advect_velocity(float dt) {
 
   u = new_u;
   v = new_v;
+}
+
+void Simulation::enforce_boundaries() {
+  for (auto it = solid_phi.begin(); it != solid_phi.end(); it++) {
+    if (*it < 0) {
+      vec2 ij = it.ij();
+      u(ij) = 0;
+      u(ij + vec2(1, 0)) = 0;
+      v(ij) = 0;
+      v(ij + vec2(0, 1)) = 0;
+    }
+  }
 }
