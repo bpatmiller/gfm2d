@@ -29,6 +29,7 @@ def read_blocks(input_file, i, j):
             blocks[-1].append(line)
     return blocks[i:j + 1]
 
+
 with open('config.json') as config_file:
     data = json.load(config_file)
 
@@ -37,53 +38,38 @@ ymax = data['vertical_cells'] * data['cell_size']
 
 # DRAW PHI
 
-datablocks = read_blocks(phi_location, 0, 10)
-print("drawing phi", len(datablocks), "time samples")
-fig, axs = plt.subplots(2, int(len(datablocks) / 2), figsize=(20, 20))
+phi_datablocks = read_blocks(phi_location, 0, 10)
+vel_datablocks = read_blocks(velocity_location, 0, 10)
+print("drawing phi", len(phi_datablocks), "time samples")
+fig, axs = plt.subplots(2, int(len(phi_datablocks) / 2), figsize=(20, 20))
 
-if len(datablocks) == 1:
+if len(phi_datablocks) == 1:
     axs = [axs]
 
 for i, ax in enumerate(axs.reshape(-1)):
-    x, y, z, fluid_id, pressure = np.loadtxt(datablocks[i], unpack=True)
+    x, y, z, fluid_id, pressure = np.loadtxt(phi_datablocks[i], unpack=True)
     # define grid.
     xi = np.linspace(0.0, xmax, 100)
     yi = np.linspace(0.0, ymax, 100)
-    xi,yi = np.meshgrid(xi,yi)
+    xi, yi = np.meshgrid(xi, yi)
     # grid the data.
     zi = griddata((x, y), fluid_id, (xi, yi), method='linear')
-    boundaryi = griddata((x, y), fluid_id, (xi, yi), method='nearest')
+    boundaryi = griddata((x, y), -z, (xi, yi), method='linear')
 
     # use for phi
     # cm.GnBu
 
-    ax.imshow(zi, origin='lower', cmap=cm.Spectral, interpolation='nearest',
+    ax.imshow(zi, origin='lower', cmap=cm.Pastel2, interpolation='nearest',
               extent=[np.min(x), np.max(x), np.min(y), np.max(y)])
     contour = ax.contour(
         xi,
         yi,
         boundaryi,
-        levels=1,
-        linewidths=2,
+        levels=8,
+        linewidths=1,
         cmap="RdBu_r")
 
-    ax.set_title("t=" + str(i))
-    ax.set_aspect("equal")
-    ax.axis('off')
-
-fig.tight_layout()
-plt.savefig('plot/images/phi.png', bbox_inches='tight')
-
-# DRAW VELOCITY
-
-datablocks = read_blocks(velocity_location, 0, 10)
-print("drawing velocity,", len(datablocks), "time samples")
-fig, axs = plt.subplots(2, int(len(datablocks) / 2), figsize=(20, 20))
-if len(datablocks) == 1:
-    axs = [axs]
-
-for i, ax in enumerate(axs.reshape(-1)):
-    x, y, u, v = np.loadtxt(datablocks[i], unpack=True)
+    x, y, u, v = np.loadtxt(vel_datablocks[i], unpack=True)
 
     ax.set_xlim(0, xmax)
     ax.set_ylim(0, ymax)
@@ -94,6 +80,10 @@ for i, ax in enumerate(axs.reshape(-1)):
     ax.quiver(x, y, u, v, np.sqrt(u**2 + v**2),
               angles='xy', scale_units='xy', scale=15)
 
-fig.suptitle('Main title')
+
+    ax.set_title("t=" + str(i))
+    ax.set_aspect("equal")
+    ax.axis('off')
+
 fig.tight_layout()
-plt.savefig('plot/images/vel.png', bbox_inches='tight')
+plt.savefig('plot/images/phi.png', bbox_inches='tight')
