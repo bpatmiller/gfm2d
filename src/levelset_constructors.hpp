@@ -39,11 +39,14 @@ float compute_phi_sphere(vec2 p, FluidConfig &fconf) {
 }
 
 /* returns the distance a point is ABOVE a plane.
- * p1 is the planes height
- * p2 is the jitter quantity
+ * p1 is the planes height (lower)
+ * p2 is the planes height (upper)
+ * p3 is the jitter quantity
  */
 float compute_phi_plane(vec2 p, FluidConfig &fconf) {
-  return p.y - fconf.p1 + linearRand(-fconf.p2, fconf.p2);
+  float midpoint = (fconf.p1 + fconf.p2) * 0.5f;
+  float radius = (fconf.p1 - fconf.p2) * 0.5f;
+  return abs(p.y - (midpoint + linearRand(-fconf.p3, fconf.p3))) - radius;
 }
 
 /** TODO - add documentation and more level set starting configurations */
