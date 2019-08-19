@@ -45,8 +45,10 @@ fig, axs = plt.subplots(2, int(len(phi_datablocks) / 2), figsize=(20, 20))
 
 if len(phi_datablocks) == 1:
     axs = [axs]
+else:
+    axs = axs.reshape(-1)
 
-for i, ax in enumerate(axs.reshape(-1)):
+for i, ax in enumerate(axs):
     x, y, z, fluid_id, pressure = np.loadtxt(phi_datablocks[i], unpack=True)
     # define grid.
     xi = np.linspace(0.0, xmax, 100)
@@ -87,8 +89,19 @@ for i, ax in enumerate(axs.reshape(-1)):
     ax.set_aspect("equal")
     ax.axis('off')
 
-    ax.quiver(x, y, u, v, np.sqrt(u**2 + v**2),
-              angles='xy', scale_units='xy', scale=15)
+    ax.quiver(
+        x,
+        y,
+        u,
+        v,
+        np.sqrt(
+            u**2 +
+            v**2),
+        angles='xy',
+        scale_units='xy',
+        scale=15,
+        width=0.0015,
+        headwidth=2)
 
     ax.set_title("t=" + str(i))
     ax.set_aspect("equal")
