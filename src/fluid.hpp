@@ -12,7 +12,7 @@ public:
   float radius;
   bool valid;
 
-  Particle(vec3 position_, float starting_phi_, float radius_)
+  Particle(vec2 position_, float starting_phi_, float radius_)
       : position(position_), starting_phi(starting_phi_), radius(radius_) {
     valid = true;
   }
@@ -25,9 +25,9 @@ public:
 class Fluid {
 public:
   float density;
-  Array2f phi;     // phi, sampled at center
-  Array2f pls_phi; // an artificial resampling of phi for use in the particle
-                   // level set
+  Array2f phi; // phi, sampled at center
+  // Array2f pls_phi; // an artificial resampling of phi for use in the particle
+  // level set
   Array2i particle_count; // counts how many particles are in that area, sampled
                           // in the same manner as pls_phi
 
@@ -37,11 +37,12 @@ public:
     // center-located quantities
     phi.init(sx_, sy_, -0.5, -0.5, h);
     // vertex-located quantities
-    pls_phi.init(sx_ - 1, sy_ - 1, -1.0, -1.0, h);
-    particle_count.init(sx_ - 1, sy_ - 1, -1.0, -1.0, h);
+    // pls_phi.init(sx_ - 1, sy_ - 1, -1.0, -1.0, h);
+    particle_count.init(sx_, sy_, 0.f, 0.f, h);
   }
   /*    */
   void print_information() {
-    printf("~~ Fluid information ~~\n density: %f\n", density);
+    printf("~~ Fluid information ~~\n density: %f\n # particles: %i\n", density,
+           static_cast<int>(particles.size()));
   }
 };

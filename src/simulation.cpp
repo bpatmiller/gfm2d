@@ -21,7 +21,9 @@ float Simulation::cfl() {
 void Simulation::run() {
   // delete old datafiles, fix after initializing
   clear_exported_data();
-  reinitialize_phi(fluids);
+  for (auto &f : fluids) {
+    reinitialize_phi(f);
+  }
   project_phi(fluids, solid_phi);
   while (time_elapsed < max_t) {
     if (time_elapsed + timestep > max_t)
@@ -36,6 +38,9 @@ void Simulation::run() {
       t += substep;
     }
     export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
+    for (auto &f : fluids) {
+      f.print_information();
+    }
     frame_number += 1;
     time_elapsed += timestep;
   }
@@ -48,11 +53,12 @@ void Simulation::advance(float dt) {
   for (auto &f : fluids) {
     advect_phi(u, v, f.phi, dt);
     advect_particles(f, vel, solid_phi, dt);
-    // correct_levelset();
-    reinitialize_phi(fluids);
-    // correct_levelset();
-    // adjust_particle_radii();
-    // reseed_particles();
+    correct_levelset(f);
+    reinitialize_phi(f);
+    correct_levelset(f);
+    adjust_particle_radii(f);
+    if (reseed_counter++ % 10 == 0)
+    reseed_particles(f, solid_phi);
   }
   project_phi(fluids, solid_phi);
 

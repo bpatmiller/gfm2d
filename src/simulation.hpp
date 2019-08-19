@@ -25,6 +25,7 @@ public:
   float max_t = 0;        // full simulation runtime
   float timestep = 0;     // timestep per frame
   int frame_number = 0;   // current frame
+  int reseed_counter = 0; // used for PLS
 
   Array2f u; // horizontal velocity, sampled at cell sides
   Array2f v; // vertical velocity, sampled at cell tops/bottoms

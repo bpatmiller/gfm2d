@@ -83,8 +83,16 @@ public:
   /** Takes in x and y indice of the grid and returns the value stored at that
    * index. */
   T &operator()(int i, int j) {
-    assert(i >= 0 and i < sx);
-    assert(j >= 0 and j < sy);
+    if (i < 0 || i >= sx)
+      std::printf("err i: %i, j: %i\n", i, j);
+    if (j < 0 || j >= sy)
+      std::printf("err i: %i, j: %i\n", i, j);
+    i = i < 0 ? 0 : i;
+    i = i > sx - 1 ? sx-1 : i;
+    j = j < 0 ? 0 : j;
+    j = j > sy - 1 ? sy-1 : j;
+    assert(i >= 0 && i < sx);
+    assert(j >= 0 && j < sy);
     return data[i + (sx * j)];
   }
 

@@ -92,32 +92,30 @@ Array2f compute_sigmoid(Array2f phi) {
   return sigmoid;
 }
 
-void reinitialize_phi(std::vector<Fluid> fluids) {
-  for (auto &f : fluids) {
-    Array2f sigmoid = compute_sigmoid(f.phi);
-    Array2f gradnorm = gradient_norm(f.phi, sigmoid);
+void reinitialize_phi(Fluid &f) {
+  Array2f sigmoid = compute_sigmoid(f.phi);
+  Array2f gradnorm = gradient_norm(f.phi, sigmoid);
 
-    float err = 0;
-    float tol = 1e-1;
-    int max_iters = 250;
-    float dt = 0.5f * f.phi.h;
+  float err = 0;
+  float tol = 1e-1;
+  int max_iters = 250;
+  float dt = 0.5f * f.phi.h;
 
-    for (int iter = 0; iter <= max_iters; iter++) {
-      // assert(iter != max_iters);
-      // apply the update
-      for (int i = 0; i < f.phi.size(); i++) {
-        f.phi(i) -= sigmoid(i) * (gradnorm(i) - 1.0f) * dt;
-      }
-      // check updated error
-      gradnorm = gradient_norm(f.phi, sigmoid);
-      err = 0;
-      for (int i = 0; i < f.phi.size(); i++) {
-        err += abs(gradnorm(i) - 1.0f);
-      }
-      err /= static_cast<float>(f.phi.size());
-      if (err < tol)
-        break;
+  for (int iter = 0; iter <= max_iters; iter++) {
+    // assert(iter != max_iters);
+    // apply the update
+    for (int i = 0; i < f.phi.size(); i++) {
+      f.phi(i) -= sigmoid(i) * (gradnorm(i) - 1.0f) * dt;
     }
+    // check updated error
+    gradnorm = gradient_norm(f.phi, sigmoid);
+    err = 0;
+    for (int i = 0; i < f.phi.size(); i++) {
+      err += abs(gradnorm(i) - 1.0f);
+    }
+    err /= static_cast<float>(f.phi.size());
+    if (err < tol)
+      break;
   }
 }
 

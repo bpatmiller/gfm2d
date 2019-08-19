@@ -4,6 +4,20 @@
 #include <iostream>
 #include <vector>
 
+void export_particles(std::vector<Fluid> &sim, float time, int frame_number) {
+  std::fstream part_file("plot/data/part.txt", part_file.out | part_file.app);
+  part_file << "#BLOCK HEADER time:" << time << "\n";
+  part_file << "#x\ty\tinitial_phi\tradius\n";
+  part_file << "\n";
+
+  for (auto &f: sim) {
+    for (auto &p : f.particles) {
+      part_file << p.position.x << "\t" << p.position.y << "\t" << p.starting_phi << "\t" << p.radius << "\n";
+    }
+  }
+  part_file.close();
+}
+
 /* exports velocities sampled at the voxel centers */
 void export_velocity(VelocityField &vel, Array2f phi, float time,
                      int frame_number) {
@@ -55,6 +69,7 @@ void export_simulation_data(Array2f &p, VelocityField vel,
   std::printf("exporting frame %i at time %f\n", frame_number, time);
   export_fluid_ids(p, sim, time, frame_number);
   export_velocity(vel, sim[0].phi, time, frame_number);
+  export_particles(sim, time, frame_number);
 }
 
 void clear_exported_data() {

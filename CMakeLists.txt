@@ -8,7 +8,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wno-unused-parameter")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+set(CMAKE_CXX_FLAGS_DEBUG
+    "-g -O0 -Wno-unused-variable -Wno-unused-but-set-variable")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 # coverage flags
