@@ -3,10 +3,8 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
 
 ### BIG TODOS:
-* [ ] density sampling
-* [ ] poisson coefficient matrix
-* [ ] poisson rhs
-* [ ] make levelset initialization better
+* [ ] more examples (!)
+* [ ] impliment reactions (or something else cool)
 * [ ] do some tests
 * [ ] fix cmake like a real human
 * [ ] pressure projection!!!
@@ -25,6 +23,10 @@
 * [x] do level set work
 * [x] phi projection method
 * [x] levelset reinitialization
+* [x] density sampling
+* [x] poisson coefficient matrix
+* [x] poisson rhs
+* [x] make levelset initialization better
 ### about the project
 
 
