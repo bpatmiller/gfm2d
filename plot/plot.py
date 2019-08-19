@@ -54,13 +54,23 @@ for i, ax in enumerate(axs.reshape(-1)):
     xi, yi = np.meshgrid(xi, yi)
     # grid the data.
     zi = griddata((x, y), fluid_id, (xi, yi), method='linear')
-    boundaryi = griddata((x, y), -z, (xi, yi), method='linear')
+    boundaryi = griddata((x, y), -z, (xi, yi), method='nearest')
 
     # use for phi
     # cm.GnBu
 
-    ax.imshow(zi, origin='lower', cmap=cm.Pastel2, interpolation='nearest',
-              extent=[np.min(x), np.max(x), np.min(y), np.max(y)])
+    ax.imshow(
+        zi,
+        origin='lower',
+        cmap=cm.Pastel2,
+        interpolation='nearest',
+        extent=[
+            np.min(x),
+            np.max(x),
+            np.min(y),
+            np.max(y)],
+        vmin=0,
+        vmax=2)
     contour = ax.contour(
         xi,
         yi,
@@ -79,7 +89,6 @@ for i, ax in enumerate(axs.reshape(-1)):
 
     ax.quiver(x, y, u, v, np.sqrt(u**2 + v**2),
               angles='xy', scale_units='xy', scale=15)
-
 
     ax.set_title("t=" + str(i))
     ax.set_aspect("equal")

@@ -42,7 +42,9 @@ float compute_phi_sphere(vec2 p, FluidConfig &fconf) {
  * p1 is the planes height
  * p2 is the jitter quantity
  */
-float compute_phi_plane(vec2 p, FluidConfig &fconf) { return p.y - fconf.p1 + linearRand(-fconf.p2, fconf.p2); }
+float compute_phi_plane(vec2 p, FluidConfig &fconf) {
+  return p.y - fconf.p1 + linearRand(-fconf.p2, fconf.p2);
+}
 
 /** TODO - add documentation and more level set starting configurations */
 void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
