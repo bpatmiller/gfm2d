@@ -4,7 +4,7 @@
 ### about
 Please read [this paper describing the project](writeup.pdf). The majority of the information comes from the original Particle Level Set Method paper, Level Set Methods and Dynamic Implicit Surfaces by Fedkiw and Osher, Multiple Interacting Fluids by Losasso et al, Stable Fluids by Stam et al, and various university pdfs scattered across the internet.
 
-The name of this paper comes from the Ghost Fluid Method, which is not used in this program.
+The name of this program comes from the Ghost Fluid Method, which is not used in this program.
 
 ### BIG TODOS:
 * [ ] fix cmake like a real human
@@ -63,7 +63,7 @@ a density, and a phi definition. As of now, the only supported phi computation i
 (exterior and interior).
 
 ### Dependencies
-https://github.com/nlohmann/json
+nlohmann/json
 catch2
 Eigen3
 GLM
