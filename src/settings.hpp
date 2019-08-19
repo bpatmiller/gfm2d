@@ -19,6 +19,10 @@ void initialize_boundaries(Simulation &sim) {
     sim.solid_phi(i, 0) = -0.5;
     sim.solid_phi(i, sim.sy - 1) = -0.5;
   }
+  for (int j = 0; j < sim.sy; j++) {
+    sim.solid_phi(0, j) = -0.5;
+    sim.solid_phi(sim.sx - 1, j) = -0.5;
+  }
 }
 
 /** Initializes a simulation based on the json parameters,

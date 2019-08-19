@@ -22,7 +22,7 @@ public:
   float h = 0;
   std::vector<T> data;
 
-  /** \Class Array2::iterator
+  /** \class Array2::iterator
    *  iterates through our data vecot
    *  call ij() on the iterate to get the index
    */

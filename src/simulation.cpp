@@ -136,7 +136,20 @@ Array2i Simulation::count_fluid_cells() {
 /** Returns the density between two voxels, either as naively expected in the
  * case where the voxels contain the same fluid, or as defined in eqn. 55 in Liu
  * et al*/
-float Simulation::sample_density(vec2 ij, vec2 kl) { return 0; }
+float Simulation::sample_density(vec2 ij, vec2 kl) {
+  if (fluid_id(ij) == fluid_id(kl)) {
+    return 1.f / fluids[fluid_id(ij)].density;
+  } else {
+    int ij_id = fluid_id(ij);
+    int kl_id = fluid_id(kl);
+    float ij_phi = fluids[ij_id].phi(ij);
+    float kl_phi = fluids[kl_id].phi(kl);
+    float b_minus = 1.f / fluids[ij_id].density;
+    float b_plus = 1.f / fluids[kl_id].density;
+    float theta = abs(ij_phi) / (abs(ij_phi) + abs(kl_phi));
+    return (b_minus * b_plus) / (theta * b_plus + (1.f - theta) * b_minus);
+  }
+}
 
 /** Assembles a varying coefficient matrix for the possion equation. The lhs is
  * discretized as in eqn. 77 in liu et all */
@@ -144,37 +157,37 @@ Eigen::SparseMatrix<double>
 Simulation::assemble_poisson_coefficient_matrix(Array2i fluid_cell_count,
                                                 int nf) {
   std::vector<Eigen::Triplet<double>> coefficients;
-
-  // assemble our coefficient matrix
   for (int it = 0; it < p.size(); it++) {
     if (solid_phi(it) <= 0)
       continue;
-    // auto &f = fluids[fluid_id(it)]; // map from grid location to fluid type
-    // vec2 ij = f.phi.ij_from_index(it);
-    // int index =
-    //     fluid_cell_count(it); // map from grid location to fluid cell index
+    vec2 ij = p.ij_from_index(it);
+    float scale = 1.f / (h * h);
+    int center_index = fluid_cell_count(ij);
+    float center_coefficient = 0;
 
-    // float Fl = 0;
-    // float Fr = 0;
-    // float Fb = 0;
-    // float Ft = 0;
-    // // skeleton code for solution math
-    // vec2 N = normalize(gradient(f.phi, ij));
+    /* loop through all four neighboring cells */
+    for (auto offset : {vec2(1, 0), vec2(-1, 0), vec2(0, 1), vec2(0, -1)}) {
+      vec2 neighbor_position = ij + offset;
+      int neighbor_index = fluid_cell_count(neighbor_position);
+      if (neighbor_index >= 0) {
+        float b_hat = sample_density(ij, neighbor_position);
+        float neighbor_coefficient = scale * b_hat;
+        center_coefficient -= scale * b_hat;
+        coefficients.push_back(Eigen::Triplet<double>(
+            center_index, neighbor_index, neighbor_coefficient));
+      }
+    }
+    coefficients.push_back(
+        Eigen::Triplet<double>(center_index, center_index, center_coefficient));
   }
 
   Eigen::SparseMatrix<double> A(nf, nf);
+  A.setFromTriplets(coefficients.begin(), coefficients.end());
   return A;
 }
 
-Eigen::VectorXd Simulation::assemble_poisson_rhs(Array2i fluid_cell_count,
-                                                 int nf) {
-  Eigen::VectorXd rhs(nf);
-  return rhs;
-}
-
 /** Sets up a linear system Ax=b to solve the discrete poission equation with
- * varying coefficients and a discontinuous solution as in "A Boundary Condition
- * Capturing Method for Poisson's Equation on Irregular Domains" Liu et al
+ * varying coefficients.
  */
 void Simulation::solve_pressure(float dt) {
   /* Count each fluid cell, and find which voxels contain which fluids */
@@ -182,10 +195,19 @@ void Simulation::solve_pressure(float dt) {
   Array2i fluid_cell_count = count_fluid_cells();
   int nf = fluid_cell_count.max() + 1; // number of fluid cells
 
-  /* Create our coefficint matrix and rhs to discretize the poission equation */
+  /* Compute the discrete divergence of each fluid cell */
+  Eigen::VectorXd rhs(nf);
+  for (int i = 0; i < solid_phi.size(); i++) {
+    if (solid_phi(i) <= 0)
+      continue;
+    vec2 ij = solid_phi.ij_from_index(i);
+    rhs(fluid_cell_count(i)) = (1.f / (h * dt)) * (u(ij + vec2(1, 0)) - u(ij) +
+                                                   v(ij + vec2(0, 1)) - v(ij));
+  }
+
+  /* Assemble the coefficient matrix */
   Eigen::SparseMatrix<double> A =
       assemble_poisson_coefficient_matrix(fluid_cell_count, nf);
-  Eigen::VectorXd rhs = assemble_poisson_rhs(fluid_cell_count, nf);
 
   /* Solve the linear system with the PCG method */
   Eigen::ConjugateGradient<Eigen::SparseMatrix<double>> solver;

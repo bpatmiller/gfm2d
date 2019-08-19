@@ -117,15 +117,22 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a616b2ffd9f07cf8e2ee377fa313e5607"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12f7b360ce5d22c5e8a8d111acd1c884"><td class="memItemLeft" align="right" valign="top"><a id="a12f7b360ce5d22c5e8a8d111acd1c884"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a12f7b360ce5d22c5e8a8d111acd1c884">solve_pressure</a> (float dt)</td></tr>
-<tr class="memdesc:a12f7b360ce5d22c5e8a8d111acd1c884"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO Consider refactoring later Sets up a linear system Ax=b to solve the discrete poission equation with varying coefficients and a discontinuous solution as in "A Boundary Condition
-Capturing Method for Poisson's Equation on Irregular Domains". <br /></td></tr>
+<tr class="memdesc:a12f7b360ce5d22c5e8a8d111acd1c884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up a linear system Ax=b to solve the discrete poission equation with varying coefficients. <br /></td></tr>
 <tr class="separator:a12f7b360ce5d22c5e8a8d111acd1c884"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2393e1da56190503c9e8320b8a94368c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a2393e1da56190503c9e8320b8a94368c">apply_pressure_gradient</a> (float dt)</td></tr>
 <tr class="memdesc:a2393e1da56190503c9e8320b8a94368c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the discrete pressure gradient using a similar method as how the coefficient matrix in solve_pressure is constructed.  <a href="#a2393e1da56190503c9e8320b8a94368c">More...</a><br /></td></tr>
 <tr class="separator:a2393e1da56190503c9e8320b8a94368c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c0d91b0d040b6663d4a452688e931c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#aa8c0d91b0d040b6663d4a452688e931c">sample_density</a> (vec2 ij, vec2 kl)</td></tr>
+<tr class="memdesc:aa8c0d91b0d040b6663d4a452688e931c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the density between two voxels, either as naively expected in the case where the voxels contain the same fluid, or as defined in eqn.  <a href="#aa8c0d91b0d040b6663d4a452688e931c">More...</a><br /></td></tr>
+<tr class="separator:aa8c0d91b0d040b6663d4a452688e931c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad703d643ef271ce842f2b27e7a1b5fc"><td class="memItemLeft" align="right" valign="top">Eigen::SparseMatrix&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#aad703d643ef271ce842f2b27e7a1b5fc">assemble_poisson_coefficient_matrix</a> (<a class="el" href="structArray2.html">Array2i</a> fluid_cell_count, int nf)</td></tr>
+<tr class="memdesc:aad703d643ef271ce842f2b27e7a1b5fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles a varying coefficient matrix for the possion equation.  <a href="#aad703d643ef271ce842f2b27e7a1b5fc">More...</a><br /></td></tr>
+<tr class="separator:aad703d643ef271ce842f2b27e7a1b5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ef5121bfe230477efe0eae09bdb1864"><td class="memItemLeft" align="right" valign="top"><a id="a2ef5121bfe230477efe0eae09bdb1864"></a>
+<a class="el" href="structArray2.html">Array2i</a>&#160;</td><td class="memItemRight" valign="bottom"><b>count_fluid_cells</b> ()</td></tr>
+<tr class="separator:a2ef5121bfe230477efe0eae09bdb1864"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9213a11855b98b66ec578e4745f9562"><td class="memItemLeft" align="right" valign="top"><a id="ac9213a11855b98b66ec578e4745f9562"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#ac9213a11855b98b66ec578e4745f9562">get_fluid_ids</a> ()</td></tr>
-<tr class="memdesc:ac9213a11855b98b66ec578e4745f9562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populates the fluid_id array with the fluid that exists at each index in space. <br /></td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>get_fluid_ids</b> ()</td></tr>
 <tr class="separator:ac9213a11855b98b66ec578e4745f9562"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -198,6 +205,37 @@ std::vector&lt; <a class="el" href="classFluid.html">Fluid</a> &gt;&#160;</td><t
 
 </div>
 </div>
+<a id="aad703d643ef271ce842f2b27e7a1b5fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad703d643ef271ce842f2b27e7a1b5fc">&#9670;&nbsp;</a></span>assemble_poisson_coefficient_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Eigen::SparseMatrix&lt; double &gt; Simulation::assemble_poisson_coefficient_matrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structArray2.html">Array2i</a>&#160;</td>
+          <td class="paramname"><em>fluid_cell_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assembles a varying coefficient matrix for the possion equation. </p>
+<p>The lhs is discretized as in eqn. 77 in liu et all </p>
+
+</div>
+</div>
 <a id="ae5c367f87c0b5dc9740bc6d00e44e72c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5c367f87c0b5dc9740bc6d00e44e72c">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -215,6 +253,37 @@ std::vector&lt; <a class="el" href="classFluid.html">Fluid</a> &gt;&#160;</td><t
 
 <p>Runs the main simulation loop. </p>
 <p>Exports simulation data at each timestep, and breaks the timestep into substeps based on the CFL condition time_elapsed - current runtime of the simulation max_t - total amount of time the simulation will run timestep - amount of time between "frames" t - tracks the amount of time traversed in a given frame substep - a length of time given by <a class="el" href="classSimulation.html#a9449ce98d9819e822ca544a1324c9d04" title="TODO Returns a timestep that ensures the simulation is stable.">cfl()</a> </p>
+
+</div>
+</div>
+<a id="aa8c0d91b0d040b6663d4a452688e931c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8c0d91b0d040b6663d4a452688e931c">&#9670;&nbsp;</a></span>sample_density()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Simulation::sample_density </td>
+          <td>(</td>
+          <td class="paramtype">vec2&#160;</td>
+          <td class="paramname"><em>ij</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vec2&#160;</td>
+          <td class="paramname"><em>kl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the density between two voxels, either as naively expected in the case where the voxels contain the same fluid, or as defined in eqn. </p>
+<p>55 in Liu et al </p>
 
 </div>
 </div>
