@@ -13,7 +13,7 @@
                 "property1":0.5,
                 "property2":0.5,
                 "property3":0.25,
-                "negate":false
+                "negate":true
             }
         },
         {
@@ -24,7 +24,7 @@
                 "property1":0.5,
                 "property2":0.5,
                 "property3":0.25,
-                "negate":true
+                "negate":false
             }
         }
     ]
