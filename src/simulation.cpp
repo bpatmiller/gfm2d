@@ -38,9 +38,6 @@ void Simulation::run() {
       t += substep;
     }
     export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
-    for (auto &f : fluids) {
-      f.print_information();
-    }
     frame_number += 1;
     time_elapsed += timestep;
   }
@@ -58,7 +55,7 @@ void Simulation::advance(float dt) {
     correct_levelset(f);
     adjust_particle_radii(f);
     if (reseed_counter++ % 10 == 0)
-    reseed_particles(f, solid_phi);
+      reseed_particles(f, solid_phi);
   }
   project_phi(fluids, solid_phi);
 

@@ -10,9 +10,10 @@ void export_particles(std::vector<Fluid> &sim, float time, int frame_number) {
   part_file << "#x\ty\tinitial_phi\tradius\n";
   part_file << "\n";
 
-  for (auto &f: sim) {
+  for (auto &f : sim) {
     for (auto &p : f.particles) {
-      part_file << p.position.x << "\t" << p.position.y << "\t" << p.starting_phi << "\t" << p.radius << "\n";
+      part_file << p.position.x << "\t" << p.position.y << "\t"
+                << p.starting_phi << "\t" << p.radius << "\n";
     }
   }
   part_file.close();
