@@ -22,7 +22,7 @@ if(DEFINED ENV{COVERAGE_OPTION})
   set(CMAKE_BUILD_TYPE COVERAGE)
   message(STATUS "OPT building with coverage options !!")
 else()
-  set(CMAKE_BUILD_TYPE DEBUG)
+  set(CMAKE_BUILD_TYPE RELEASE)
   message(STATUS "OPT building without coverage options ~~")
 endif()
 
