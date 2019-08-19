@@ -35,6 +35,7 @@ with open('config.json') as config_file:
 
 xmax = data['horizontal_cells'] * data['cell_size']
 ymax = data['vertical_cells'] * data['cell_size']
+number_of_fluids = len(data['fluids'])
 
 # DRAW PHI
 
@@ -55,7 +56,7 @@ for i, ax in enumerate(axs):
     yi = np.linspace(0.0, ymax, 100)
     xi, yi = np.meshgrid(xi, yi)
     # grid the data.
-    zi = griddata((x, y), fluid_id, (xi, yi), method='linear')
+    zi = griddata((x, y), fluid_id, (xi, yi), method='nearest')
     boundaryi = griddata((x, y), -z, (xi, yi), method='nearest')
 
     # use for phi
@@ -65,14 +66,15 @@ for i, ax in enumerate(axs):
         zi,
         origin='lower',
         cmap=cm.Pastel2,
-        interpolation='nearest',
+        interpolation='bilinear',
         extent=[
             np.min(x),
             np.max(x),
             np.min(y),
             np.max(y)],
-        vmin=0,
-        vmax=2)
+        # vmin=0,
+        # vmax=2
+        )
     contour = ax.contour(
         xi,
         yi,
