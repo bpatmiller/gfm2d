@@ -4,6 +4,7 @@
 #include <eigen3/Eigen/SparseCore>
 #include <stdio.h>
 #include <vector>
+#include <chrono>
 
 /** \class Simulation
  * The main simulation class that defines our computational domain. It

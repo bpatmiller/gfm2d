@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include "array2.hpp"
 #include <stdio.h>
 
@@ -26,23 +27,17 @@ class Fluid {
 public:
   float density;
   Array2f phi; // phi, sampled at center
-  // Array2f pls_phi; // an artificial resampling of phi for use in the particle
-  // level set
   Array2i particle_count; // counts how many particles are in that area, sampled
                           // in the same manner as pls_phi
 
   std::vector<Particle> particles;
 
   Fluid(float density_, int sx_, int sy_, float h) : density(density_) {
-    // center-located quantities
     phi.init(sx_, sy_, -0.5, -0.5, h);
-    // vertex-located quantities
-    // pls_phi.init(sx_ - 1, sy_ - 1, -1.0, -1.0, h);
     particle_count.init(sx_, sy_, 0.f, 0.f, h);
   }
   /*    */
   void print_information() {
-    printf("~~ Fluid information ~~\n density: %f\n # particles: %i\n", density,
-           static_cast<int>(particles.size()));
+    printf("~~ Fluid information ~~\n density: %f\n number of voxels: %i\n", density, (int)count_if(phi.data.begin(), phi.data.end(), [](float f){return f < 0.f;}));
   }
 };

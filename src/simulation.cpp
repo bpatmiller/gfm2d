@@ -19,27 +19,38 @@ float Simulation::cfl() {
  * t            - tracks the amount of time traversed in a given frame
  * substep      - a length of time given by cfl() */
 void Simulation::run() {
+  auto start_time = std::chrono::high_resolution_clock::now();
   // delete old datafiles, fix after initializing
   clear_exported_data();
   for (auto &f : fluids) {
     reinitialize_phi(f);
   }
   project_phi(fluids, solid_phi);
+  advance(std::min(cfl(), 1e-7f));
+      auto end_time = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+        float ms = duration.count();
+          printf("[ %f seconds have passed ] ", ms / 1000.f);
+  export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
   while (time_elapsed < max_t) {
+    frame_number += 1;
     if (time_elapsed + timestep > max_t)
       timestep = max_t - time_elapsed;
     // break the timestep up
     float t = 0;
     while (t < timestep) {
-      float substep = std::min(cfl(), timestep / 10.0f);
+      float substep = cfl();
       if (t + substep > timestep)
         substep = timestep - t;
       advance(substep);
       t += substep;
     }
-    export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
-    frame_number += 1;
+    end_time = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    ms = duration.count();
     time_elapsed += timestep;
+    printf("[ %f seconds have passed ] ", ms / 1000.f);
+    export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
   }
 }
 
