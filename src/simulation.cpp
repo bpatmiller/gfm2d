@@ -61,7 +61,7 @@ void Simulation::advance(float dt) {
 
   enforce_boundaries();
   solve_pressure(dt);
-  // apply_pressure_gradient(dt);
+  apply_pressure_gradient(dt);
 }
 
 void Simulation::get_fluid_ids() {
@@ -226,4 +226,26 @@ void Simulation::solve_pressure(float dt) {
 
 /** Applies the discrete pressure gradient using a similar method as how the
  * coefficient matrix in solve_pressure is constructed. */
-void Simulation::apply_pressure_gradient(float dt) {}
+void Simulation::apply_pressure_gradient(float dt) {
+  for (auto it = u.begin(); it != u.end(); it++) {
+    vec2 ij = it.ij();
+    if (ij.x < 1 || ij.x >= u.sx - 1)
+      continue;
+    if (solid_phi(ij) <= 0 || solid_phi(ij - vec2(1, 0)) <= 0)
+      continue;
+    float du = sample_density(ij, ij - vec2(1, 0)) * (dt / h) *
+               (p(ij) - p(ij - vec2(1, 0)));
+    u(ij) -= du;
+  }
+
+  for (auto it = v.begin(); it != v.end(); it++) {
+    vec2 ij = it.ij();
+    if (ij.y < 1 || ij.y >= v.sy - 1)
+      continue;
+    if (solid_phi(ij) <= 0 || solid_phi(ij - vec2(0, 1)) <= 0)
+      continue;
+    float dv = sample_density(ij, ij - vec2(0, 1)) * (dt / h) *
+               (p(ij) - p(ij - vec2(0, 1)));
+    v(ij) -= dv;
+  }
+}
