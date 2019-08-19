@@ -2,6 +2,7 @@
 #include "fluid.hpp"
 #include "json.hpp"
 #include "simulation.hpp"
+#include <glm/gtc/random.hpp>
 #include <string>
 
 using json = nlohmann::json;
@@ -12,7 +13,7 @@ using json = nlohmann::json;
  * - three scalar values which describe its transformations
  * - a boolean which negates the phi values
  *
- *  supported shapes are: circle */
+ *  supported shapes are: circle, plane */
 struct FluidConfig {
   std::string name;
   float p1;
@@ -33,9 +34,15 @@ struct FluidConfig {
  * p1, p2 are the spheres center
  * p3 is the radius
  */
-float compute_phi_sphere(float x1, float x2, FluidConfig &fconf) {
-  return distance(vec2(x1, x2), vec2(fconf.p1, fconf.p2)) - fconf.p3;
+float compute_phi_sphere(vec2 p, FluidConfig &fconf) {
+  return distance(p, vec2(fconf.p1, fconf.p2)) - fconf.p3;
 }
+
+/* returns the distance a point is ABOVE a plane.
+ * p1 is the planes height
+ * p2 is the jitter quantity
+ */
+float compute_phi_plane(vec2 p, FluidConfig &fconf) { return p.y - fconf.p1 + linearRand(-fconf.p2, fconf.p2); }
 
 /** TODO - add documentation and more level set starting configurations */
 void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
@@ -44,9 +51,18 @@ void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
 
   for (auto it = f.phi.begin(); it != f.phi.end(); it++) {
     vec2 ij = it.ij();
-    float phi_value = compute_phi_sphere(
-        (static_cast<float>(ij.x) + 0.5f) / static_cast<float>(sx),
-        (static_cast<float>(ij.y) + 0.5f) / static_cast<float>(sy), fconf);
+    vec2 scaled_position =
+        vec2((static_cast<float>(ij.x) + 0.5f) / static_cast<float>(sx),
+             (static_cast<float>(ij.y) + 0.5f) / static_cast<float>(sy));
+    float phi_value = 0;
+
+    if (fconf.name == "circle") {
+      phi_value = compute_phi_sphere(scaled_position, fconf);
+    } else if (fconf.name == "plane") {
+      phi_value = compute_phi_plane(scaled_position, fconf);
+    } else {
+      throw;
+    }
     f.phi(ij) = fconf.negate ? -phi_value : phi_value;
   }
 }

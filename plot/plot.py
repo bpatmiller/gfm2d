@@ -2,12 +2,13 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
-from matplotlib.mlab import griddata
 from matplotlib.colors import Normalize
 import matplotlib.cm as cm
+from scipy.interpolate import griddata
 
 phi_location = "plot/data/phi.txt"
 velocity_location = "plot/data/vel.txt"
+
 
 def read_blocks(input_file, i, j):
     """ Split a data file by newlines/comments. this is used to split our datafile by time
@@ -27,8 +28,9 @@ def read_blocks(input_file, i, j):
             blocks[-1].append(line)
     return blocks[i:j + 1]
 
-xmax = 10.0
-ymax = 10.0
+
+xmax = 2.5
+ymax = 2.5
 
 # DRAW PHI
 
@@ -44,10 +46,11 @@ for i, ax in enumerate(axs.reshape(-1)):
     # define grid.
     xi = np.linspace(0.0, xmax, 100)
     yi = np.linspace(0.0, ymax, 100)
+    xi,yi = np.meshgrid(xi,yi)
     # grid the data.
-    # zi = griddata(x, y, np.log(-z), xi, yi, interp='linear')
-    zi = griddata(x, y, pressure, xi, yi, interp='linear')
-    boundaryi = griddata(x, y, fluid_id, xi, yi, interp='linear')
+    zi = griddata((x, y), z, (xi, yi), method='linear')
+    boundaryi = griddata((x, y), fluid_id, (xi, yi), method='linear')
+
     ax.imshow(zi, origin='lower', cmap=cm.GnBu, interpolation='nearest',
               extent=[np.min(x), np.max(x), np.min(y), np.max(y)])
     contour = ax.contour(

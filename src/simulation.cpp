@@ -24,8 +24,6 @@ void Simulation::run() {
   reinitialize_phi(fluids);
   project_phi(fluids, solid_phi);
   while (time_elapsed < max_t) {
-    export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
-    frame_number += 1;
     if (time_elapsed + timestep > max_t)
       timestep = max_t - time_elapsed;
     // break the timestep up
@@ -37,6 +35,8 @@ void Simulation::run() {
       advance(substep);
       t += substep;
     }
+    export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
+    frame_number += 1;
     time_elapsed += timestep;
   }
 }
