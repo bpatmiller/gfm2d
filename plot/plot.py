@@ -5,6 +5,7 @@ import matplotlib
 from matplotlib.colors import Normalize
 import matplotlib.cm as cm
 from scipy.interpolate import griddata
+import json
 
 phi_location = "plot/data/phi.txt"
 velocity_location = "plot/data/vel.txt"
@@ -28,9 +29,11 @@ def read_blocks(input_file, i, j):
             blocks[-1].append(line)
     return blocks[i:j + 1]
 
+with open('config.json') as config_file:
+    data = json.load(config_file)
 
-xmax = 2.5
-ymax = 2.5
+xmax = data['horizontal_cells'] * data['cell_size']
+ymax = data['vertical_cells'] * data['cell_size']
 
 # DRAW PHI
 
@@ -48,10 +51,13 @@ for i, ax in enumerate(axs.reshape(-1)):
     yi = np.linspace(0.0, ymax, 100)
     xi,yi = np.meshgrid(xi,yi)
     # grid the data.
-    zi = griddata((x, y), z, (xi, yi), method='linear')
-    boundaryi = griddata((x, y), fluid_id, (xi, yi), method='linear')
+    zi = griddata((x, y), fluid_id, (xi, yi), method='linear')
+    boundaryi = griddata((x, y), fluid_id, (xi, yi), method='nearest')
 
-    ax.imshow(zi, origin='lower', cmap=cm.GnBu, interpolation='nearest',
+    # use for phi
+    # cm.GnBu
+
+    ax.imshow(zi, origin='lower', cmap=cm.Spectral, interpolation='nearest',
               extent=[np.min(x), np.max(x), np.min(y), np.max(y)])
     contour = ax.contour(
         xi,
@@ -88,5 +94,6 @@ for i, ax in enumerate(axs.reshape(-1)):
     ax.quiver(x, y, u, v, np.sqrt(u**2 + v**2),
               angles='xy', scale_units='xy', scale=15)
 
+fig.suptitle('Main title')
 fig.tight_layout()
 plt.savefig('plot/images/vel.png', bbox_inches='tight')
