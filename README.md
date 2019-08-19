@@ -4,6 +4,8 @@
 ### about
 Please read [this paper describing the project](writeup.pdf). The majority of the information comes from the original Particle Level Set Method paper, Level Set Methods and Dynamic Implicit Surfaces by Fedkiw and Osher, Multiple Interacting Fluids by Losasso et al, Stable Fluids by Stam et al, and various university pdfs scattered across the internet.
 
+The name of this paper comes from the Ghost Fluid Method, which is not used in this program.
+
 ### BIG TODOS:
 * [ ] fix cmake like a real human
 * [ ] more examples (!) (like stored in file)
