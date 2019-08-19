@@ -1,16 +1,18 @@
 [![Build Status](https://travis-ci.com/bpatmiller/gfm2d.svg?branch=master)](https://travis-ci.com/bpatmiller/gfm2d)
 [![codecov](https://codecov.io/gh/bpatmiller/gfm2d/branch/master/graph/badge.svg)](https://codecov.io/gh/bpatmiller/gfm2d)
-[![BCH compliance](https://bettercodehub.com/edge/badge/bpatmiller/gfm2d?branch=master)](https://bettercodehub.com/)
+
+### about
+Please read [this paper describing the project](writeup.pdf). The majority of the information comes from the original Particle Level Set Method paper, Level Set Methods and Dynamic Implicit Surfaces by Fedkiw and Osher, Multiple Interacting Fluids by Losasso et al, Stable Fluids by Stam et al, and various university pdfs scattered across the internet.
 
 ### BIG TODOS:
-* [ ] more examples (!)
-* [ ] impliment reactions (or something else cool)
-* [ ] do some tests
 * [ ] fix cmake like a real human
-* [ ] pressure projection!!!
+* [ ] more examples (!) (like stored in file)
+* [ ] impliment reactions (or something else cool)
+* [ ] do more test / fix catch2
 
 ...
 
+* [x] pressure projection!!!
 * [x] get coverage working
 * [x] set up auto code review
 * [x] get travis build working
@@ -27,8 +29,6 @@
 * [x] poisson coefficient matrix
 * [x] poisson rhs
 * [x] make levelset initialization better
-### about the project
-
 
 ### data format for graphing
 within the plot/ folder, there are seperate files for:
@@ -59,12 +59,6 @@ Velocity will be drawn on top of the cell centers as an arrow pointing along its
 to add fluids, we use the "fluid" entry type in the json. A fluid entry consists of a name,
 a density, and a phi definition. As of now, the only supported phi computation is of a circle
 (exterior and interior).
-
-### CI/CD stuff
-- Travis CI
-- CodeCov
-- bettercodehub
-- doxygen
 
 ### Dependencies
 https://github.com/nlohmann/json
