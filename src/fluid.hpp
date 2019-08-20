@@ -1,6 +1,6 @@
 #pragma once
-#include <algorithm>
 #include "array2.hpp"
+#include <algorithm>
 #include <stdio.h>
 
 /** \class Particle
@@ -26,7 +26,7 @@ public:
 class Fluid {
 public:
   float density;
-  Array2f phi; // phi, sampled at center
+  Array2f phi;            // phi, sampled at center
   Array2i particle_count; // counts how many particles are in that area, sampled
                           // in the same manner as pls_phi
 
@@ -38,6 +38,10 @@ public:
   }
   /*    */
   void print_information() {
-    printf("~~ Fluid information ~~\n density: %f\n number of voxels: %i\n", density, (int)count_if(phi.data.begin(), phi.data.end(), [](float f){return f < 0.f;}));
+    printf("~~ Fluid information ~~\n density: %.3f\n volume: ~%i%%\n", density,
+           (int)(100.f *
+                 (float)count_if(phi.data.begin(), phi.data.end(),
+                                 [](float f) { return f < 0.f; }) /
+                 (float)phi.size()));
   }
 };

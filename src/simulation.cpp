@@ -27,10 +27,11 @@ void Simulation::run() {
   }
   project_phi(fluids, solid_phi);
   advance(std::min(cfl(), 1e-7f));
-      auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        float ms = duration.count();
-          printf("[ %f seconds have passed ] ", ms / 1000.f);
+  auto end_time = std::chrono::high_resolution_clock::now();
+  auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+      end_time - start_time);
+  float ms = duration.count();
+  printf("[ %f seconds have passed ] ", ms / 1000.f);
   export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
   while (time_elapsed < max_t) {
     frame_number += 1;
@@ -46,7 +47,8 @@ void Simulation::run() {
       t += substep;
     }
     end_time = std::chrono::high_resolution_clock::now();
-    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(
+        end_time - start_time);
     ms = duration.count();
     time_elapsed += timestep;
     printf("[ %f seconds have passed ] ", ms / 1000.f);
