@@ -67,3 +67,22 @@ nlohmann/json
 catch2
 Eigen3
 GLM
+
+### me learning that O3 is very good
+debug:
+
+[ 0.852 seconds have passed ] exporting frame 0 at time 0.000000
+[ 1.420 seconds have passed ] exporting frame 1 at time 0.250000
+[ 9.732 seconds have passed ] exporting frame 2 at time 0.500000
+[ 25.893 seconds have passed ] exporting frame 3 at time 0.750000
+[ 48.799 seconds have passed ] exporting frame 4 at time 1.000000
+=======================================================================
+
+release:
+
+[ 0.033 seconds have passed ] exporting frame 0 at time 0.000000
+[ 0.085 seconds have passed ] exporting frame 1 at time 0.250000
+[ 0.377 seconds have passed ] exporting frame 2 at time 0.500000
+[ 0.936 seconds have passed ] exporting frame 3 at time 0.750000
+[ 1.690 seconds have passed ] exporting frame 4 at time 1.000000
+===============================================================================
