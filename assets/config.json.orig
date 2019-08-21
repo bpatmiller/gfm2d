@@ -8,24 +8,31 @@
         {
             "name":"water",
             "density":1.0,
-            "phi":{
+            "phi":[{
                 "shape":"circle",
                 "property1":0.5,
                 "property2":0.5,
                 "property3":0.25,
                 "negate":true
-            }
+            }]
         },
         {
             "name":"air",
             "density":0.1,
-            "phi":{
+            "phi":[{
                 "shape":"circle",
                 "property1":0.5,
                 "property2":0.5,
-                "property3":0.25,
+                "property3":0.1,
                 "negate":false
-            }
+            },
+            {
+                "shape":"circle",
+                "property1":0.5,
+                "property2":0.15,
+                "property3":0.1,
+                "negate":false 
+            }]
         }
     ]
 }
