@@ -40,7 +40,7 @@ void Simulation::run() {
     // break the timestep up
     float t = 0;
     while (t < timestep) {
-      float substep = min(cfl(), timestep / 2.f);
+      float substep = cfl();
       if (t + substep > timestep)
         substep = timestep - t;
       advance(substep);
