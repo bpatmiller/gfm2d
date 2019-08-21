@@ -80,7 +80,7 @@ void Simulation::advance(float dt) {
     reinitialize_phi(f);
     correct_levelset(f);
     adjust_particle_radii(f);
-    if (reseed_counter++ % 10 == 0)
+    if (reseed_counter++ % 5 == 0)
       reseed_particles(f, solid_phi);
   }
   project_phi(fluids, solid_phi);
@@ -88,6 +88,9 @@ void Simulation::advance(float dt) {
   advect_velocity(dt);
   add_gravity(dt);
 
+  float max_velocity = 200.f;
+  u.clamp(-max_velocity, max_velocity);
+  v.clamp(-max_velocity, max_velocity);
   enforce_boundaries();
   solve_pressure(dt);
   apply_pressure_gradient(dt);

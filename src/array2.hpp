@@ -71,6 +71,12 @@ public:
   /** Fills the data vector with the input value */
   void set(T val) { std::fill(data.begin(), data.end(), val); }
 
+  void clamp(T min, T max) {
+    for (auto& d : data) {
+      d = glm::clamp(d, min, max);
+    }
+  }
+
   /** Fills the data vector with 0 casted to the template type */
   void clear() { set(static_cast<T>(0)); }
 
