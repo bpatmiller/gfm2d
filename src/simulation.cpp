@@ -5,7 +5,7 @@
 #include <eigen3/Eigen/IterativeLinearSolvers>
 #include <eigen3/Eigen/SparseCore>
 
-/** TODO Returns a timestep that ensures the simulation is stable */
+/**  Returns a timestep that ensures the simulation is stable */
 float Simulation::cfl() {
   float reciprocal = (u.infnorm() + v.infnorm()) / h;
   return 1.0 / reciprocal;
@@ -40,7 +40,7 @@ void Simulation::run() {
     // break the timestep up
     float t = 0;
     while (t < timestep) {
-      float substep = cfl();
+      float substep = min(cfl(), timestep / 2.f);
       if (t + substep > timestep)
         substep = timestep - t;
       advance(substep);
