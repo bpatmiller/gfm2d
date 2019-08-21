@@ -48,8 +48,12 @@ void initialize_simulation(Simulation &sim) {
     std::string fluid_name = tmp["name"].get<std::string>();
     std::printf("adding %s...\n", fluid_name.c_str());
     //  then initialize phi
-    FluidConfig fconf(tmp["phi"].get<json>());
-    construct_levelset(sim.fluids.back(), sx, sy, h, fluid_name, fconf);
+    std::vector<FluidConfig> fluid_phis;
+    for (auto p : tmp["phi"].get<json>()) {
+      fluid_phis.push_back(FluidConfig(p.get<json>()));
+      fluid_phis.back().print_information();
+    }
+    construct_levelset(sim.fluids.back(), sx, sy, h, fluid_name, fluid_phis);
   }
   initialize_boundaries(sim);
   fix_levelset_walls(sim.fluids, vec2(0, 0), vec2(sx * h, sy * h));

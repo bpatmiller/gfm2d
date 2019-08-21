@@ -27,7 +27,13 @@ struct FluidConfig {
     p2 = j["property2"].get<float>();
     p3 = j["property3"].get<float>();
     negate = j["negate"].get<bool>();
+    assert(name == "circle" || name == "plane"); // TODO replace with enum types
   };
+
+  void print_information() {
+    printf("name: %s\np1: %f, p2: %f, p3: %f\n negate: %s\n", name.c_str(), p1,
+           p2, p3, negate ? "true" : "false");
+  }
 };
 
 /* x1, x2 is a position in space (scaled from 0-1)
@@ -51,8 +57,8 @@ float compute_phi_plane(vec2 p, FluidConfig &fconf) {
 
 /** TODO - add documentation and more level set starting configurations */
 void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
-                        FluidConfig fconf) {
-  f.phi.clear();
+                        std::vector<FluidConfig> fluid_phis) {
+  f.phi.set((sx + sy) * h);
 
   for (auto it = f.phi.begin(); it != f.phi.end(); it++) {
     vec2 ij = it.ij();
@@ -61,14 +67,15 @@ void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
              (static_cast<float>(ij.y) + 0.5f) / static_cast<float>(sy));
     float phi_value = 0;
 
-    if (fconf.name == "circle") {
-      phi_value = compute_phi_sphere(scaled_position, fconf);
-    } else if (fconf.name == "plane") {
-      phi_value = compute_phi_plane(scaled_position, fconf);
-    } else {
-      throw;
+    for (auto fconf : fluid_phis) {
+      if (fconf.name == "circle") {
+        phi_value = compute_phi_sphere(scaled_position, fconf);
+      } else if (fconf.name == "plane") {
+        phi_value = compute_phi_plane(scaled_position, fconf);
+      }
+      phi_value = fconf.negate ? -phi_value : phi_value;
+      f.phi(ij) = min(phi_value, f.phi(ij));
     }
-    f.phi(ij) = fconf.negate ? -phi_value : phi_value;
   }
 }
 
