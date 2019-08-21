@@ -23,15 +23,8 @@
                 "shape":"circle",
                 "property1":0.5,
                 "property2":0.5,
-                "property3":0.1,
+                "property3":0.25,
                 "negate":false
-            },
-            {
-                "shape":"circle",
-                "property1":0.5,
-                "property2":0.15,
-                "property3":0.1,
-                "negate":false 
             }]
         }
     ]
