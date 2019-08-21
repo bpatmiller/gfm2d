@@ -9,7 +9,7 @@ void reseed_particles(Fluid &f, Array2f solid_phi) {
   /* start by removing invalid particles */
   for (auto &p : f.particles) {
     float local_phi = f.phi.value_at(p.position);
-    p.valid = (abs(local_phi) < 2.f * f.phi.h);
+    p.valid = (abs(local_phi) < 3.f * f.phi.h);
   }
   f.particles.erase(std::remove_if(f.particles.begin(), f.particles.end(),
                                    [](Particle const &p) { return !p.valid; }),
@@ -26,7 +26,7 @@ void reseed_particles(Fluid &f, Array2f solid_phi) {
   for (int i = 0; i < f.phi.size(); i++) {
     // FIXME
     vec2 ij = f.phi.ij_from_index(i);
-    if (abs(f.phi(i)) > 2.f * f.phi.h || ij.x < 2 || ij.y < 2 ||
+    if (abs(f.phi(i)) > 3.f * f.phi.h || ij.x < 2 || ij.y < 2 ||
         ij.x > f.phi.sx - 3 || ij.y > f.phi.sy - 3 || solid_phi(i) <= 0)
       continue;
     while (f.particle_count(i) < 16) {
@@ -43,7 +43,7 @@ void reseed_particles(Fluid &f, Array2f solid_phi) {
           clamp(new_position, 2.001f * f.phi.h,
                 (max((float)f.phi.sx, (float)f.phi.sy) - 2.001f) * f.phi.h);
       float new_phi = f.phi.value_at(new_position);
-      float radius = clamp(abs(new_phi), 0.1f * f.phi.h, -0.5f * f.phi.h);
+      float radius = clamp(abs(new_phi), 0.1f * f.phi.h, 0.5f * f.phi.h);
       f.particles.push_back(Particle(new_position, new_phi, radius));
       f.particle_count(i) += 1;
     }
