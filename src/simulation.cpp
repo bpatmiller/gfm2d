@@ -31,8 +31,8 @@ void Simulation::run() {
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
       end_time - start_time);
   float ms = duration.count();
-  printf("[ %f seconds have passed ] ", ms / 1000.f);
-  export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
+    // printf("[ %.2fs elapsed ] ", ms / 1000.f);
+  // export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
   while (time_elapsed < max_t) {
     frame_number += 1;
     if (time_elapsed + timestep > max_t)
@@ -45,13 +45,26 @@ void Simulation::run() {
         substep = timestep - t;
       advance(substep);
       t += substep;
+      /* progress bar code */
+      std::cout << "  ";
+      int pos = 20 * (t / timestep);
+      for (int b = 0; b < 20; ++b) {
+        if (b < pos) std::cout << ".";
+        else if (b == pos) std::cout << ">";
+        else std::cout << " ";
+      }
+      std::cout << "   " << int((t / timestep) * 100.f) << "%\r";
+      std::cout.flush();
+      /* ^ consider refactoring this */
     }
+    std::cout << "\r";
+    std::cout.flush();
     end_time = std::chrono::high_resolution_clock::now();
     duration = std::chrono::duration_cast<std::chrono::milliseconds>(
         end_time - start_time);
     ms = duration.count();
     time_elapsed += timestep;
-    printf("[ %f seconds have passed ] ", ms / 1000.f);
+    printf("[ %3.2fs elapsed ] ", ms / 1000.f);
     export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
   }
 }
