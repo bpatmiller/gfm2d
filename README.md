@@ -9,12 +9,10 @@ The name of this program comes from the Ghost Fluid Method, which is not used in
 ### BIG TODOS:
 * [ ] fix cmake like a real human
 * [ ] more examples (!) (like stored in file)
-* [ ] impliment reactions (or something else cool)
 * [ ] do more test / fix catch2
 
 ...
 
-* [x] pressure projection!!!
 * [x] get coverage working
 * [x] set up auto code review
 * [x] get travis build working
@@ -30,7 +28,10 @@ The name of this program comes from the Ghost Fluid Method, which is not used in
 * [x] density sampling
 * [x] poisson coefficient matrix
 * [x] poisson rhs
+* [x] pressure projection!!!
 * [x] make levelset initialization better
+* [x] impliment reactions (or something else cool)
+
 
 ### data format for graphing
 within the plot/ folder, there are seperate files for:
