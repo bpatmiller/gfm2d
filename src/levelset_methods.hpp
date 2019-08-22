@@ -32,23 +32,17 @@ void project_phi(std::vector<Fluid> &fluids, Array2f &solid_phi, vec4 rxn) {
       }
     }
 
-    if (rxn.x != -1 && rxn.y != -1 && rxn.z != -1 &&
-        ((min1_index == rxn[0] && min2_index == rxn[1]) ||
-         (min2_index == rxn[0] && min1_index == rxn[1]))) {
-      if (linearRand(0.f, 1.f) > rxn[3])
-        continue;
-      if (abs(fluids[rxn.x].phi(i)) > fluids[rxn.x].phi.h * 0.25f ||
-          abs(fluids[rxn.y].phi(i)) > fluids[rxn.y].phi.h * 0.5f)
-        continue;
-      fluids[rxn[2]].phi(i) = -1.0f * fluids[rxn[2]].phi.h;
-      for (auto f : fluids) {
-        f.phi(i) -= ((-0.5f * f.phi.h) + min1) * 0.5f;
-      }
-      continue;
-    }
-
     assert(min1 != number_grid_points && min2 != number_grid_points);
     assert(min1_index != -1 && min2_index != -1);
+
+    bool valid_reaction = (rxn.x >= 0 && rxn.y >= 0 && rxn.z >= 0 && rxn.w > 0);
+    bool desired_reactants = ((min1_index == rxn[0] && min2_index == rxn[1]) ||
+                              (min1_index == rxn[1] && min2_index == rxn[0]));
+    bool overlap = (min1 < 0.25f * fluids[min1_index].phi.h && min2 < 0.25f * fluids[min2_index].phi.h);
+    if (valid_reaction && desired_reactants && overlap) {
+      auto &pf = fluids[rxn[2]];
+      pf.phi(i) = min1 - 2.5f * pf.phi.h;
+    }
 
     if (min1 * min2 > 0) {
       float avg = (min1 + min2) * 0.5f;
