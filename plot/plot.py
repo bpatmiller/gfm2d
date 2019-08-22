@@ -41,8 +41,16 @@ number_of_fluids = len(data['fluids'])
 
 phi_datablocks = read_blocks(phi_location, 0, 10)
 vel_datablocks = read_blocks(velocity_location, 0, 10)
+
+if len(phi_datablocks) % 2 == 0:
+    number_of_rows = 2
+    number_of_cols = len(phi_datablocks) // 2
+else:
+    number_of_rows = len(phi_datablocks)
+    number_of_cols = 1
+
 print("drawing phi", len(phi_datablocks), "time samples")
-fig, axs = plt.subplots(2, int(len(phi_datablocks) / 2), figsize=(20, 20))
+fig, axs = plt.subplots(number_of_rows, number_of_cols, figsize=(20, 20))
 
 if len(phi_datablocks) == 1:
     axs = [axs]
@@ -52,12 +60,13 @@ else:
 for i, ax in enumerate(axs):
     x, y, z, fluid_id, pressure = np.loadtxt(phi_datablocks[i], unpack=True)
     # define grid.
-    xi = np.linspace(0.0, xmax, 100)
-    yi = np.linspace(0.0, ymax, 100)
+    xi = np.linspace(0.0, xmax, 200)
+    yi = np.linspace(0.0, ymax, 200)
     xi, yi = np.meshgrid(xi, yi)
     # grid the data.
+    phii = griddata((x, y), z, (xi, yi), method='nearest')
     zi = griddata((x, y), fluid_id, (xi, yi), method='nearest')
-    boundaryi = griddata((x, y), -z, (xi, yi), method='nearest')
+    boundaryi = griddata((x, y), z, (xi, yi), method='nearest')
 
     # use for phi
     # cm.GnBu
@@ -66,22 +75,23 @@ for i, ax in enumerate(axs):
         zi,
         origin='lower',
         cmap=cm.Pastel2,
-        interpolation='bilinear',
+        # cmap=cm.Set2,
+        interpolation='bicubic',
         extent=[
             np.min(x),
             np.max(x),
             np.min(y),
             np.max(y)],
-        # vmin=0,
-        # vmax=2
-        )
-    contour = ax.contour(
-        xi,
-        yi,
-        boundaryi,
-        levels=8,
-        linewidths=1,
-        cmap="RdBu_r")
+        vmin=0,
+        vmax=number_of_fluids
+    )
+    # contour = ax.contour(
+    #     xi,
+    #     yi,
+    #     boundaryi,
+    #     levels=8,
+    #     linewidths=1,
+    #     cmap=cm.RdBu)
 
     x, y, u, v = np.loadtxt(vel_datablocks[i], unpack=True)
 
@@ -91,19 +101,35 @@ for i, ax in enumerate(axs):
     ax.set_aspect("equal")
     ax.axis('off')
 
-    ax.quiver(
-        x,
-        y,
-        u,
-        v,
-        np.sqrt(
-            u**2 +
-            v**2),
-        angles='xy',
-        scale_units='xy',
-        scale=15,
-        width=0.0015,
-        headwidth=2)
+    # if i == 0 or True:
+    # ax.quiver(
+    #     x,
+    #     y,
+    #     u,
+    #     v,
+    #     np.sqrt(
+    #         u**2 +
+    #         v**2),
+    #     angles='xy',
+    #     scale_units='xy',
+    #     scale=15,
+    #     width=0.0015,
+    #     headwidth=2,
+    #     # headlength=1,
+    #     pivot='mid')
+    # else:
+    #     ax.quiver(
+    #         x,
+    #         y,
+    #         u,
+    #         v,
+    #         np.sqrt(
+    #             u**2 +
+    #             v**2),
+    #         angles='xy',
+    #         scale_units='xy',
+    #         width=0.0015,
+    #         headwidth=2)
 
     ax.set_title("t=" + str(i))
     ax.set_aspect("equal")
