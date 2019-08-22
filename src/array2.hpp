@@ -72,7 +72,7 @@ public:
   void set(T val) { std::fill(data.begin(), data.end(), val); }
 
   void clamp(T min, T max) {
-    for (auto& d : data) {
+    for (auto &d : data) {
       d = glm::clamp(d, min, max);
     }
   }

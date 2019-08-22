@@ -42,6 +42,13 @@ void initialize_simulation(Simulation &sim) {
   // define the computational domain
   sim.init(sx, sy, h, rt, dt);
 
+  // load the reactions TODO handle multiple
+  auto rxn_json = j["reaction"].get<json>();
+  sim.rxn =
+      vec4(rxn_json["reactant1"].get<int>() - 1,
+           rxn_json["reactant2"].get<int>() - 1,
+           rxn_json["product"].get<int>() - 1, rxn_json["rate"].get<float>());
+
   // add each fluid
   for (auto tmp : j["fluids"].get<json>()) {
     sim.add_fluid(tmp["density"].get<float>());

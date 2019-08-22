@@ -25,13 +25,13 @@ void Simulation::run() {
   for (auto &f : fluids) {
     reinitialize_phi(f);
   }
-  project_phi(fluids, solid_phi);
+  project_phi(fluids, solid_phi, vec4(-1));
   advance(std::min(cfl(), 1e-7f));
   auto end_time = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
       end_time - start_time);
   float ms = duration.count();
-    // printf("[ %.2fs elapsed ] ", ms / 1000.f);
+  // printf("[ %.2fs elapsed ] ", ms / 1000.f);
   // export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
   while (time_elapsed < max_t) {
     frame_number += 1;
@@ -49,9 +49,12 @@ void Simulation::run() {
       std::cout << "  ";
       int pos = 20 * (t / timestep);
       for (int b = 0; b < 20; ++b) {
-        if (b < pos) std::cout << ".";
-        else if (b == pos) std::cout << ">";
-        else std::cout << " ";
+        if (b < pos)
+          std::cout << ".";
+        else if (b == pos)
+          std::cout << ">";
+        else
+          std::cout << " ";
       }
       std::cout << "   " << int((t / timestep) * 100.f) << "%\r";
       std::cout.flush();
@@ -83,7 +86,7 @@ void Simulation::advance(float dt) {
     if (reseed_counter++ % 5 == 0)
       reseed_particles(f, solid_phi);
   }
-  project_phi(fluids, solid_phi);
+  project_phi(fluids, solid_phi, rxn);
 
   advect_velocity(dt);
   add_gravity(dt);

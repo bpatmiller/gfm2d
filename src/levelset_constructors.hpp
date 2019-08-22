@@ -27,7 +27,8 @@ struct FluidConfig {
     p2 = j["property2"].get<float>();
     p3 = j["property3"].get<float>();
     negate = j["negate"].get<bool>();
-    assert(name == "circle" || name == "plane"); // TODO replace with enum types
+    assert(name == "circle" || name == "plane" ||
+           name == "none"); // TODO replace with enum types
   };
 
   void print_information() {
@@ -72,6 +73,9 @@ void construct_levelset(Fluid &f, int sx, int sy, float h, std::string name,
         phi_value = compute_phi_sphere(scaled_position, fconf);
       } else if (fconf.name == "plane") {
         phi_value = compute_phi_plane(scaled_position, fconf);
+      } else if (fconf.name == "none") {
+        phi_value = fconf.negate ? -(f.phi.sx + f.phi.sy) * h
+                                 : (f.phi.sx + f.phi.sy) * h;
       }
       phi_value = fconf.negate ? -phi_value : phi_value;
       f.phi(ij) = min(phi_value, f.phi(ij));

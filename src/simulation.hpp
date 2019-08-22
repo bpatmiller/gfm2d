@@ -28,6 +28,8 @@ public:
   int frame_number = 0;   // current frame
   int reseed_counter = 0; // used for PLS
 
+  vec4 rxn; // 0 -> reactant1, 1->reactant2, 2->product, 3->rate
+
   Array2f u; // horizontal velocity, sampled at cell sides
   Array2f v; // vertical velocity, sampled at cell tops/bottoms
   Array2f p; // pressure, sampled at center
