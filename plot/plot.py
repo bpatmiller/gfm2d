@@ -35,6 +35,8 @@ with open('config.json') as config_file:
 
 xmax = data['horizontal_cells'] * data['cell_size']
 ymax = data['vertical_cells'] * data['cell_size']
+h_cells = data['horizontal_cells']
+v_cells = data['vertical_cells']
 number_of_fluids = len(data['fluids'])
 
 # DRAW PHI
@@ -60,8 +62,8 @@ else:
 for i, ax in enumerate(axs):
     x, y, z, fluid_id, pressure = np.loadtxt(phi_datablocks[i], unpack=True)
     # define grid.
-    xi = np.linspace(0.0, xmax, 200)
-    yi = np.linspace(0.0, ymax, 200)
+    xi = np.linspace(0.0, xmax, h_cells)
+    yi = np.linspace(0.0, ymax, v_cells)
     xi, yi = np.meshgrid(xi, yi)
     # grid the data.
     phii = griddata((x, y), z, (xi, yi), method='nearest')
@@ -76,7 +78,7 @@ for i, ax in enumerate(axs):
         origin='lower',
         cmap=cm.Pastel2,
         # cmap=cm.Set2,
-        interpolation='bicubic',
+        interpolation='bilinear',
         extent=[
             np.min(x),
             np.max(x),
@@ -95,41 +97,33 @@ for i, ax in enumerate(axs):
 
     x, y, u, v = np.loadtxt(vel_datablocks[i], unpack=True)
 
+    xii= np.linspace(0.0, xmax, h_cells // 3)
+    yii = np.linspace(0.0, ymax, v_cells // 3)
+    xii, yii = np.meshgrid(xii, yii)
+    ui = griddata((x,y), u, (xii, yii), method='linear')
+    vi = griddata((x,y), v, (xii, yii), method='linear')
+
     ax.set_xlim(0, xmax)
     ax.set_ylim(0, ymax)
     ax.set_title("t=" + str(i))
     ax.set_aspect("equal")
     ax.axis('off')
-
-    # if i == 0 or True:
-    # ax.quiver(
-    #     x,
-    #     y,
-    #     u,
-    #     v,
-    #     np.sqrt(
-    #         u**2 +
-    #         v**2),
-    #     angles='xy',
-    #     scale_units='xy',
-    #     scale=15,
-    #     width=0.0015,
-    #     headwidth=2,
-    #     # headlength=1,
-    #     pivot='mid')
-    # else:
-    #     ax.quiver(
-    #         x,
-    #         y,
-    #         u,
-    #         v,
-    #         np.sqrt(
-    #             u**2 +
-    #             v**2),
-    #         angles='xy',
-    #         scale_units='xy',
-    #         width=0.0015,
-    #         headwidth=2)
+    ax.quiver(
+        xii,
+        yii,
+        ui,
+        vi,
+        np.sqrt(
+            ui**2 +
+            vi**2),
+        angles='xy',
+        scale_units='xy',
+        scale=20,
+        width=0.0015,
+        headwidth=2,
+        # headlength=1,
+        pivot='mid')
+    
 
     ax.set_title("t=" + str(i))
     ax.set_aspect("equal")

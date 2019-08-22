@@ -25,15 +25,15 @@ void Simulation::run() {
   for (auto &f : fluids) {
     reinitialize_phi(f);
   }
-  project_phi(fluids, solid_phi, vec4(-1));
-  advance(std::min(cfl(), 1e-7f));
+  project_phi(fluids, solid_phi, vec4(-1,-1,-1,0.0));
+  // advance(std::min(cfl(), 1e-7f));
   print_information();
   auto end_time = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
       end_time - start_time);
   float ms = duration.count();
-  // printf("[ %.2fs elapsed ] ", ms / 1000.f);
-  // export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
+  printf("[ %.2fs elapsed ] ", ms / 1000.f);
+  export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
   while (time_elapsed < max_t) {
     frame_number += 1;
     if (time_elapsed + timestep > max_t)
