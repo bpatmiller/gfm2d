@@ -38,7 +38,8 @@ void project_phi(std::vector<Fluid> &fluids, Array2f &solid_phi, vec4 rxn) {
     bool valid_reaction = (rxn.x >= 0 && rxn.y >= 0 && rxn.z >= 0 && rxn.w > 0);
     bool desired_reactants = ((min1_index == rxn[0] && min2_index == rxn[1]) ||
                               (min1_index == rxn[1] && min2_index == rxn[0]));
-    bool overlap = (min1 < 0.35f * fluids[min1_index].phi.h && min2 < 0.35f * fluids[min2_index].phi.h);
+    bool overlap = (min1 < 0.35f * fluids[min1_index].phi.h &&
+                    min2 < 0.35f * fluids[min2_index].phi.h);
     if (valid_reaction && desired_reactants && overlap) {
       auto &pf = fluids[rxn[2]];
       pf.phi(i) = min1 - 1.0f * pf.phi.h;

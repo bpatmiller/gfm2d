@@ -41,8 +41,8 @@ number_of_fluids = len(data['fluids'])
 
 # DRAW PHI
 
-phi_datablocks = read_blocks(phi_location, 0, 10)
-vel_datablocks = read_blocks(velocity_location, 0, 10)
+phi_datablocks = read_blocks(phi_location, 1, 10)
+vel_datablocks = read_blocks(velocity_location, 1, 10)
 
 if len(phi_datablocks) % 2 == 0:
     number_of_rows = 2
@@ -97,11 +97,11 @@ for i, ax in enumerate(axs):
 
     x, y, u, v = np.loadtxt(vel_datablocks[i], unpack=True)
 
-    xii= np.linspace(0.0, xmax, h_cells // 3)
+    xii = np.linspace(0.0, xmax, h_cells // 3)
     yii = np.linspace(0.0, ymax, v_cells // 3)
     xii, yii = np.meshgrid(xii, yii)
-    ui = griddata((x,y), u, (xii, yii), method='linear')
-    vi = griddata((x,y), v, (xii, yii), method='linear')
+    ui = griddata((x, y), u, (xii, yii), method='linear')
+    vi = griddata((x, y), v, (xii, yii), method='linear')
 
     ax.set_xlim(0, xmax)
     ax.set_ylim(0, ymax)
@@ -118,12 +118,11 @@ for i, ax in enumerate(axs):
             vi**2),
         angles='xy',
         scale_units='xy',
-        scale=20,
+        scale=25,
         width=0.0015,
         headwidth=2,
         # headlength=1,
         pivot='mid')
-    
 
     ax.set_title("t=" + str(i))
     ax.set_aspect("equal")

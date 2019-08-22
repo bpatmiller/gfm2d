@@ -53,7 +53,7 @@ void initialize_simulation(Simulation &sim) {
   for (auto tmp : j["fluids"].get<json>()) {
     sim.add_fluid(tmp["density"].get<float>());
     std::string fluid_name = tmp["name"].get<std::string>();
-    std::printf("adding %s...\n", fluid_name.c_str());
+    std::printf("~~ adding %s...\n", fluid_name.c_str());
     //  then initialize phi
     std::vector<FluidConfig> fluid_phis;
     for (auto p : tmp["phi"].get<json>()) {
