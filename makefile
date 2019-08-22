@@ -15,6 +15,10 @@ format:
 	--enable-sort True --autosort True --enable-markup True \
 	./CMakeLists.txt ./test/CMakeLists.txt
 	autopep8 --in-place --aggressive --aggressive plot/plot.py
+	python -m json.tool assets/config.json.orig assets/tmp.json
+	mv -f assets/tmp.json assets/config.json.orig
+	python -m json.tool config.json tmp.json
+	mv -f tmp.json config.json
 
 .PHONY: clean
 clean:
