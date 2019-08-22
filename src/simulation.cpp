@@ -27,6 +27,7 @@ void Simulation::run() {
   }
   project_phi(fluids, solid_phi, vec4(-1));
   advance(std::min(cfl(), 1e-7f));
+  print_information();
   auto end_time = std::chrono::high_resolution_clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(
       end_time - start_time);
@@ -69,6 +70,9 @@ void Simulation::run() {
     time_elapsed += timestep;
     printf("[ %3.2fs elapsed ] ", ms / 1000.f);
     export_simulation_data(p, vel, fluids, time_elapsed, frame_number);
+  }
+  for (auto f : fluids) {
+    f.print_information();
   }
 }
 
@@ -125,12 +129,12 @@ void Simulation::advect_velocity(float dt) {
   Array2f new_u(u);
   Array2f new_v(v);
 
-  for (auto it = u.begin(); it != u.end(); it++) {
+  for (auto it = new_u.begin(); it != new_u.end(); it++) {
     vec2 new_position = rk4(it.wp(), vel, -dt);
     *it = u.value_at(new_position);
   }
 
-  for (auto it = v.begin(); it != v.end(); it++) {
+  for (auto it = new_v.begin(); it != new_v.end(); it++) {
     vec2 new_position = rk4(it.wp(), vel, -dt);
     *it = v.value_at(new_position);
   }
