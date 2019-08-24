@@ -1,0 +1,37 @@
+{
+    "runtime":2.0,
+    "timestep":0.5,
+    "horizontal_cells":100,
+    "vertical_cells":100,
+    "cell_size":0.1,
+    "reaction":{
+        "reactant1":1,
+        "reactant2":2,
+        "product":2,
+        "rate":0.05
+    },
+    "fluids":[
+        {
+            "name":"oil",
+            "density":0.7,
+            "phi":[{
+                "shape":"circle",
+                "property1":0.5,
+                "property2":0.5,
+                "property3":0.25,
+                "negate":true
+            }]
+        },
+        {
+            "name":"water",
+            "density":1.0,
+            "phi":[{
+                "shape":"circle",
+                "property1":0.5,
+                "property2":0.5,
+                "property3":0.25,
+                "negate":false
+            }]
+        }
+    ]
+}
