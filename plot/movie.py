@@ -40,37 +40,27 @@ h_cells = data['horizontal_cells']
 v_cells = data['vertical_cells']
 number_of_fluids = len(data['fluids'])
 
-# DRAW PHI
+phi_datablocks = read_blocks(phi_location, 0, 1000)
+vel_datablocks = read_blocks(velocity_location, 0, 1000)
 
-phi_datablocks = read_blocks(phi_location, 1, 2)
-vel_datablocks = read_blocks(velocity_location, 1, 2)
+for frame in tqdm(range(200, len(phi_datablocks))):
+    phi_datablock = phi_datablocks[frame]
+    vel_datablock = vel_datablocks[frame]
 
-if len(phi_datablocks) % 2 == 0:
-    number_of_rows = 2
-    number_of_cols = len(phi_datablocks) // 2
-else:
-    number_of_rows = len(phi_datablocks)
-    number_of_cols = 1
 
-print("drawing phi", len(phi_datablocks), "time samples")
-fig, axs = plt.subplots(number_of_rows, number_of_cols, figsize=(20, 20))
-
-if len(phi_datablocks) == 1:
-    axs = [axs]
-else:
-    axs = axs.reshape(-1)
-
-for i, ax in tqdm(enumerate(axs)):
-    x, y, z, fluid_id, pressure = np.loadtxt(phi_datablocks[i], unpack=True)
-    # define grid.
+    #--------------------------------
+    #   fluid types
+    #--------------------------------
+    x, y, z, fluid_id, pressure = np.loadtxt(phi_datablock, unpack=True)
     xi = np.linspace(0.0, xmax, 2 * h_cells)
     yi = np.linspace(0.0, ymax, 2 * v_cells)
     xi, yi = np.meshgrid(xi, yi)
-    # grid the data.
-    zi = griddata((x, y), fluid_id, (xi, yi), method='nearest')
-    # phii = griddata((x, y), z, (xi, yi), method='nearest')
+    zi = griddata((x, y), fluid_id, (xi, yi), method='linear')
 
-    im1 = ax.imshow(
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(10,10)
+
+    plt.imshow(
         zi,
         origin='lower',
         cmap=cm.Pastel2,
@@ -81,22 +71,37 @@ for i, ax in tqdm(enumerate(axs)):
             np.min(y),
             np.max(y)],
         vmin=0,
-        vmax=number_of_fluids)
+        vmax=number_of_fluids
+    )
 
-    x, y, u, v = np.loadtxt(vel_datablocks[i], unpack=True)
+    #--------------------------------
+    #   phi value contour lines
+    #--------------------------------
+    # boundaryi = griddata((x, y), z, (xi, yi), method='nearest')
+    # contour = contour(
+    #     xi,
+    #     yi,
+    #     boundaryi,
+    #     levels=8,
+    #     linewidths=1,
+    #     cmap=cm.RdBu)
 
-    xii = np.linspace(0.0, xmax, h_cells // 3)
-    yii = np.linspace(0.0, ymax, v_cells // 3)
+    #--------------------------------
+    #   velocity field quiver
+    #--------------------------------
+    x, y, u, v = np.loadtxt(vel_datablock, unpack=True)
+    xii = np.linspace(0.0, xmax, h_cells // 4)
+    yii = np.linspace(0.0, ymax, v_cells // 4)
     xii, yii = np.meshgrid(xii, yii)
     ui = griddata((x, y), u, (xii, yii), method='linear')
     vi = griddata((x, y), v, (xii, yii), method='linear')
 
-    ax.set_xlim(0, xmax)
-    ax.set_ylim(0, ymax)
-    ax.set_title("t=" + str(i))
-    ax.set_aspect("equal")
-    ax.axis('off')
-    ax.quiver(
+    # plt.set_xlim(0, xmax)
+    # plt.set_ylim(0, ymax)
+    # plt.set_title("t=" + str(frame))
+    # plt.set_aspect("equal")
+    plt.axis('off')
+    plt.quiver(
         xii,
         yii,
         ui,
@@ -106,14 +111,17 @@ for i, ax in tqdm(enumerate(axs)):
             vi**2),
         angles='xy',
         scale_units='xy',
-        # scale=25,
+        scale=10,
         width=0.0015,
         headwidth=2,
+        # headlength=1,
         pivot='mid')
 
-    ax.set_title("t=" + str(i))
-    ax.set_aspect("equal")
-    ax.axis('off')
+    # plt.set_title("t=" + str(frame))
+    # plt.set_aspect("equal")
+    # plt.axis('off')
 
-fig.tight_layout()
-plt.savefig('plot/images/phi.png', bbox_inches='tight')
+    plt.tight_layout()
+    plt.savefig('plot/images/phi{0:05d}.png'.format(frame), bbox_inches='tight')
+    plt.clf()
+    # print('frame saved to plot/images/phi{0:05d}.png'.format(frame))
