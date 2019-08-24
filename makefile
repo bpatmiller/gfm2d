@@ -45,5 +45,11 @@ docs:
 draw:
 	python plot/plot.py
 
+.PHONY: movie
+movie:
+	python plot/movie.py
+	ffmpeg -r 30 -i plot/images/phi%05d.png -c:v libvpx-vp9 -crf 30 -b:v 0 -y -an video.webm -vf "pad=ceil(iw/2)*2:ceil(ih/2)*2"
+	mpv video.mp4
+
 .PHONY: all
 all: clean format build test

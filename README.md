@@ -87,3 +87,16 @@ release:
 [ 0.936 seconds have passed ] exporting frame 3 at time 0.750000
 [ 1.690 seconds have passed ] exporting frame 4 at time 1.000000
 ===============================================================================
+
+# performance benefits of solving with an initial guess
+with guess:
+
+[ 0.00s elapsed ] exporting frame 0 at time 0.00
+[ 0.02s elapsed ] exporting frame 1 at time 1.00
+[ 19.56s elapsed ] exporting frame 2 at time 2.00
+[ 44.51s elapsed ] exporting frame 3 at time 3.00
+[ 78.75s elapsed ] exporting frame 4 at time 4.00
+
+without guess:
+
+TODO finish this

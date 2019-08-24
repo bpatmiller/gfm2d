@@ -6,6 +6,7 @@ from matplotlib.colors import Normalize
 import matplotlib.cm as cm
 from scipy.interpolate import griddata
 import json
+from tqdm import tqdm
 
 phi_location = "plot/data/phi.txt"
 velocity_location = "plot/data/vel.txt"
@@ -41,8 +42,8 @@ number_of_fluids = len(data['fluids'])
 
 # DRAW PHI
 
-phi_datablocks = read_blocks(phi_location, 1, 10)
-vel_datablocks = read_blocks(velocity_location, 1, 10)
+phi_datablocks = read_blocks(phi_location, 1, 2)
+vel_datablocks = read_blocks(velocity_location, 1, 2)
 
 if len(phi_datablocks) % 2 == 0:
     number_of_rows = 2
@@ -59,25 +60,20 @@ if len(phi_datablocks) == 1:
 else:
     axs = axs.reshape(-1)
 
-for i, ax in enumerate(axs):
+for i, ax in tqdm(enumerate(axs)):
     x, y, z, fluid_id, pressure = np.loadtxt(phi_datablocks[i], unpack=True)
     # define grid.
-    xi = np.linspace(0.0, xmax, h_cells)
-    yi = np.linspace(0.0, ymax, v_cells)
+    xi = np.linspace(0.0, xmax, 2 * h_cells)
+    yi = np.linspace(0.0, ymax, 2 * v_cells)
     xi, yi = np.meshgrid(xi, yi)
     # grid the data.
-    phii = griddata((x, y), z, (xi, yi), method='nearest')
     zi = griddata((x, y), fluid_id, (xi, yi), method='nearest')
-    boundaryi = griddata((x, y), z, (xi, yi), method='nearest')
+    # phii = griddata((x, y), z, (xi, yi), method='nearest')
 
-    # use for phi
-    # cm.GnBu
-
-    ax.imshow(
+    im1 = ax.imshow(
         zi,
         origin='lower',
         cmap=cm.Pastel2,
-        # cmap=cm.Set2,
         interpolation='bilinear',
         extent=[
             np.min(x),
@@ -85,15 +81,7 @@ for i, ax in enumerate(axs):
             np.min(y),
             np.max(y)],
         vmin=0,
-        vmax=number_of_fluids
-    )
-    # contour = ax.contour(
-    #     xi,
-    #     yi,
-    #     boundaryi,
-    #     levels=8,
-    #     linewidths=1,
-    #     cmap=cm.RdBu)
+        vmax=number_of_fluids)
 
     x, y, u, v = np.loadtxt(vel_datablocks[i], unpack=True)
 
@@ -118,10 +106,9 @@ for i, ax in enumerate(axs):
             vi**2),
         angles='xy',
         scale_units='xy',
-        scale=25,
+        # scale=25,
         width=0.0015,
         headwidth=2,
-        # headlength=1,
         pivot='mid')
 
     ax.set_title("t=" + str(i))

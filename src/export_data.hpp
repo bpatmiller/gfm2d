@@ -70,7 +70,8 @@ void export_simulation_data(Array2f &p, VelocityField vel,
   std::printf("exporting frame %i at time %.2f\n", frame_number, time);
   export_fluid_ids(p, sim, time, frame_number);
   export_velocity(vel, sim[0].phi, time, frame_number);
-  export_particles(sim, time, frame_number);
+  // export_particles(sim, time, frame_number);
+  // TODO either remove this or make it take less storage (literally 91gb)
 }
 
 void clear_exported_data() {
