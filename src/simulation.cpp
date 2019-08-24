@@ -149,7 +149,7 @@ void Simulation::enforce_boundaries() {
   for (auto it = solid_phi.begin(); it != solid_phi.end(); it++) {
     if (*it < 0) {
       vec2 ij = it.ij();
-      for (auto& f : fluids) {
+      for (auto &f : fluids) {
         f.phi(ij) = min(f.phi(ij), 0.5f * f.phi.h);
       }
       u(ij) = 0;
