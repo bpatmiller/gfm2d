@@ -100,3 +100,41 @@ with guess:
 without guess:
 
 TODO finish this
+
+
+TESTING LEVELSET REINITIALIZATION
+config1:
+- steps = 50, tol = 1e-1f, dt = 0.5f * h
+
+[ 0.03s elapsed ] exporting frame 0 at time 0.00
+[ 0.12s elapsed ] exporting frame 1 at time 0.50
+[ 1.33s elapsed ] exporting frame 2 at time 1.00
+[ 3.82s elapsed ] exporting frame 3 at time 1.50
+[ 8.42s elapsed ] exporting frame 4 at time 2.00
+
+[ 0.03s elapsed ] exporting frame 0 at time 0.00
+[ 0.12s elapsed ] exporting frame 1 at time 0.50
+[ 1.37s elapsed ] exporting frame 2 at time 1.00
+[ 3.91s elapsed ] exporting frame 3 at time 1.50
+[ 8.73s elapsed ] exporting frame 4 at time 2.00
+
+[ 0.03s elapsed ] exporting frame 0 at time 0.00
+[ 0.12s elapsed ] exporting frame 1 at time 0.50
+[ 1.33s elapsed ] exporting frame 2 at time 1.00
+[ 3.77s elapsed ] exporting frame 3 at time 1.50
+[ 8.43s elapsed ] exporting frame 4 at time 2.00
+
+- steps = 250, tol = 1e-1f, dt = 0.5f * h
+[ 8.53s elapsed ] exporting frame 4 at time 2.00
+
+[ 0.02s elapsed ] exporting frame 0 at time 0.00
+[ 0.11s elapsed ] exporting frame 1 at time 0.50
+[ 1.34s elapsed ] exporting frame 2 at time 1.00
+[ 3.74s elapsed ] exporting frame 3 at time 1.50
+[ 8.27s elapsed ] exporting frame 4 at time 2.00
+
+[ 0.03s elapsed ] exporting frame 0 at time 0.00
+[ 0.12s elapsed ] exporting frame 1 at time 0.50
+[ 1.37s elapsed ] exporting frame 2 at time 1.00
+[ 3.93s elapsed ] exporting frame 3 at time 1.50
+[ 8.50s elapsed ] exporting frame 4 at time 2.00

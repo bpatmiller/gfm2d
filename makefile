@@ -53,3 +53,12 @@ movie:
 
 .PHONY: all
 all: clean format build test
+
+#note - this depends on using clang, added this just for testing on the macbook
+.PHONY: profile
+profile: format clean build
+	LLVM_PROFILE_FILE="code-%p.profraw" build/bin/gfm
+	cp -f examples/dam_break.json config.json
+	LLVM_PROFILE_FILE="code-%p.profraw" build/bin/gfm
+	llvm-profdata merge -output=code.profdata code-*.profraw
+	llvm-cov show -format=html -instr-profile code.profdata build/bin/gfm > report.html
