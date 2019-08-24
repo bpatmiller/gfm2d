@@ -43,7 +43,7 @@ number_of_fluids = len(data['fluids'])
 phi_datablocks = read_blocks(phi_location, 0, 1000)
 vel_datablocks = read_blocks(velocity_location, 0, 1000)
 
-for frame in tqdm(range(200, len(phi_datablocks))):
+for frame in tqdm(range(0, len(phi_datablocks))):
     phi_datablock = phi_datablocks[frame]
     vel_datablock = vel_datablocks[frame]
 
