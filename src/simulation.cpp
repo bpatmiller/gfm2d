@@ -95,9 +95,9 @@ void Simulation::advance(float dt) {
   advect_velocity(dt);
   add_gravity(dt);
 
-  float max_velocity = 200.f;
-  u.clamp(-max_velocity, max_velocity);
-  v.clamp(-max_velocity, max_velocity);
+  // float max_velocity = 200.f;
+  // u.clamp(-max_velocity, max_velocity);
+  // v.clamp(-max_velocity, max_velocity);
   enforce_boundaries();
   solve_pressure(dt);
   apply_pressure_gradient(dt);
@@ -149,6 +149,9 @@ void Simulation::enforce_boundaries() {
   for (auto it = solid_phi.begin(); it != solid_phi.end(); it++) {
     if (*it < 0) {
       vec2 ij = it.ij();
+      for (auto& f : fluids) {
+        f.phi(ij) = min(f.phi(ij), 0.5f * f.phi.h);
+      }
       u(ij) = 0;
       u(ij + vec2(1, 0)) = 0;
       v(ij) = 0;
@@ -248,10 +251,19 @@ void Simulation::solve_pressure(float dt) {
   Eigen::SparseMatrix<double> A =
       assemble_poisson_coefficient_matrix(fluid_cell_count, nf);
 
+  /* Copy old pressure to a vector, to use as a guess */
+  // Eigen::VectorXd old_pressures(nf);
+  // for (int i = 0; i < p.size(); i++) {
+  //   if (fluid_cell_count(i) < 0)
+  //     continue;
+  //   old_pressures(fluid_cell_count(i)) = p(i);
+  // }
+
   /* Solve the linear system with the PCG method */
   Eigen::ConjugateGradient<Eigen::SparseMatrix<double>> solver;
   Eigen::VectorXd pressures(nf);
   solver.compute(A);
+  // pressures = solver.solveWithGuess(rhs, old_pressures);
   pressures = solver.solve(rhs);
 
   /* Copy the new pressure values over */
