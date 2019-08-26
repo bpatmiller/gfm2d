@@ -9,5 +9,3 @@ include_directories(SYSTEM ${GLM_INCLUDE_DIRS})
 
 find_package(Eigen3 3.3.0 REQUIRED NO_MODULE)
 include_directories(${EIGEN3_INCLUDE_DIR})
-
-include_directories(${PROJECT_ROOT}/thirdparty/nlohmann-json)

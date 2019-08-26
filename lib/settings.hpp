@@ -3,7 +3,7 @@
     parameters for initializing the simulation.
 */
 
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 #include "levelset_constructors.hpp"
 #include "simulation.hpp"
 #include <fstream>
