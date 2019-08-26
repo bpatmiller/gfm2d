@@ -1,6 +1,6 @@
 #pragma once
 #include "fluid.hpp"
-#include <json.hpp>
+#include <nlohmann/json.hpp>
 #include "simulation.hpp"
 #include <glm/gtc/random.hpp>
 #include <string>

@@ -9,11 +9,11 @@ build:
 
 .PHONY: format
 format:
-	find ./src ./test -iname *.hpp -o -iname *.cpp \
+	find ./lib ./src ./test -iname *.hpp -o -iname *.cpp \
 	| xargs clang-format -i
 	cmake-format -i --command-case canonical --keyword-case upper \
 	--enable-sort True --autosort True --enable-markup True \
-	./CMakeLists.txt ./test/CMakeLists.txt
+	./CMakeLists.txt ./src/CMakeLists.txt ./lib/CMakeLists.txt ./test/CMakeLists.txt
 	autopep8 --in-place --aggressive --aggressive plot/plot.py
 	python -m json.tool assets/config.json.orig assets/tmp.json
 	mv -f assets/tmp.json assets/config.json.orig
