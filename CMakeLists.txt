@@ -33,4 +33,5 @@ endif()
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_ROOT}/cmake/")
 
 add_subdirectory(lib)
+add_subdirectory(test)
 add_subdirectory(src)
