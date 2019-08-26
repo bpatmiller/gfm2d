@@ -35,7 +35,7 @@ run:
 
 .PHONY: test
 test:
-	build/bin/unit-tests
+	build/bin/gfm_test
 
 .PHONY: docs
 docs:
