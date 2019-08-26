@@ -8,8 +8,7 @@ env:
 
 before_install:
   - sudo apt-get install -y libeigen3-dev libglm-dev
-  - pip install --user cmake-format autopep8 cget
-  - cget install nlohmann/json@v3.7.0
+  - pip install --user cmake-format autopep8
 
 addons:
   apt:
