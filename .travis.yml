@@ -3,8 +3,8 @@ language: cpp
 dist: bionic
 
 before_install:
-  - sudo apt-get install -y libeigen3-dev
-  - pip install --user pyyaml cpp-coveralls cmake-format autopep8
+  - sudo apt-get install -y libeigen3-dev libglm-dev nlohmann-json-dev
+  - pip install --user cmake-format autopep8
 
 compiler:
   - gcc
@@ -23,7 +23,7 @@ addons:
 
 script:
   - make clean build
-  - ./build/bin/unit-tests
+  - ./build/bin/gfm
 
 after_success:
     # Creating report
