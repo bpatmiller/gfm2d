@@ -7,7 +7,11 @@ Please read [this paper describing the project](writeup.pdf). The majority of th
 The name of this program comes from the Ghost Fluid Method, which is not used in this program.
 
 ### BIG TODOS:
+* [ ] optimization - measure timings for different simulation components
+* [ ] do some documentation (? maybe idk if anyone will read the code)
 * [ ] fix cmake like a real human
+* [ ] move draw.py and movie.py to src/, also substantially refactor and consolidate (common.py) both of them.
+* [ ] cleaner, more portable format - config and data. consider the config file determining filename
 * [ ] more examples (!) (like stored in file)
 * [ ] do more test / fix catch2
 
