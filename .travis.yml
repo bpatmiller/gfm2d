@@ -1,16 +1,15 @@
 sudo: required
 language: cpp
 dist: bionic
-
-before_install:
-  - sudo apt-get install -y libeigen3-dev libglm-dev nlohmann-json-dev
-  - pip install --user cmake-format autopep8
-
 compiler:
   - gcc
-
 env:
   - COVERAGE_OPTION=1
+
+before_install:
+  - sudo apt-get install -y libeigen3-dev libglm-dev
+  - pip install --user cmake-format autopep8 cget
+  - cget install nlohmann/json@v3.7.0
 
 addons:
   apt:

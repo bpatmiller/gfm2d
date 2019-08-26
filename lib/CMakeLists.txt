@@ -10,5 +10,4 @@ include_directories(SYSTEM ${GLM_INCLUDE_DIRS})
 find_package(Eigen3 3.3.0 REQUIRED NO_MODULE)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
-find_package(nlohmann_json 3.2.0 REQUIRED)
-target_link_libraries(${PROJECT_NAME}lib PRIVATE nlohmann_json::nlohmann_json)
+include_directories(${PROJECT_ROOT}/thirdparty/nlohmann-json)

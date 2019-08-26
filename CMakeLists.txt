@@ -14,7 +14,7 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wno-unused-parameter")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-### TODO consider changing coverage methodology?
+# TODO consider changing coverage methodology?
 set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_DEBUG} --coverage")
 set(CMAKE_EXE_LINKER_FLAGS_COVERAGE
     "${CMAKE_EXE_LINKER_FLAGS_DEBUG} --coverage")
@@ -28,7 +28,7 @@ else()
   set(CMAKE_BUILD_TYPE RELEASE)
   message(STATUS "OPT building without coverage options ~~")
 endif()
-###
+#
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_ROOT}/cmake/")
 
