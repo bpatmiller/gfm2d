@@ -7,3 +7,4 @@ coverage.info
 *.gcda
 plot/data/*.txt
 plot/images/*.png
+hunter/
