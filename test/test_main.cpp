@@ -1,4 +1,3 @@
-#include "calculus.hpp"
 #include "gtest/gtest.h"
 
 namespace {
