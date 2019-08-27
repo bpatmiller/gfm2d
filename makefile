@@ -25,7 +25,6 @@ clean:
 	rm -f plot/data/*
 	rm -f plot/images/*
 	rm -rf build/
-	cp -f assets/config.json.orig config.json
 	rm -f ./*.gcov
 	rm -f capture.info
 
